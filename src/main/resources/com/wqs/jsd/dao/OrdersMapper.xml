@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Orders">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="service_type" jdbcType="VARCHAR" property="serviceType" />
+    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="estimated_price" jdbcType="DECIMAL" property="estimatedPrice" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="is_done" jdbcType="VARCHAR" property="isDone" />
+    <result column="is_accept" jdbcType="VARCHAR" property="isAccept" />
+    <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, customer_id, service_type, service_name, address, estimated_price, order_time, 
+    is_done, is_accept, accept_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
+    insert into orders (customer_id, service_type, service_name, 
+      address, estimated_price, order_time, 
+      is_done, is_accept, accept_time
+      )
+    values (#{customerId,jdbcType=INTEGER}, #{serviceType,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{estimatedPrice,jdbcType=DECIMAL}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{isDone,jdbcType=VARCHAR}, #{isAccept,jdbcType=VARCHAR}, #{acceptTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="serviceType != null">
+        service_type,
+      </if>
+      <if test="serviceName != null">
+        service_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="estimatedPrice != null">
+        estimated_price,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="isDone != null">
+        is_done,
+      </if>
+      <if test="isAccept != null">
+        is_accept,
+      </if>
+      <if test="acceptTime != null">
+        accept_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedPrice != null">
+        #{estimatedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDone != null">
+        #{isDone,jdbcType=VARCHAR},
+      </if>
+      <if test="isAccept != null">
+        #{isAccept,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null">
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.Orders">
+    update orders
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceType != null">
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedPrice != null">
+        estimated_price = #{estimatedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDone != null">
+        is_done = #{isDone,jdbcType=VARCHAR},
+      </if>
+      <if test="isAccept != null">
+        is_accept = #{isAccept,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null">
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.Orders">
+    update orders
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      estimated_price = #{estimatedPrice,jdbcType=DECIMAL},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      is_done = #{isDone,jdbcType=VARCHAR},
+      is_accept = #{isAccept,jdbcType=VARCHAR},
+      accept_time = #{acceptTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

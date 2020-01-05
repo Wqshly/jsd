@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.OutsourceMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Outsource">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="orders_id" jdbcType="INTEGER" property="ordersId" />
+    <result column="spending" jdbcType="DECIMAL" property="spending" />
+    <result column="cooperation_time" jdbcType="TIMESTAMP" property="cooperationTime" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_id, orders_id, spending, cooperation_time, final_editor, final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from outsource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from outsource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Outsource" useGeneratedKeys="true">
+    insert into outsource (company_id, orders_id, spending, 
+      cooperation_time, final_editor, final_edit_time
+      )
+    values (#{companyId,jdbcType=INTEGER}, #{ordersId,jdbcType=INTEGER}, #{spending,jdbcType=DECIMAL}, 
+      #{cooperationTime,jdbcType=TIMESTAMP}, #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Outsource" useGeneratedKeys="true">
+    insert into outsource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="ordersId != null">
+        orders_id,
+      </if>
+      <if test="spending != null">
+        spending,
+      </if>
+      <if test="cooperationTime != null">
+        cooperation_time,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="ordersId != null">
+        #{ordersId,jdbcType=INTEGER},
+      </if>
+      <if test="spending != null">
+        #{spending,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationTime != null">
+        #{cooperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.Outsource">
+    update outsource
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="ordersId != null">
+        orders_id = #{ordersId,jdbcType=INTEGER},
+      </if>
+      <if test="spending != null">
+        spending = #{spending,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationTime != null">
+        cooperation_time = #{cooperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.Outsource">
+    update outsource
+    set company_id = #{companyId,jdbcType=INTEGER},
+      orders_id = #{ordersId,jdbcType=INTEGER},
+      spending = #{spending,jdbcType=DECIMAL},
+      cooperation_time = #{cooperationTime,jdbcType=TIMESTAMP},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

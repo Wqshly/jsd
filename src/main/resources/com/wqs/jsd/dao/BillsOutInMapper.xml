@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.BillsOutInMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.BillsOutIn">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="applicant_id" jdbcType="INTEGER" property="applicantId" />
+    <result column="approval_id" jdbcType="INTEGER" property="approvalId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="is_approval" jdbcType="TINYINT" property="isApproval" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, applicant_id, approval_id, `name`, `number`, `type`, `status`, is_approval, final_editor, 
+    final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bills_out_in
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bills_out_in
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BillsOutIn" useGeneratedKeys="true">
+    insert into bills_out_in (applicant_id, approval_id, `name`, 
+      `number`, `type`, `status`, 
+      is_approval, final_editor, final_edit_time
+      )
+    values (#{applicantId,jdbcType=INTEGER}, #{approvalId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{number,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{isApproval,jdbcType=TINYINT}, #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BillsOutIn" useGeneratedKeys="true">
+    insert into bills_out_in
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applicantId != null">
+        applicant_id,
+      </if>
+      <if test="approvalId != null">
+        approval_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="isApproval != null">
+        is_approval,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applicantId != null">
+        #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalId != null">
+        #{approvalId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isApproval != null">
+        #{isApproval,jdbcType=TINYINT},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.BillsOutIn">
+    update bills_out_in
+    <set>
+      <if test="applicantId != null">
+        applicant_id = #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalId != null">
+        approval_id = #{approvalId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isApproval != null">
+        is_approval = #{isApproval,jdbcType=TINYINT},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.BillsOutIn">
+    update bills_out_in
+    set applicant_id = #{applicantId,jdbcType=INTEGER},
+      approval_id = #{approvalId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      `number` = #{number,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      is_approval = #{isApproval,jdbcType=TINYINT},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

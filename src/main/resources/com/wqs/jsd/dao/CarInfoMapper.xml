@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.CarInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.CarInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="holder" jdbcType="VARCHAR" property="holder" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="number_plate" jdbcType="VARCHAR" property="numberPlate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, holder, `type`, car_number, number_plate, `status`, final_editor, final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CarInfo" useGeneratedKeys="true">
+    insert into car_info (holder, `type`, car_number, 
+      number_plate, `status`, final_editor, 
+      final_edit_time)
+    values (#{holder,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, 
+      #{numberPlate,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{finalEditor,jdbcType=VARCHAR}, 
+      #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CarInfo" useGeneratedKeys="true">
+    insert into car_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="holder != null">
+        holder,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="numberPlate != null">
+        number_plate,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="holder != null">
+        #{holder,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null">
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.CarInfo">
+    update car_info
+    <set>
+      <if test="holder != null">
+        holder = #{holder,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null">
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.CarInfo">
+    update car_info
+    set holder = #{holder,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      number_plate = #{numberPlate,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

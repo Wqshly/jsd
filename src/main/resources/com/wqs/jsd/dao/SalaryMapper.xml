@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.SalaryMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Salary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
+    <result column="commission" jdbcType="DECIMAL" property="commission" />
+    <result column="basic_salary" jdbcType="DECIMAL" property="basicSalary" />
+    <result column="bonus" jdbcType="DECIMAL" property="bonus" />
+    <result column="calculate_date" jdbcType="TIMESTAMP" property="calculateDate" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, staff_id, commission, basic_salary, bonus, calculate_date, final_editor, final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Salary" useGeneratedKeys="true">
+    insert into salary (staff_id, commission, basic_salary, 
+      bonus, calculate_date, final_editor, 
+      final_edit_time)
+    values (#{staffId,jdbcType=INTEGER}, #{commission,jdbcType=DECIMAL}, #{basicSalary,jdbcType=DECIMAL}, 
+      #{bonus,jdbcType=DECIMAL}, #{calculateDate,jdbcType=TIMESTAMP}, #{finalEditor,jdbcType=VARCHAR}, 
+      #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Salary" useGeneratedKeys="true">
+    insert into salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="basicSalary != null">
+        basic_salary,
+      </if>
+      <if test="bonus != null">
+        bonus,
+      </if>
+      <if test="calculateDate != null">
+        calculate_date,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="basicSalary != null">
+        #{basicSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="bonus != null">
+        #{bonus,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateDate != null">
+        #{calculateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.Salary">
+    update salary
+    <set>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="basicSalary != null">
+        basic_salary = #{basicSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="bonus != null">
+        bonus = #{bonus,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateDate != null">
+        calculate_date = #{calculateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.Salary">
+    update salary
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      commission = #{commission,jdbcType=DECIMAL},
+      basic_salary = #{basicSalary,jdbcType=DECIMAL},
+      bonus = #{bonus,jdbcType=DECIMAL},
+      calculate_date = #{calculateDate,jdbcType=TIMESTAMP},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

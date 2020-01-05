@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.ContractDetailMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.ContractDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="contract_id" jdbcType="INTEGER" property="contractId" />
+    <result column="charges" jdbcType="DECIMAL" property="charges" />
+    <result column="construction_area" jdbcType="INTEGER" property="constructionArea" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="construction_time" jdbcType="TIMESTAMP" property="constructionTime" />
+    <result column="deposit" jdbcType="DECIMAL" property="deposit" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, contract_id, charges, construction_area, total, construction_time, deposit, final_editor, 
+    final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.ContractDetail" useGeneratedKeys="true">
+    insert into contract_detail (contract_id, charges, construction_area, 
+      total, construction_time, deposit, 
+      final_editor, final_edit_time)
+    values (#{contractId,jdbcType=INTEGER}, #{charges,jdbcType=DECIMAL}, #{constructionArea,jdbcType=INTEGER}, 
+      #{total,jdbcType=DECIMAL}, #{constructionTime,jdbcType=TIMESTAMP}, #{deposit,jdbcType=DECIMAL}, 
+      #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.ContractDetail" useGeneratedKeys="true">
+    insert into contract_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        contract_id,
+      </if>
+      <if test="charges != null">
+        charges,
+      </if>
+      <if test="constructionArea != null">
+        construction_area,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="constructionTime != null">
+        construction_time,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractId != null">
+        #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="charges != null">
+        #{charges,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionArea != null">
+        #{constructionArea,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionTime != null">
+        #{constructionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.ContractDetail">
+    update contract_detail
+    <set>
+      <if test="contractId != null">
+        contract_id = #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="charges != null">
+        charges = #{charges,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionArea != null">
+        construction_area = #{constructionArea,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionTime != null">
+        construction_time = #{constructionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.ContractDetail">
+    update contract_detail
+    set contract_id = #{contractId,jdbcType=INTEGER},
+      charges = #{charges,jdbcType=DECIMAL},
+      construction_area = #{constructionArea,jdbcType=INTEGER},
+      total = #{total,jdbcType=DECIMAL},
+      construction_time = #{constructionTime,jdbcType=TIMESTAMP},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
