@@ -1,5 +1,6 @@
 package com.wqs.jsd.service;
 
+import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.pojo.StaffUser;
 import com.wqs.jsd.pojo.User;
@@ -17,19 +18,19 @@ public interface StaffUserService {
     /**
      * @param staffUser
      * @description:
-     * @return:
+     * @return: ResultBean
      * @author: van
-     * @time: 2019/12/27 10:58
+     * @time: 2020/1/9 12:56
      */
-    int login(StaffUser staffUser);
+    ResultBean<Staff> login(StaffUser staffUser);
 
     /**
-     * @description: 
      * @param staffUser
+     * @description:
      * @return:
      * @author: van
      * @time: 2019/12/27 11:08
-     */ 
+     */
     StaffUser getLoginInfo(StaffUser staffUser);
 
     /**

@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wqs.jsd.dao.StaffMapper">
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Staff">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="identify" jdbcType="CHAR" property="identify" />
-    <result column="current_position" jdbcType="VARCHAR" property="currentPosition" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="birth" jdbcType="VARCHAR" property="birth" />
-    <result column="education" jdbcType="VARCHAR" property="education" />
-    <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
-    <result column="discipline" jdbcType="VARCHAR" property="discipline" />
-    <result column="medical_num" jdbcType="VARCHAR" property="medicalNum" />
-    <result column="bank_card_num" jdbcType="VARCHAR" property="bankCardNum" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
-    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="number" jdbcType="VARCHAR" property="number"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="sex" jdbcType="VARCHAR" property="sex"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="identify" jdbcType="CHAR" property="identify"/>
+    <result column="current_position" jdbcType="VARCHAR" property="currentPosition"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="birth" jdbcType="VARCHAR" property="birth"/>
+    <result column="education" jdbcType="VARCHAR" property="education"/>
+    <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool"/>
+    <result column="discipline" jdbcType="VARCHAR" property="discipline"/>
+    <result column="medical_num" jdbcType="VARCHAR" property="medicalNum"/>
+    <result column="bank_card_num" jdbcType="VARCHAR" property="bankCardNum"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor"/>
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, `number`, `name`, sex, phone, identify, current_position, address, email, birth, 
@@ -28,7 +28,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from staff
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -48,6 +48,12 @@
   </select>
   <select id="countNumberOrPhone" parameterType="java.lang.String" resultType="int">
     select count(*)
+    from staff
+    where number = #{number, jdbcType=VARCHAR} or phone = #{phone, jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNumberOrPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
     from staff
     where number = #{number, jdbcType=VARCHAR} or phone = #{phone, jdbcType=VARCHAR}
   </select>
@@ -84,7 +90,8 @@
       #{medicalNum,jdbcType=VARCHAR}, #{bankCardNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Staff" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Staff"
+          useGeneratedKeys="true">
     insert into staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="number != null">

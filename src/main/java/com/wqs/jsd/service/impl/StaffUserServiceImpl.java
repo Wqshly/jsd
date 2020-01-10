@@ -1,5 +1,6 @@
 package com.wqs.jsd.service.impl;
 
+import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.dao.UserMapper;
 import com.wqs.jsd.pojo.Staff;
@@ -8,9 +9,6 @@ import com.wqs.jsd.pojo.User;
 import com.wqs.jsd.service.StaffUserService;
 import com.wqs.jsd.util.CommonMethod;
 import com.wqs.jsd.util.RSACode;
-import org.apache.shiro.codec.Base64;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.wqs.jsd.beans.ResultBean.*;
 import static com.wqs.jsd.util.CheckUtil.check;
@@ -34,48 +33,44 @@ import static com.wqs.jsd.util.CheckUtil.notNull;
 public class StaffUserServiceImpl implements StaffUserService {
     private static final Logger logger = LoggerFactory.getLogger(StaffUserService.class);
 
+    @Autowired
+    private User user;
+
     @Resource
     private UserMapper userMapper;
 
     @Resource
     private StaffMapper staffMapper;
 
-    @Autowired
-    private User user;
-
     /**
      * @param staffUser
      * @description:
-     * @return:
+     * @return: ResultBean
      * @author: van
-     * @time: 2019/12/27 10:58
+     * @time: 2020/1/9 12:56
      */
     @Override
-    public int login(StaffUser staffUser) {
+    public ResultBean<Staff> login(StaffUser staffUser) {
         try {
             CommonMethod commonMethod = new CommonMethod();
             int a = staffMapper.countNumberOrPhone(staffUser.getPhone());
-            System.out.println(a);
             if (a == 1) {
                 byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
                 String password = new String(decodedData);
-                System.out.println(password);
                 user.userLogin(staffMapper.selectIdByNumberOrPhone(staffUser.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"));
-//                User user = new User(staffMapper.selectIdByNumberOrPhone(staffUser.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"));
-                System.out.println("staffID: " + user.getStaffId() + "password:" + user.getPassword());
                 if (userMapper.loginByStaffId(user) == 1) {
-                    return SUCCESS;
+                    return new ResultBean<>(staffMapper.selectByNumberOrPhone(staffUser.getPhone()), SUCCESS, "登录成功!");
                 } else {
-                    return LOGIN_FAILED;
+                    return new ResultBean<>(LOGIN_FAILED, "登录失败!账号或密码错误!");
                 }
             } else if (a == 0) {
-                return NOT_EXIST_USER;
+                return new ResultBean<>(NOT_EXIST_USER, "该用户不存在!");
             } else {
-                return SQL_WRONG;
+                return new ResultBean<>(SQL_WRONG, "数据库查出多条数据");
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return UNKNOWN_EXCEPTION;
+            return new ResultBean<>(UNKNOWN_EXCEPTION, e.getMessage());
         }
     }
 
@@ -110,7 +105,9 @@ public class StaffUserServiceImpl implements StaffUserService {
                     byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
                     String password = new String(decodedData);
                     System.out.println(password);
-                    User user = new User(staffMapper.selectIdByPhone(staffUser.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"), "在职", staffUser.getName(), commonMethod.getTime());
+                    user.userInitRegister(staffMapper.selectIdByPhone(staffUser.getPhone()),
+                            commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
+                            staffUser.getName(), commonMethod.getTime());
                     this.initRegister(user);
                     return SUCCESS;
                 } else {

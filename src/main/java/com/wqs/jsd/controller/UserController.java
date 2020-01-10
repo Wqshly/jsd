@@ -1,7 +1,9 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.pojo.StaffUser;
+import com.wqs.jsd.pojo.User;
 import com.wqs.jsd.service.StaffUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +28,14 @@ public class UserController {
         return new ResultBean<>(staffUserService.initRegister(staffUser), "success");
     }
 
+    @PostMapping("register")
+    public ResultBean<User> register(@RequestBody User user) {
+        return new ResultBean<>();
+    }
+
+    // 登录
     @PostMapping("login")
-    public ResultBean<StaffUser> loginByPhoneCode(@RequestBody StaffUser staffUser) {
-        return new ResultBean<>(staffUserService.getLoginInfo(staffUser), staffUserService.login(staffUser), "success");
+    public ResultBean<Staff> loginByPhoneCode(@RequestBody StaffUser staffUser) {
+        return staffUserService.login(staffUser);
     }
 }

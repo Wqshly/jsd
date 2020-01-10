@@ -19,6 +19,8 @@ public interface StaffMapper {
 
     int countNumberOrPhone(String s);
 
+    Staff selectByNumberOrPhone(String s);
+
     int selectIdByNumberOrPhone(String s);
 
     int selectIdByNumber(String number);

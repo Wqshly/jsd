@@ -1,6 +1,5 @@
 package com.wqs.jsd.pojo;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -12,7 +11,6 @@ import java.util.Date;
  * @author
  */
 @Component
-@ConfigurationProperties(prefix = "user")
 public class User implements Serializable {
     private Integer id;
 
@@ -36,13 +34,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(Integer staffId, String password, String status, String finalEditor, Date finalEditTime) {
+    public void userInitRegister(Integer staffId, String password, String status, String finalEditor, Date finalEditTime) {
         this.staffId = staffId;
         this.password = password;
         this.status = status;
         this.finalEditor = finalEditor;
         this.finalEditTime = finalEditTime;
     }
+
     public void userLogin(Integer staffId, String password) {
         this.staffId = staffId;
         this.password = password;

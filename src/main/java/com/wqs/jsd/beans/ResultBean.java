@@ -43,6 +43,8 @@ public class ResultBean<T> implements Serializable {
     public ResultBean(T data) {
         super();
         this.data = data;
+        this.code = SUCCESS;
+        this.msg = "success";
     }
 
     public ResultBean(int code, String msg) {
