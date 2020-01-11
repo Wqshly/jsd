@@ -32,6 +32,11 @@ public class ResultBean<T> implements Serializable {
     public static final int SQL_WRONG = 2001;
     public static final int SQL_EXIST = 2002;
 
+    /**
+     * 3*** 代表一些已知的错误
+     */
+    public static final int NULL_DATA_EXCEPTION = 3001;
+
     private int code = SUCCESS;
     private String msg = "SUCCESS";
     private T data;
