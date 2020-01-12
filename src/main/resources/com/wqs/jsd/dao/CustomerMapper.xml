@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Customer">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `name`, `password`, phone, sex
+    id, `name`, nick_name `password`, phone, sex
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

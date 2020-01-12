@@ -42,6 +42,9 @@ public class StaffUserServiceImpl implements StaffUserService {
     @Resource
     private StaffMapper staffMapper;
 
+    @Autowired
+    private Staff staff;
+
     /**
      * @param staffUser
      * @description:
@@ -99,12 +102,10 @@ public class StaffUserServiceImpl implements StaffUserService {
             // 当数据库为空时，可执行初始注册
             if (staffMapper.countStaff() == 0) {
                 CommonMethod commonMethod = new CommonMethod();
-                Staff staff = new Staff("JSD001", staffUser.getName(), staffUser.getSex(), staffUser.getPhone(), staffUser.getIdentify(), "在职", staffUser.getName(), commonMethod.getTime());
+                staff.getStaffInfo("JSD001", staffUser.getName(), staffUser.getSex(), staffUser.getPhone(), staffUser.getIdentify(), "在职", staffUser.getName(), commonMethod.getTime());
                 if (this.initRegister(staff)) {
-                    System.out.println(staffUser.getPassword());
                     byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
                     String password = new String(decodedData);
-                    System.out.println(password);
                     user.userInitRegister(staffMapper.selectIdByPhone(staffUser.getPhone()),
                             commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
                             staffUser.getName(), commonMethod.getTime());

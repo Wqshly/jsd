@@ -15,6 +15,7 @@ import java.security.PrivateKey;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import static com.wqs.jsd.beans.ResultBean.NULL_DATA_EXCEPTION;
 import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
@@ -28,6 +29,11 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
 @Component
 public class CommonMethod {
 
+    /**
+     * 获取系统当前时间
+     *
+     * @return Timestamp
+     */
     public Timestamp getTime() {
         Date date = new Date();
         return new Timestamp(date.getTime());
@@ -62,6 +68,25 @@ public class CommonMethod {
             }
         }
         return convert.toString().toUpperCase();
+    }
+
+    /**
+     * 随机生成字符串，用于生成初始用户名等
+     */
+    public String getRandomString(int length) {
+        StringBuilder val = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            String strOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+            if ("char".equalsIgnoreCase(strOrNum)) {
+                int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
+                val.append((char) (random.nextInt(26) + temp));
+            } else {
+                val.append(String.valueOf(random.nextInt(10)));
+            }
+        }
+        val.insert(0, "jsd_");
+        return val.toString();
     }
 
     /**

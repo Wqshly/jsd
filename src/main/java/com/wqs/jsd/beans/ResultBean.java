@@ -15,6 +15,7 @@ public class ResultBean<T> implements Serializable {
      * 定义不同的状态码
      */
     public static final int SUCCESS = 0;
+    public static final int FAILURE = -1;
     /**
      * 1***代表登录状态的问题
      * 1000 未登录

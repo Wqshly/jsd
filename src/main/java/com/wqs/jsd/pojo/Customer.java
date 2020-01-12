@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 /**
  * customer
- * @author 
+ *
+ * @author
  */
 public class Customer implements Serializable {
     private Integer id;
 
     private String name;
+
+    private String nickName;
 
     private String password;
 
@@ -33,6 +36,14 @@ public class Customer implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getPassword() {

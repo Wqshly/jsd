@@ -1,5 +1,7 @@
 package com.wqs.jsd.pojo;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import java.util.Date;
  * staff
  * @author 
  */
+@Component
 public class Staff implements Serializable {
     private Integer id;
 
@@ -49,7 +52,7 @@ public class Staff implements Serializable {
     public Staff() {
     }
 
-    public Staff(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {
+    public void getStaffInfo(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {
         this.number = number;
         this.name = name;
         this.sex = sex;

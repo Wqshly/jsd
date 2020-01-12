@@ -23,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, `number`, `name`, sex, phone, identify, current_position, address, email, birth, 
-    education, graduate_school, discipline, medical_num, bank_card_num, `status`, final_editor, 
+    education, graduate_school, discipline, medical_num, bank_card_num, `status`, final_editor,
     final_edit_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -71,6 +71,11 @@
     select id
     from staff
     where phone = #{phone, jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Staff">
+    select
+    <include refid="Base_Column_List"/>
+    from staff
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff

@@ -2,7 +2,12 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Staff;
 
+import java.util.List;
+
 public interface StaffMapper {
+
+    List<Staff> selectAll();
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Staff record);
@@ -19,8 +24,10 @@ public interface StaffMapper {
 
     int countNumberOrPhone(String s);
 
+    // 通过手机号或员工编号查到员工信息
     Staff selectByNumberOrPhone(String s);
 
+    // 通过手机号或员工编号查寻是否有满足条件的员工
     int selectIdByNumberOrPhone(String s);
 
     int selectIdByNumber(String number);
