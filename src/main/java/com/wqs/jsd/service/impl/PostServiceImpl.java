@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public ResultBean<Void> insertPostRecord(Post post) {
         post.setFinalEditTime(commonMethod.getTime());
-        return commonMethod.insertRecord(postMapper.insert(post));
+        return commonMethod.changeRecord(postMapper.insert(post));
     }
 
     @Override

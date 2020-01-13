@@ -30,15 +30,15 @@ public class CommonMethod {
 
     /**
      * @description: 
-     * @param: insert 公共增方法
+     * @param: i 公共增方法
      * @return: ResultBean
      * @author: van
      * @time: 2020/1/13 10:24
      */ 
-    public ResultBean<Void> insertRecord(int insert) {
+    public ResultBean<Void> changeRecord(int i) {
         try{
             int code = UNKNOWN_EXCEPTION;
-            if (insert > 0) {
+            if (i > 0) {
                 code = SUCCESS;
             }
             return new ResultBean<>(code, "success");

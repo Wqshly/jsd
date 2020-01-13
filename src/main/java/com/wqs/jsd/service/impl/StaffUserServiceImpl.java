@@ -170,7 +170,7 @@ public class StaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public ResultBean<Void> insertUserRecord(User user) {
-        return commonMethod.insertRecord(userMapper.insert(user));
+        return commonMethod.changeRecord(userMapper.insert(user));
     }
 
     /**
@@ -180,6 +180,6 @@ public class StaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public ResultBean<Void> insertStaffRecord(Staff staff) {
-        return commonMethod.insertRecord(staffMapper.insert(staff));
+        return commonMethod.changeRecord(staffMapper.insert(staff));
     }
 }

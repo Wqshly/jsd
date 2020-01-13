@@ -33,7 +33,7 @@ public class BasicCodingServiceImpl implements BasicCodingService {
 
     @Override
     public ResultBean<Void> insertBasicCodingRecord(BasicCoding basicCoding) {
-        return commonMethod.insertRecord(basicCodingMapper.insert(basicCoding));
+        return commonMethod.changeRecord(basicCodingMapper.insert(basicCoding));
     }
 
     @Override

@@ -73,6 +73,13 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public ResultBean<Void> insertStaffRecord(Staff staff) {
-        return commonMethod.insertRecord(staffMapper.insert(staff));
+        staff.setFinalEditTime(commonMethod.getTime());
+        return commonMethod.changeRecord(staffMapper.insert(staff));
+    }
+
+    @Override
+    public ResultBean<Void> updateStaffRecord(Staff staff) {
+        staff.setFinalEditTime(commonMethod.getTime());
+        return commonMethod.changeRecord(staffMapper.updateByPrimaryKey(staff));
     }
 }

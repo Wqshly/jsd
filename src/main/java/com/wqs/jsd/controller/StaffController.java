@@ -32,6 +32,11 @@ public class StaffController {
         return staffService.staffValid(phoneNum);
     }
 
+    @PostMapping("editStaff")
+    public ResultBean<Void> updateStaff(@RequestBody Staff staff) {
+        return staffService.updateStaffRecord(staff);
+    }
+
     @GetMapping("findAllStaff")
     public ResultBean<List<Staff>> findAllStaff() {
         return staffService.selectStaffAll();

@@ -29,4 +29,6 @@ public interface StaffService {
     ResultBean<List<Staff>> selectStaffAll();
 
     ResultBean<Void> insertStaffRecord(Staff staff);
+
+    ResultBean<Void> updateStaffRecord(Staff staff);
 }
