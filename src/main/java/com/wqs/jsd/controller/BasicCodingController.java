@@ -1,9 +1,14 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.BasicCoding;
 import com.wqs.jsd.pojo.Post;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.wqs.jsd.service.BasicCodingService;
+import com.wqs.jsd.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: wan
@@ -12,16 +17,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Modified By:
  */
 @RequestMapping("/basicCoding")
+@RestController
 public class BasicCodingController {
-    /**
-     * @param
-     * @description:
-     * @return:
-     * @author: van
-     * @time: 2020/1/11 21:55
-     */
-    @PostMapping("findAllPost")
-    public ResultBean<Void> findAllPost() {
-        return new ResultBean<>();
+    @Autowired
+    private BasicCodingService basicCodingService;
+
+    @Autowired
+    private PostService postService;
+
+    @PostMapping("addPost")
+    public ResultBean<Void> addPost(@RequestBody Post post) {
+        return postService.insertPostRecord(post);
+    }
+
+    @GetMapping("findAllPost")
+    public ResultBean<List<Post>> findAllPost() {
+        return postService.findAllPost();
+    }
+
+    @PostMapping("addBasicCoding")
+    public ResultBean<Void> addBasicCoding(@RequestBody BasicCoding basicCoding){
+        return basicCodingService.insertBasicCodingRecord(basicCoding);
+    }
+
+    @GetMapping("findBasicCodingWithType")
+    public ResultBean<List<BasicCoding>> findBasicCoding(String s) {
+        return basicCodingService.findBasicCodingByType(s);
     }
 }

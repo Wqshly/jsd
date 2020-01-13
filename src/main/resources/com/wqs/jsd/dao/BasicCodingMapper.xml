@@ -2,28 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wqs.jsd.dao.BasicCodingMapper">
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.BasicCoding">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="abbreviation" jdbcType="VARCHAR" property="abbreviation" />
-    <result column="coding_style" jdbcType="VARCHAR" property="codingStyle" />
-    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
-    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="type" jdbcType="VARCHAR" property="type"/>
+    <result column="abbreviation" jdbcType="VARCHAR" property="abbreviation"/>
+    <result column="coding_style" jdbcType="VARCHAR" property="codingStyle"/>
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor"/>
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, `name`, `type`, abbreviation, coding_style, final_editor, final_edit_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from basic_coding
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from basic_coding
+    where type = #{type,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from basic_coding
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BasicCoding" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BasicCoding"
+          useGeneratedKeys="true">
     insert into basic_coding (`name`, `type`, abbreviation, 
       coding_style, final_editor, final_edit_time
       )
@@ -31,7 +38,8 @@
       #{codingStyle,jdbcType=VARCHAR}, #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BasicCoding" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BasicCoding"
+          useGeneratedKeys="true">
     insert into basic_coding
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">

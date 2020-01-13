@@ -2,7 +2,12 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.BasicCoding;
 
+import java.util.List;
+
 public interface BasicCodingMapper {
+
+    List<BasicCoding> selectByType(String s);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(BasicCoding record);

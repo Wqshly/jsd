@@ -4,13 +4,14 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.service.StaffService;
+import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.wqs.jsd.beans.ResultBean.*;
@@ -28,6 +29,9 @@ public class StaffServiceImpl implements StaffService {
 
     @Resource
     private StaffMapper staffMapper;
+
+    @Autowired
+    private CommonMethod commonMethod;
 
     @Override
     public Integer staffCount() {
@@ -69,15 +73,6 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public ResultBean<Void> insertStaffRecord(Staff staff) {
-        try{
-            int code = UNKNOWN_EXCEPTION;
-            if (staffMapper.insert(staff) > 0) {
-                code = SUCCESS;
-            }
-            return new ResultBean<>(code, "success");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResultBean<>(UNKNOWN_EXCEPTION,"catch the Exception");
-        }
+        return commonMethod.insertRecord(staffMapper.insert(staff));
     }
 }

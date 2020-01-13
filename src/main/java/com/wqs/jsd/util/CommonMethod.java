@@ -17,8 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import static com.wqs.jsd.beans.ResultBean.NULL_DATA_EXCEPTION;
-import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
+import static com.wqs.jsd.beans.ResultBean.*;
 
 /**
  * @Author: wan
@@ -28,6 +27,26 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
  */
 @Component
 public class CommonMethod {
+
+    /**
+     * @description: 
+     * @param: insert 公共增方法
+     * @return: ResultBean
+     * @author: van
+     * @time: 2020/1/13 10:24
+     */ 
+    public ResultBean<Void> insertRecord(int insert) {
+        try{
+            int code = UNKNOWN_EXCEPTION;
+            if (insert > 0) {
+                code = SUCCESS;
+            }
+            return new ResultBean<>(code, "success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultBean<>(UNKNOWN_EXCEPTION,"catch the Exception");
+        }
+    }
 
     /**
      * 获取系统当前时间

@@ -45,6 +45,9 @@ public class StaffUserServiceImpl implements StaffUserService {
     @Autowired
     private Staff staff;
 
+    @Autowired
+    private CommonMethod commonMethod;
+
     /**
      * @param staffUser
      * @description:
@@ -60,6 +63,8 @@ public class StaffUserServiceImpl implements StaffUserService {
             if (a == 1) {
                 byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
                 String password = new String(decodedData);
+                String s = commonMethod.MD5EncryptSalt("jwc161813", "wqs");
+                System.out.println(s);
                 user.userLogin(staffMapper.selectIdByNumberOrPhone(staffUser.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"));
                 if (userMapper.loginByStaffId(user) == 1) {
                     return new ResultBean<>(staffMapper.selectByNumberOrPhone(staffUser.getPhone()), SUCCESS, "登录成功!");
@@ -109,8 +114,11 @@ public class StaffUserServiceImpl implements StaffUserService {
                     user.userInitRegister(staffMapper.selectIdByPhone(staffUser.getPhone()),
                             commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
                             staffUser.getName(), commonMethod.getTime());
-                    this.initRegister(user);
-                    return SUCCESS;
+                    if (this.initRegister(user)) {
+                        return SUCCESS;
+                    } else {
+                        return SQL_EXIST;
+                    }
                 } else {
                     return SQL_EXIST;
                 }
@@ -131,7 +139,7 @@ public class StaffUserServiceImpl implements StaffUserService {
         try {
             notNull(staff, "param.is.null");
             //注册并验证
-            check(this.insertStaffRecord(staff) > 0, "user.register.error");
+            check(this.insertStaffRecord(staff).getCode() == 0, "user.register.error");
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -147,7 +155,7 @@ public class StaffUserServiceImpl implements StaffUserService {
         try {
             notNull(user, "param.is.null");
             //注册并验证
-            check(this.insertUserRecord(user) > 0, "user.register.error");
+            check(this.insertUserRecord(user).getCode() == 0, "user.register.error");
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -161,15 +169,8 @@ public class StaffUserServiceImpl implements StaffUserService {
      * 添加用户
      */
     @Override
-    public Integer insertUserRecord(User user) {
-        Integer code;
-        try {
-            code = userMapper.insert(user);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            code = 9;
-        }
-        return code;
+    public ResultBean<Void> insertUserRecord(User user) {
+        return commonMethod.insertRecord(userMapper.insert(user));
     }
 
     /**
@@ -178,14 +179,7 @@ public class StaffUserServiceImpl implements StaffUserService {
      * 添加员工
      */
     @Override
-    public Integer insertStaffRecord(Staff staff) {
-        Integer code;
-        try {
-            code = staffMapper.insert(staff);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            code = 9;
-        }
-        return code;
+    public ResultBean<Void> insertStaffRecord(Staff staff) {
+        return commonMethod.insertRecord(staffMapper.insert(staff));
     }
 }

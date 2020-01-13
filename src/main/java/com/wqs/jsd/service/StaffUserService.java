@@ -55,12 +55,12 @@ public interface StaffUserService {
      * @return count
      * 添加用户
      */
-    Integer insertUserRecord(User user);
+    ResultBean<Void> insertUserRecord(User user);
 
     /**
      * @param staff
      * @return count
      * 添加员工
      */
-    Integer insertStaffRecord(Staff staff);
+    ResultBean<Void> insertStaffRecord(Staff staff);
 }
