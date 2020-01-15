@@ -30,13 +30,23 @@ public class BasicCodingController {
         return postService.insertPostRecord(post);
     }
 
+    @PostMapping("editPost")
+    public ResultBean<Void> updatePostRecord(@RequestBody Post post) {
+        return postService.updatePostRecord(post);
+    }
+
     @GetMapping("findAllPost")
     public ResultBean<List<Post>> findAllPost() {
         return postService.findAllPost();
     }
 
+    @PostMapping("deletePost")
+    public ResultBean<Void> deletePost(@RequestBody List<Integer> selectMultipleId) {
+        return postService.deletePost(selectMultipleId);
+    }
+
     @PostMapping("addBasicCoding")
-    public ResultBean<Void> addBasicCoding(@RequestBody BasicCoding basicCoding){
+    public ResultBean<Void> addBasicCoding(@RequestBody BasicCoding basicCoding) {
         return basicCodingService.insertBasicCodingRecord(basicCoding);
     }
 

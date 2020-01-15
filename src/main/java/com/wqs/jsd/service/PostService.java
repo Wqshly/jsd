@@ -16,5 +16,9 @@ import java.util.List;
 public interface PostService {
     ResultBean<Void> insertPostRecord(Post post);
 
+    ResultBean<Void> updatePostRecord(Post post);
+
     ResultBean<List<Post>> findAllPost();
+
+    ResultBean<Void> deletePost(List<Integer> id);
 }

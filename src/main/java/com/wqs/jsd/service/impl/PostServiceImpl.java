@@ -40,6 +40,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public ResultBean<Void> updatePostRecord(Post post) {
+        post.setFinalEditTime(commonMethod.getTime());
+        return commonMethod.changeRecord(postMapper.updateByPrimaryKey(post));
+    }
+
+    @Override
     public ResultBean<List<Post>> findAllPost() {
         try {
             return new ResultBean<>(postMapper.selectAll(), SUCCESS, "success");
@@ -47,5 +53,10 @@ public class PostServiceImpl implements PostService {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
         }
+    }
+
+    @Override
+    public ResultBean<Void> deletePost(List<Integer> id) {
+        return commonMethod.changeRecord(postMapper.deleteByPrimaryKey(id));
     }
 }

@@ -8,7 +8,7 @@ public interface PostMapper {
 
     List<Post> selectAll();
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Post record);
 
