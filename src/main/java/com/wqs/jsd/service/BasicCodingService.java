@@ -17,5 +17,9 @@ public interface BasicCodingService {
 
     ResultBean<Void> insertBasicCodingRecord(BasicCoding basicCoding);
 
+    ResultBean<Void> updateBasicCodingRecord(BasicCoding basicCoding);
+
     ResultBean<List<BasicCoding>> findBasicCodingByType(String s);
+
+    ResultBean<Void> deleteBasicCoding(List<Integer> id);
 }

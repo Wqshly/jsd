@@ -8,7 +8,7 @@ public interface BasicCodingMapper {
 
     List<BasicCoding> selectByType(String s);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(BasicCoding record);
 

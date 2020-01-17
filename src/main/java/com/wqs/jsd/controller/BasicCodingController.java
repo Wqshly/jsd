@@ -2,8 +2,10 @@ package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.BasicCoding;
+import com.wqs.jsd.pojo.Division;
 import com.wqs.jsd.pojo.Post;
 import com.wqs.jsd.service.BasicCodingService;
+import com.wqs.jsd.service.DivisionService;
 import com.wqs.jsd.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,29 @@ public class BasicCodingController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private DivisionService divisionService;
+
+    @PostMapping("addDivision")
+    public ResultBean<Void> addDivisionRecord(@RequestBody Division division) {
+        return divisionService.insertDivisionRecord(division);
+    }
+
+    @PostMapping("editDivision")
+    public ResultBean<Void> updateDivisionRecord(@RequestBody Division division) {
+        return divisionService.updateDivisionRecord(division);
+    }
+
+    @GetMapping("findAllDivision")
+    public ResultBean<List<Division>> findAllDivision() {
+        return divisionService.findAllDivision();
+    }
+
+    @PostMapping("deleteDivision")
+    public ResultBean<Void> deleteDivision(@RequestBody List<Integer> selectMultipleId) {
+        return divisionService.deleteDivision(selectMultipleId);
+    }
 
     @PostMapping("addPost")
     public ResultBean<Void> addPost(@RequestBody Post post) {
@@ -50,8 +75,18 @@ public class BasicCodingController {
         return basicCodingService.insertBasicCodingRecord(basicCoding);
     }
 
+    @PostMapping("editBasicCoding")
+    public ResultBean<Void> updateBasicCoding(@RequestBody BasicCoding basicCoding) {
+        return basicCodingService.updateBasicCodingRecord(basicCoding);
+    }
+
     @GetMapping("findBasicCodingWithType")
-    public ResultBean<List<BasicCoding>> findBasicCoding(String s) {
-        return basicCodingService.findBasicCodingByType(s);
+    public ResultBean<List<BasicCoding>> findBasicCoding(String type) {
+        return basicCodingService.findBasicCodingByType(type);
+    }
+
+    @PostMapping("")
+    public ResultBean<Void> deleteBasicCoding(@RequestBody List<Integer> selectMultipleId) {
+        return basicCodingService.deleteBasicCoding(selectMultipleId);
     }
 }

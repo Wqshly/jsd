@@ -37,12 +37,23 @@ public class BasicCodingServiceImpl implements BasicCodingService {
     }
 
     @Override
+    public ResultBean<Void> updateBasicCodingRecord(BasicCoding basicCoding) {
+        return commonMethod.changeRecord(basicCodingMapper.updateByPrimaryKey(basicCoding));
+    }
+
+    @Override
     public ResultBean<List<BasicCoding>> findBasicCodingByType(String s) {
         try {
+            System.out.println(s);
             return new ResultBean<>(basicCodingMapper.selectByType(s), SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
         }
+    }
+
+    @Override
+    public ResultBean<Void> deleteBasicCoding(List<Integer> id) {
+        return commonMethod.changeRecord(basicCodingMapper.deleteByPrimaryKey(id));
     }
 }
