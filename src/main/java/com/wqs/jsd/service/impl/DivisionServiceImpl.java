@@ -4,6 +4,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.DivisionMapper;
 import com.wqs.jsd.pojo.Division;
 import com.wqs.jsd.service.DivisionService;
+import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,10 @@ public class DivisionServiceImpl implements DivisionService {
     @Override
     public ResultBean<Void> insertDivisionRecord(Division division) {
         division.setFinalEditTime(commonMethod.getTime());
+        if (division.getRadio().equals("1")) {
+            System.out.println(division.getRadio());
+            division.setNumber("QH" + CodeUtil.createCode());
+        }
         return commonMethod.changeRecord(divisionMapper.insert(division));
     }
 
@@ -57,6 +62,6 @@ public class DivisionServiceImpl implements DivisionService {
 
     @Override
     public ResultBean<Void> deleteDivision(List<Integer> id) {
-        return null;
+        return commonMethod.changeRecord(divisionMapper.deleteByPrimaryKey(id));
     }
 }

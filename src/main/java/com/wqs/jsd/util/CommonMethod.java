@@ -30,7 +30,7 @@ public class CommonMethod {
 
     /**
      * @description: 
-     * @param: i 公共增方法
+     * @param: i 公共增、删、改方法
      * @return: ResultBean
      * @author: van
      * @time: 2020/1/13 10:24

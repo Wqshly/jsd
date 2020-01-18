@@ -32,6 +32,7 @@ public class BasicCodingController {
 
     @PostMapping("addDivision")
     public ResultBean<Void> addDivisionRecord(@RequestBody Division division) {
+        System.out.println(division.getRadio());
         return divisionService.insertDivisionRecord(division);
     }
 

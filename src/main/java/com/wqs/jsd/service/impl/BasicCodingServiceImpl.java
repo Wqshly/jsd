@@ -4,6 +4,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.BasicCodingMapper;
 import com.wqs.jsd.pojo.BasicCoding;
 import com.wqs.jsd.service.BasicCodingService;
+import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,12 @@ public class BasicCodingServiceImpl implements BasicCodingService {
 
     @Override
     public ResultBean<Void> insertBasicCodingRecord(BasicCoding basicCoding) {
+        String abbr = commonMethod.getPinYinHeader(basicCoding.getName());
+        basicCoding.setAbbreviation(abbr);
+        basicCoding.setFinalEditTime(commonMethod.getTime());
+        if (basicCoding.getType().equals("staffStatus")) {
+            basicCoding.setCodingStyle("ZT" + CodeUtil.createCode());
+        }
         return commonMethod.changeRecord(basicCodingMapper.insert(basicCoding));
     }
 
