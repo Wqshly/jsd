@@ -86,7 +86,7 @@ public class BasicCodingController {
         return basicCodingService.findBasicCodingByType(type);
     }
 
-    @PostMapping("")
+    @PostMapping("deleteBasicCoding")
     public ResultBean<Void> deleteBasicCoding(@RequestBody List<Integer> selectMultipleId) {
         return basicCodingService.deleteBasicCoding(selectMultipleId);
     }

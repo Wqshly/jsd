@@ -10,6 +10,8 @@ import java.util.Date;
 public class Post implements Serializable {
     private Integer id;
 
+    private String radio;
+
     private String number;
 
     private String upperNumber;
@@ -32,6 +34,14 @@ public class Post implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRadio() {
+        return radio;
+    }
+
+    public void setRadio(String radio) {
+        this.radio = radio;
     }
 
     public String getNumber() {

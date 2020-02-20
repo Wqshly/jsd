@@ -4,6 +4,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.PostMapper;
 import com.wqs.jsd.pojo.Post;
 import com.wqs.jsd.service.PostService;
+import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public ResultBean<Void> insertPostRecord(Post post) {
         post.setFinalEditTime(commonMethod.getTime());
+        if (post.getRadio().equals("1")) {
+            post.setNumber("GW" + CodeUtil.createCode());
+        }
         return commonMethod.changeRecord(postMapper.insert(post));
     }
 
