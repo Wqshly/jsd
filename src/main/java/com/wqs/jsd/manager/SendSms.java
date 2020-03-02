@@ -1,4 +1,4 @@
-package com.wqs.jsd.util;
+package com.wqs.jsd.manager;
 
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;

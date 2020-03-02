@@ -24,7 +24,7 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
  * @Modified By:
  */
 @Service
-public class PostServiceImpl implements PostService {
+public class PCPostServiceImpl implements PostService {
 
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
 

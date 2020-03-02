@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * staff
- * @author 
+ * @author
  */
 @Component
 public class Staff implements Serializable {
@@ -50,6 +50,17 @@ public class Staff implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public Staff() {
+    }
+
+    public Staff(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {
+        this.number = number;
+        this.name = name;
+        this.sex = sex;
+        this.phone = phone;
+        this.identify = identify;
+        this.status = status;
+        this.finalEditor = finalEditor;
+        this.finalEditTime = finalEditTime;
     }
 
     public void getStaffInfo(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {

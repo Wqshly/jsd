@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/initRegister")
     public ResultBean<Void> initRegister(@RequestBody StaffUser staffUser) {
-        return new ResultBean<>(staffUserService.initRegister(staffUser), "success");
+        return staffUserService.initRegister(staffUser);
     }
 
     @PostMapping("register")

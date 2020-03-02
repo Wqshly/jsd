@@ -32,6 +32,10 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
     <!-- (应该是打包时?)屏蔽springboot自带的tomcat-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

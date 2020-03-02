@@ -26,29 +26,11 @@ public interface StaffUserService {
 
     /**
      * @param staffUser
-     * @description:
-     * @return:
-     * @author: van
-     * @time: 2019/12/27 11:08
-     */
-    StaffUser getLoginInfo(StaffUser staffUser);
-
-    /**
-     * @param staffUser
      * @return staffUser
      * 初始注册
      */
-    int initRegister(StaffUser staffUser);
-
-    /**
-     * @param staff 初始注册的录入
-     */
-    boolean initRegister(Staff staff);
-
-    /**
-     * @param user 初始注册的录入
-     */
-    boolean initRegister(User user);
+//    int initRegister(StaffUser staffUser);
+    ResultBean<Void> initRegister(StaffUser staffUser);
 
     /**
      * @param user

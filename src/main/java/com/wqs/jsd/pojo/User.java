@@ -34,7 +34,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public void userInitRegister(Integer staffId, String password, String status, String finalEditor, Date finalEditTime) {
+    public User(Integer staffId, String password, String status, String finalEditor, Date finalEditTime) {
         this.staffId = staffId;
         this.password = password;
         this.status = status;

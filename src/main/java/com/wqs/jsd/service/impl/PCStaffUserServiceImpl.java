@@ -16,12 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.wqs.jsd.beans.ResultBean.*;
-import static com.wqs.jsd.util.CheckUtil.check;
-import static com.wqs.jsd.util.CheckUtil.notNull;
 
 /**
  * @Author:
@@ -30,7 +25,7 @@ import static com.wqs.jsd.util.CheckUtil.notNull;
  * @Modified By:
  */
 @Service
-public class StaffUserServiceImpl implements StaffUserService {
+public class PCStaffUserServiceImpl implements StaffUserService {
     private static final Logger logger = LoggerFactory.getLogger(StaffUserService.class);
 
     @Autowired
@@ -84,82 +79,32 @@ public class StaffUserServiceImpl implements StaffUserService {
 
     /**
      * @param staffUser
-     * @description:
-     * @return:
-     * @author: van
-     * @time: 2019/12/27 11:08
-     */
-    @Override
-    public StaffUser getLoginInfo(StaffUser staffUser) {
-//        staffUser = this.staffUser;
-//                System.out.println(staffUser.getPhone());
-        return staffUser;
-    }
-
-    /**
-     * @param staffUser
      * @return staffUser
      * 初始注册
      */
     @Override
-    public int initRegister(StaffUser staffUser) {
+    public ResultBean<Void> initRegister(StaffUser staffUser) {
         try {
-            // 当数据库为空时，可执行初始注册
-            if (staffMapper.countStaff() == 0) {
-                CommonMethod commonMethod = new CommonMethod();
-                staff.getStaffInfo("JSD001", staffUser.getName(), staffUser.getSex(), staffUser.getPhone(), staffUser.getIdentify(), "在职", staffUser.getName(), commonMethod.getTime());
-                if (this.initRegister(staff)) {
-                    byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
-                    String password = new String(decodedData);
-                    user.userInitRegister(staffMapper.selectIdByPhone(staffUser.getPhone()),
-                            commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
-                            staffUser.getName(), commonMethod.getTime());
-                    if (this.initRegister(user)) {
-                        return SUCCESS;
-                    } else {
-                        return SQL_EXIST;
-                    }
-                } else {
-                    return SQL_EXIST;
-                }
+            if (staffMapper.countStaff() != 0) {
+                return new ResultBean<>(SQL_EXIST, "数据库已有初始用户!");
             } else {
-                return SQL_EXIST;
+                CommonMethod commonMethod = new CommonMethod();
+                Staff staff = new Staff("JSD001", staffUser.getName(), staffUser.getSex(), staffUser.getPhone(),
+                        staffUser.getIdentify(), "在职", staffUser.getName(), commonMethod.getTime());
+                int a = staffMapper.insert(staff);
+                System.out.println(a);
+                byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
+                String password = new String(decodedData);
+                User user = new User(staffMapper.selectIdByPhone(staffUser.getPhone()),
+                        commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
+                        staffUser.getName(), commonMethod.getTime());
+                int b = userMapper.insert(user);
+                System.out.println(b);
+                return new ResultBean<>(SUCCESS, "注册成功!");
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return UNKNOWN_EXCEPTION;
-        }
-    }
-
-    /**
-     * @param staff 初始注册的录入
-     */
-    @Override
-    public boolean initRegister(Staff staff) {
-        try {
-            notNull(staff, "param.is.null");
-            //注册并验证
-            check(this.insertStaffRecord(staff).getCode() == 0, "user.register.error");
-            return true;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * @param user 初始注册的录入
-     */
-    @Override
-    public boolean initRegister(User user) {
-        try {
-            notNull(user, "param.is.null");
-            //注册并验证
-            check(this.insertUserRecord(user).getCode() == 0, "user.register.error");
-            return true;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return false;
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误!");
         }
     }
 
