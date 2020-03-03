@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Warehouse;
 
+import java.util.List;
+
 public interface WarehouseMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Warehouse record);
 

@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.ToolsStock;
 
+import java.util.List;
+
 public interface ToolsStockMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(ToolsStock record);
 

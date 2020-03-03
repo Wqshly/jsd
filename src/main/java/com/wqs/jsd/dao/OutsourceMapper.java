@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Outsource;
 
+import java.util.List;
+
 public interface OutsourceMapper {
-    int deleteByPrimaryKey(Integer id);
+    
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Outsource record);
 

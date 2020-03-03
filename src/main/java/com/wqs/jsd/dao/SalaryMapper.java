@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Salary;
 
+import java.util.List;
+
 public interface SalaryMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Salary record);
 

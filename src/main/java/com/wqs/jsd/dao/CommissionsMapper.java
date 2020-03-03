@@ -2,8 +2,10 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Commissions;
 
+import java.util.List;
+
 public interface CommissionsMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Commissions record);
 

@@ -2,8 +2,10 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.CustomerDetail;
 
+import java.util.List;
+
 public interface CustomerDetailMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(CustomerDetail record);
 

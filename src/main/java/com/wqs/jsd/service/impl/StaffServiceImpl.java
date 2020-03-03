@@ -23,7 +23,7 @@ import static com.wqs.jsd.beans.ResultBean.*;
  * @Modified By:
  */
 @Service
-public class PCStaffServiceImpl implements StaffService {
+public class StaffServiceImpl implements StaffService {
 
     private static final Logger logger = LoggerFactory.getLogger(StaffService.class);
 

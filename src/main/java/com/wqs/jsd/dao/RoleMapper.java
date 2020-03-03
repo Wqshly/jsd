@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Role;
 
+import java.util.List;
+
 public interface RoleMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Role record);
 

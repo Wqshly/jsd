@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DivisionMapper {
 
-    List<Division> selectAll();
-
     int deleteByPrimaryKey(List<Integer> id);
+
+    List<Division> selectAll();
 
     int insert(Division record);
 

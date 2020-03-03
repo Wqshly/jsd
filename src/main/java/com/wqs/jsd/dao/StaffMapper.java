@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface StaffMapper {
 
-    List<Staff> selectAll();
+    int deleteByPrimaryKey(List<Integer> id);
 
-    int deleteByPrimaryKey(Integer id);
+    List<Staff> selectAll();
 
     int insert(Staff record);
 

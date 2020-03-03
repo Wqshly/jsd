@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.Orders;
 
+import java.util.List;
+
 public interface OrdersMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(Orders record);
 

@@ -2,8 +2,10 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.CustomerHeadSculpture;
 
+import java.util.List;
+
 public interface CustomerHeadSculptureMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(CustomerHeadSculpture record);
 

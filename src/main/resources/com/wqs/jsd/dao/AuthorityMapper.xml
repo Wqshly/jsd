@@ -16,9 +16,12 @@
     from authority
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from authority
-    where id = #{id,jdbcType=INTEGER}
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Authority" useGeneratedKeys="true">
     insert into authority (`name`, final_editor, final_edit_time

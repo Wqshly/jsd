@@ -2,15 +2,11 @@ package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.service.PortTypeFactory;
 import com.wqs.jsd.service.StaffService;
-import com.wqs.jsd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,12 +20,6 @@ import java.util.List;
 public class StaffController {
     @Autowired
     private StaffService staffService;
-    @Autowired
-    @Qualifier("PCTypeFactory")
-    private PortTypeFactory pcType;
-    @Autowired
-    @Qualifier("mobileTypeFactory")
-    private PortTypeFactory mobileType;
 
     @GetMapping("/staffCount")
     public ResultBean<Integer> staffCount() {
@@ -57,14 +47,4 @@ public class StaffController {
         return staffService.insertStaffRecord(staff);
     }
 
-//    @PostMapping("addStaff")
-//    public ResultBean<Void> addStaff(@RequestBody Staff staff, HttpServletRequest request) throws IOException {
-//        String ua = request.getHeader("User-Agent");
-//        if (StringUtil.checkAgentIsMobile(ua)) {
-//            System.out.println("电脑端使用");
-//            return pcType.getStaff().insertStaffRecord(staff);
-//        } else {
-//            return mobileType.getStaff().insertStaffRecord(staff);
-//        }
-//    }
 }

@@ -24,7 +24,7 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
  * @Modified By:
  */
 @Service
-public class PCDivisionServiceImpl implements DivisionService {
+public class DivisionServiceImpl implements DivisionService {
 
     private static final Logger logger = LoggerFactory.getLogger(DivisionService.class);
 

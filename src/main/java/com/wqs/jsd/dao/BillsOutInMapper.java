@@ -2,8 +2,10 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.BillsOutIn;
 
+import java.util.List;
+
 public interface BillsOutInMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(BillsOutIn record);
 

@@ -16,9 +16,12 @@
     from discount
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from discount
-    where id = #{id,jdbcType=INTEGER}
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Discount" useGeneratedKeys="true">
     insert into discount (policy, final_editor, final_edit_time

@@ -16,9 +16,12 @@
     from customer_head_sculpture
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from customer_head_sculpture
-    where id = #{id,jdbcType=INTEGER}
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CustomerHeadSculpture" useGeneratedKeys="true">
     insert into customer_head_sculpture (customer_id, pic_local, is_current_pic

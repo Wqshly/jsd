@@ -16,9 +16,12 @@
     from user_landing
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from user_landing
-    where id = #{id,jdbcType=INTEGER}
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.UserLanding" useGeneratedKeys="true">
     insert into user_landing (user_id, landing_address, last_landing_time

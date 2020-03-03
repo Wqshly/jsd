@@ -2,8 +2,11 @@ package com.wqs.jsd.dao;
 
 import com.wqs.jsd.pojo.TaskToolUseModel;
 
+import java.util.List;
+
 public interface TaskToolUseModelMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(TaskToolUseModel record);
 

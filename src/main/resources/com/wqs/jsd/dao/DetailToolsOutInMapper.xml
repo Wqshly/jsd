@@ -21,9 +21,12 @@
     from detail_tools_out_in
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from detail_tools_out_in
-    where id = #{id,jdbcType=INTEGER}
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.DetailToolsOutIn" useGeneratedKeys="true">
     insert into detail_tools_out_in (tools_id, bills_out_in_id, warehouse_id, 

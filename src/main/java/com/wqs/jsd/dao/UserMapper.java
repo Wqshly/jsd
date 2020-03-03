@@ -3,8 +3,11 @@ package com.wqs.jsd.dao;
 import com.wqs.jsd.pojo.StaffUser;
 import com.wqs.jsd.pojo.User;
 
+import java.util.List;
+
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteByPrimaryKey(List<Integer> id);
 
     int insert(User record);
 

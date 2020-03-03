@@ -25,7 +25,7 @@ import static com.wqs.jsd.beans.ResultBean.*;
  * @Modified By:
  */
 @Service
-public class PCStaffUserServiceImpl implements StaffUserService {
+public class StaffUserServiceImpl implements StaffUserService {
     private static final Logger logger = LoggerFactory.getLogger(StaffUserService.class);
 
     @Autowired
@@ -84,6 +84,7 @@ public class PCStaffUserServiceImpl implements StaffUserService {
      */
     @Override
     public ResultBean<Void> initRegister(StaffUser staffUser) {
+        System.out.println(staffUser.getNickName());
         try {
             if (staffMapper.countStaff() != 0) {
                 return new ResultBean<>(SQL_EXIST, "数据库已有初始用户!");
@@ -95,10 +96,11 @@ public class PCStaffUserServiceImpl implements StaffUserService {
                 System.out.println(a);
                 byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
                 String password = new String(decodedData);
-                User user = new User(staffMapper.selectIdByPhone(staffUser.getPhone()),
-                        commonMethod.MD5EncryptSalt(password, "wqs"), "在职",
-                        staffUser.getName(), commonMethod.getTime());
+                User user = new User(staffMapper.selectIdByPhone(staffUser.getPhone()), staffUser.getNickName(),
+                        commonMethod.MD5EncryptSalt(password, "wqs"), "在职", staffUser.getName(),
+                        commonMethod.getTime());
                 int b = userMapper.insert(user);
+                
                 System.out.println(b);
                 return new ResultBean<>(SUCCESS, "注册成功!");
             }

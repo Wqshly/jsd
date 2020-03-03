@@ -16,6 +16,8 @@ public class User implements Serializable {
 
     private Integer staffId;
 
+    private String nickName;
+
     private String password;
 
     private String status;
@@ -34,8 +36,9 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(Integer staffId, String password, String status, String finalEditor, Date finalEditTime) {
+    public User(Integer staffId, String nickName, String password, String status, String finalEditor, Date finalEditTime) {
         this.staffId = staffId;
+        this.nickName = nickName;
         this.password = password;
         this.status = status;
         this.finalEditor = finalEditor;
@@ -61,6 +64,14 @@ public class User implements Serializable {
 
     public void setStaffId(Integer staffId) {
         this.staffId = staffId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getPassword() {

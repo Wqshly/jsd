@@ -24,7 +24,7 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
  * @Modified By:
  */
 @Service
-public class PCBasicCodingServiceImpl implements BasicCodingService {
+public class BasicCodingServiceImpl implements BasicCodingService {
     private static final Logger logger = LoggerFactory.getLogger(BasicCodingService.class);
     @Resource
     private BasicCodingMapper basicCodingMapper;
