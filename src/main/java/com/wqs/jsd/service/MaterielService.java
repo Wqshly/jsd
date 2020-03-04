@@ -18,7 +18,7 @@ public interface MaterielService {
 
     ResultBean<Void> updateWarehouseRecord(Warehouse warehouse);
 
-    ResultBean<List<Warehouse>> findAllWarehouse();
+    ResultBean<List<Warehouse>> findAllWarehouse(int currentPage, int pageSize);
 
     ResultBean<Void> deleteWarehouse(List<Integer> id);
 }

@@ -1,6 +1,7 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,9 @@ public class StaffController {
         return staffService.updateStaffRecord(staff);
     }
 
-    @GetMapping("findAllStaff")
-    public ResultBean<List<Staff>> findAllStaff() {
-        return staffService.selectStaffAll();
+    @PostMapping("findAllStaff")
+    public ResultBean<List<Staff>> findAllStaff(@RequestBody PageInfo pageInfo) {
+        return staffService.selectStaffAll(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
     @PostMapping("addStaff")

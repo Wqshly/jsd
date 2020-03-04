@@ -1,5 +1,6 @@
 package com.wqs.jsd.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.PostMapper;
 import com.wqs.jsd.pojo.Post;
@@ -50,9 +51,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public ResultBean<List<Post>> findAllPost() {
+    public ResultBean<List<Post>> findAllPost(int currentPage,int pageSize) {
         try {
-            return new ResultBean<>(postMapper.selectAll(), SUCCESS, "success");
+            PageHelper.startPage(currentPage, pageSize);
+            List<Post> posts = postMapper.selectAll();
+            return new ResultBean<>(posts, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

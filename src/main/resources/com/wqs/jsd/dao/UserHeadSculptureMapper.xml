@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.UserHeadSculptureMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.UserHeadSculpture">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="pic_location" jdbcType="VARCHAR" property="picLocation" />
+    <result column="is_current_pic" jdbcType="VARCHAR" property="isCurrentPic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, pic_location, is_current_pic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_head_sculpture
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from user_head_sculpture
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.UserHeadSculpture" useGeneratedKeys="true">
+    insert into user_head_sculpture (user_id, pic_location, is_current_pic)
+    values (#{userId,jdbcType=INTEGER}, #{picLocation,jdbcType=VARCHAR}, #{isCurrentPic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.UserHeadSculpture" useGeneratedKeys="true">
+    insert into user_head_sculpture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="picLocation != null">
+        pic_location,
+      </if>
+      <if test="isCurrentPic != null">
+        is_current_pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="picLocation != null">
+        #{picLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isCurrentPic != null">
+        #{isCurrentPic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.UserHeadSculpture">
+    update user_head_sculpture
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="picLocation != null">
+        pic_location = #{picLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isCurrentPic != null">
+        is_current_pic = #{isCurrentPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.UserHeadSculpture">
+    update user_head_sculpture
+    set user_id = #{userId,jdbcType=INTEGER},
+      pic_location = #{picLocation,jdbcType=VARCHAR},
+      is_current_pic = #{isCurrentPic,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

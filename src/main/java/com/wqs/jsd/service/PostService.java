@@ -18,7 +18,7 @@ public interface PostService {
 
     ResultBean<Void> updatePostRecord(Post post);
 
-    ResultBean<List<Post>> findAllPost();
+    ResultBean<List<Post>> findAllPost(int currentPage,int pageSize);
 
     ResultBean<Void> deletePost(List<Integer> id);
 }

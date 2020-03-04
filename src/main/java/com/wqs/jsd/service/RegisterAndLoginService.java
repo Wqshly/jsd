@@ -1,8 +1,8 @@
 package com.wqs.jsd.service;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.pojo.StaffUser;
 import com.wqs.jsd.pojo.User;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +13,24 @@ import org.springframework.stereotype.Service;
  * @Modified By:
  */
 @Service
-public interface StaffUserService {
+public interface RegisterAndLoginService {
 
     /**
-     * @param staffUser
+     * @param systemUserInfo
      * @description:
      * @return: ResultBean
      * @author: van
      * @time: 2020/1/9 12:56
      */
-    ResultBean<Staff> login(StaffUser staffUser);
+    ResultBean<Staff> login(SystemUserInfo systemUserInfo);
 
     /**
-     * @param staffUser
-     * @return staffUser
+     * @param systemUserInfo
+     * @return systemUserInfo
      * 初始注册
      */
-//    int initRegister(StaffUser staffUser);
-    ResultBean<Void> initRegister(StaffUser staffUser);
+//    int initRegister(SystemUserInfo systemUserInfo);
+    ResultBean<Void> initRegister(SystemUserInfo systemUserInfo);
 
     /**
      * @param user

@@ -3,6 +3,7 @@ package com.wqs.jsd.controller;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.BasicCoding;
 import com.wqs.jsd.pojo.Division;
+import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.pojo.Post;
 import com.wqs.jsd.service.BasicCodingService;
 import com.wqs.jsd.service.DivisionService;
@@ -40,9 +41,9 @@ public class BasicCodingController {
         return divisionService.updateDivisionRecord(division);
     }
 
-    @GetMapping("findAllDivision")
-    public ResultBean<List<Division>> findAllDivision() {
-        return divisionService.findAllDivision();
+    @PostMapping("findAllDivision")
+    public ResultBean<List<Division>> findAllDivision(@RequestBody PageInfo pageInfo) {
+        return divisionService.findAllDivision(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
     @PostMapping("deleteDivision")
@@ -60,9 +61,9 @@ public class BasicCodingController {
         return postService.updatePostRecord(post);
     }
 
-    @GetMapping("findAllPost")
-    public ResultBean<List<Post>> findAllPost() {
-        return postService.findAllPost();
+    @PostMapping("findAllPost")
+    public ResultBean<List<Post>> findAllPost(@RequestBody PageInfo pageInfo) {
+        return postService.findAllPost(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
     @PostMapping("deletePost")
@@ -80,9 +81,9 @@ public class BasicCodingController {
         return basicCodingService.updateBasicCodingRecord(basicCoding);
     }
 
-    @GetMapping("findBasicCodingWithType")
-    public ResultBean<List<BasicCoding>> findBasicCoding(String type) {
-        return basicCodingService.findBasicCodingByType(type);
+    @PostMapping("findBasicCodingWithType/{type}")
+    public ResultBean<List<BasicCoding>> findBasicCoding(@PathVariable("type") String type, @RequestBody PageInfo pageInfo) {
+        return basicCodingService.findBasicCodingByType(type,pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
     @PostMapping("deleteBasicCoding")

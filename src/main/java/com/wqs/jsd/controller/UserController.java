@@ -1,20 +1,17 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.pojo.StaffUser;
 import com.wqs.jsd.pojo.User;
-import com.wqs.jsd.service.StaffUserService;
+import com.wqs.jsd.service.RegisterAndLoginService;
 import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @Author: wan
@@ -26,13 +23,13 @@ import java.util.Date;
 @RestController
 public class UserController {
     @Autowired
-    private StaffUserService staffUserService;
+    private RegisterAndLoginService registerAndLoginService;
     @Autowired
     private CommonMethod commonMethod;
 
     @PostMapping("/initRegister")
-    public ResultBean<Void> initRegister(@RequestBody StaffUser staffUser) {
-        return staffUserService.initRegister(staffUser);
+    public ResultBean<Void> initRegister(@RequestBody SystemUserInfo systemUserInfo) {
+        return registerAndLoginService.initRegister(systemUserInfo);
     }
 
     @PostMapping("register")
@@ -42,8 +39,8 @@ public class UserController {
 
     // 登录
     @PostMapping("login")
-    public ResultBean<Staff> loginByPhoneCode(@RequestBody StaffUser staffUser) {
-        return staffUserService.login(staffUser);
+    public ResultBean<Staff> loginByPhoneCode(@RequestBody SystemUserInfo systemUserInfo) {
+        return registerAndLoginService.login(systemUserInfo);
     }
 
     // 上传头像

@@ -84,18 +84,18 @@
       #{item}
     </foreach>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Staff" useGeneratedKeys="true">
-    insert into staff (`number`, `name`, sex, 
-      phone, identify, current_position, 
-      address, email, birth, 
-      education, graduate_school, discipline, 
-      medical_num, bank_card_num, `status`, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.wqs.jsd.pojo.Staff">
+    insert into staff (`number`, `name`, sex,
+      phone, identify, current_position,
+      address, email, birth,
+      education, graduate_school, discipline,
+      medical_num, bank_card_num, `status`,
       final_editor, final_edit_time)
-    values (#{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{identify,jdbcType=CHAR}, #{currentPosition,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
-      #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{discipline,jdbcType=VARCHAR}, 
-      #{medicalNum,jdbcType=VARCHAR}, #{bankCardNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+    values (#{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{identify,jdbcType=CHAR}, #{currentPosition,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR},
+      #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{discipline,jdbcType=VARCHAR},
+      #{medicalNum,jdbcType=VARCHAR}, #{bankCardNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Staff"

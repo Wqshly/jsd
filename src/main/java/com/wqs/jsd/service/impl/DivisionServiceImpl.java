@@ -1,5 +1,6 @@
 package com.wqs.jsd.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.DivisionMapper;
 import com.wqs.jsd.pojo.Division;
@@ -51,9 +52,11 @@ public class DivisionServiceImpl implements DivisionService {
     }
 
     @Override
-    public ResultBean<List<Division>> findAllDivision() {
+    public ResultBean<List<Division>> findAllDivision(int currentPage, int pageSize) {
         try {
-            return new ResultBean<>(divisionMapper.selectAll(), SUCCESS, "success");
+            PageHelper.startPage(currentPage, pageSize);
+            List<Division> divisions = divisionMapper.selectAll();
+            return new ResultBean<>(divisions, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

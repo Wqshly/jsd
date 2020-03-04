@@ -26,7 +26,7 @@ public interface StaffService {
      */ 
     ResultBean<Boolean> staffValid(String s);
 
-    ResultBean<List<Staff>> selectStaffAll();
+    ResultBean<List<Staff>> selectStaffAll(int currentPage,int pageSize);
 
     ResultBean<Void> insertStaffRecord(Staff staff);
 

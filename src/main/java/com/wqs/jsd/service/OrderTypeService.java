@@ -18,7 +18,7 @@ public interface OrderTypeService {
 
     ResultBean<Void> updateOrderType(OrderModel orderModel);
 
-    ResultBean<List<OrderModel>> findAllOrderType();
+    ResultBean<List<OrderModel>> findAllOrderType(int currentPage, int pageSize);
 
     ResultBean<Void> deleteOrderTypeRecord(List<Integer> id);
 }

@@ -2,11 +2,13 @@ package com.wqs.jsd.service.impl;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
+import com.wqs.jsd.dao.UserHeadSculptureMapper;
 import com.wqs.jsd.dao.UserMapper;
 import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.pojo.StaffUser;
+import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.User;
-import com.wqs.jsd.service.StaffUserService;
+import com.wqs.jsd.pojo.UserHeadSculpture;
+import com.wqs.jsd.service.RegisterAndLoginService;
 import com.wqs.jsd.util.CommonMethod;
 import com.wqs.jsd.util.RSACode;
 import org.slf4j.Logger;
@@ -25,14 +27,17 @@ import static com.wqs.jsd.beans.ResultBean.*;
  * @Modified By:
  */
 @Service
-public class StaffUserServiceImpl implements StaffUserService {
-    private static final Logger logger = LoggerFactory.getLogger(StaffUserService.class);
+public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
+    private static final Logger logger = LoggerFactory.getLogger(RegisterAndLoginService.class);
 
     @Autowired
     private User user;
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private UserHeadSculptureMapper sculptureMapper;
 
     @Resource
     private StaffMapper staffMapper;
@@ -44,25 +49,22 @@ public class StaffUserServiceImpl implements StaffUserService {
     private CommonMethod commonMethod;
 
     /**
-     * @param staffUser
+     * @param systemUserInfo
      * @description:
      * @return: ResultBean
      * @author: van
      * @time: 2020/1/9 12:56
      */
     @Override
-    public ResultBean<Staff> login(StaffUser staffUser) {
+    public ResultBean<Staff> login(SystemUserInfo systemUserInfo) {
         try {
-            CommonMethod commonMethod = new CommonMethod();
-            int a = staffMapper.countNumberOrPhone(staffUser.getPhone());
+            int a = staffMapper.countNumberOrPhone(systemUserInfo.getPhone());
             if (a == 1) {
-                byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
+                byte[] decodedData = RSACode.decryptByPrivateKey(systemUserInfo.getPassword());
                 String password = new String(decodedData);
-                String s = commonMethod.MD5EncryptSalt("jwc161813", "wqs");
-                System.out.println(s);
-                user.userLogin(staffMapper.selectIdByNumberOrPhone(staffUser.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"));
+                user.userLogin(staffMapper.selectIdByNumberOrPhone(systemUserInfo.getPhone()), commonMethod.MD5EncryptSalt(password, "wqs"));
                 if (userMapper.loginByStaffId(user) == 1) {
-                    return new ResultBean<>(staffMapper.selectByNumberOrPhone(staffUser.getPhone()), SUCCESS, "登录成功!");
+                    return new ResultBean<>(staffMapper.selectByNumberOrPhone(systemUserInfo.getPhone()), SUCCESS, "登录成功!");
                 } else {
                     return new ResultBean<>(LOGIN_FAILED, "登录失败!账号或密码错误!");
                 }
@@ -78,30 +80,30 @@ public class StaffUserServiceImpl implements StaffUserService {
     }
 
     /**
-     * @param staffUser
-     * @return staffUser
+     * @param systemUserInfo
+     * @return systemUserInfo
      * 初始注册
      */
     @Override
-    public ResultBean<Void> initRegister(StaffUser staffUser) {
-        System.out.println(staffUser.getNickName());
+    public ResultBean<Void> initRegister(SystemUserInfo systemUserInfo) {
+        System.out.println(systemUserInfo.getNickName());
         try {
             if (staffMapper.countStaff() != 0) {
                 return new ResultBean<>(SQL_EXIST, "数据库已有初始用户!");
             } else {
                 CommonMethod commonMethod = new CommonMethod();
-                Staff staff = new Staff("JSD001", staffUser.getName(), staffUser.getSex(), staffUser.getPhone(),
-                        staffUser.getIdentify(), "在职", staffUser.getName(), commonMethod.getTime());
-                int a = staffMapper.insert(staff);
-                System.out.println(a);
-                byte[] decodedData = RSACode.decryptByPrivateKey(staffUser.getPassword());
+                Staff staff = new Staff("JSD001", systemUserInfo.getName(), systemUserInfo.getSex(), systemUserInfo.getPhone(),
+                        systemUserInfo.getIdentify(), "在职", systemUserInfo.getName(), commonMethod.getTime());
+                staffMapper.insert(staff);
+                byte[] decodedData = RSACode.decryptByPrivateKey(systemUserInfo.getPassword());
                 String password = new String(decodedData);
-                User user = new User(staffMapper.selectIdByPhone(staffUser.getPhone()), staffUser.getNickName(),
-                        commonMethod.MD5EncryptSalt(password, "wqs"), "在职", staffUser.getName(),
+                User user = new User(staff.getId(), systemUserInfo.getNickName(),
+                        commonMethod.MD5EncryptSalt(password, "wqs"), "在职", systemUserInfo.getName(),
                         commonMethod.getTime());
-                int b = userMapper.insert(user);
-                
-                System.out.println(b);
+                userMapper.insert(user);
+                System.out.println(user.getId());
+                UserHeadSculpture userHeadSculpture = new UserHeadSculpture(user.getId(),systemUserInfo.getPicLocation(),"true");
+                sculptureMapper.insert(userHeadSculpture);
                 return new ResultBean<>(SUCCESS, "注册成功!");
             }
         } catch (Exception e) {

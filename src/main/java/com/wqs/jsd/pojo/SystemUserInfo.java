@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @Description: 员工注册，登录的实体类
  * @Modified By:
  */
-public class StaffUser implements Serializable {
+public class SystemUserInfo implements Serializable {
     private int id;
     private String name;
     private String nickName;

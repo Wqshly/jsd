@@ -1,6 +1,5 @@
 package com.wqs.jsd.dao;
 
-import com.wqs.jsd.pojo.StaffUser;
 import com.wqs.jsd.pojo.User;
 
 import java.util.List;

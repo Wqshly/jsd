@@ -1,5 +1,6 @@
 package com.wqs.jsd.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.pojo.Staff;
@@ -62,9 +63,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public ResultBean<List<Staff>> selectStaffAll() {
+    public ResultBean<List<Staff>> selectStaffAll(int currentPage, int pageSize) {
         try {
-            return new ResultBean<>(staffMapper.selectAll(), SUCCESS, "success");
+            PageHelper.startPage(currentPage, pageSize);
+            List<Staff> staff = staffMapper.selectAll();
+            return new ResultBean<>(staff, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
