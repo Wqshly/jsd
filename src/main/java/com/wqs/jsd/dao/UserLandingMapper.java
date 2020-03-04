@@ -8,6 +8,8 @@ public interface UserLandingMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<UserLanding> selectAll();
+
     int insert(UserLanding record);
 
     int insertSelective(UserLanding record);

@@ -16,6 +16,11 @@
     from authority
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Authority">
+    select
+    <include refid="Base_Column_List"/>
+    from authority
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from authority
     where id in

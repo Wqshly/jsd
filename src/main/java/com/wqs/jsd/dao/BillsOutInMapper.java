@@ -7,6 +7,8 @@ import java.util.List;
 public interface BillsOutInMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<BillsOutIn> selectAll();
+
     int insert(BillsOutIn record);
 
     int insertSelective(BillsOutIn record);

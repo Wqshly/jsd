@@ -15,6 +15,11 @@
     from member_discount
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.MemberDiscount">
+    select
+    <include refid="Base_Column_List"/>
+    from member_discount
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from member_discount
     where id in

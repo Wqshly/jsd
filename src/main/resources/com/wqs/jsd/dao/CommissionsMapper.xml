@@ -20,6 +20,11 @@
     from commissions
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Commissions">
+    select
+    <include refid="Base_Column_List"/>
+    from commissions
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from commissions
     where id in

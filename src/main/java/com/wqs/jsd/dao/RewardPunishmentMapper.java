@@ -8,6 +8,8 @@ public interface RewardPunishmentMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<RewardPunishment> selectAll();
+
     int insert(RewardPunishment record);
 
     int insertSelective(RewardPunishment record);

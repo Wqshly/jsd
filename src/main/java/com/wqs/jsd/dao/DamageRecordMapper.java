@@ -7,6 +7,8 @@ import java.util.List;
 public interface DamageRecordMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<DamageRecord> selectAll();
+
     int insert(DamageRecord record);
 
     int insertSelective(DamageRecord record);

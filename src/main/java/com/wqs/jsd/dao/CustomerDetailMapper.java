@@ -7,6 +7,8 @@ import java.util.List;
 public interface CustomerDetailMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<CustomerDetail> selectAll();
+
     int insert(CustomerDetail record);
 
     int insertSelective(CustomerDetail record);

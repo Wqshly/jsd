@@ -20,6 +20,11 @@
     from car_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.CarInfo">
+    select
+    <include refid="Base_Column_List"/>
+    from car_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from car_info
     where id in

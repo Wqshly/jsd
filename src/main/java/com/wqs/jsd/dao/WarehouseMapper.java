@@ -8,6 +8,8 @@ public interface WarehouseMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Warehouse> selectAll();
+
     int insert(Warehouse record);
 
     int insertSelective(Warehouse record);

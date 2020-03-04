@@ -8,6 +8,8 @@ public interface ToolsStockMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<ToolsStock> selectAll();
+
     int insert(ToolsStock record);
 
     int insertSelective(ToolsStock record);

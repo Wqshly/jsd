@@ -7,6 +7,8 @@ import java.util.List;
 public interface DiscountMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Discount> selectAll();
+
     int insert(Discount record);
 
     int insertSelective(Discount record);

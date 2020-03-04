@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserHeadSculptureMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<UserHeadSculpture> selectAll();
+
     int insert(UserHeadSculpture record);
 
     int insertSelective(UserHeadSculpture record);

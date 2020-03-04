@@ -20,6 +20,11 @@
     from is_quit
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.IsQuit">
+    select
+    <include refid="Base_Column_List"/>
+    from is_quit
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from is_quit
     where id in

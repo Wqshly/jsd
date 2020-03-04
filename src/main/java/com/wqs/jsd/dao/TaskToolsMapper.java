@@ -8,6 +8,8 @@ public interface TaskToolsMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<TaskTools> selectAll();
+
     int insert(TaskTools record);
 
     int insertSelective(TaskTools record);

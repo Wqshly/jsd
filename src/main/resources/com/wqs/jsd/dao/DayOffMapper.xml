@@ -20,6 +20,11 @@
     from day_off
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.DayOff">
+    select
+    <include refid="Base_Column_List"/>
+    from day_off
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from day_off
     where id in

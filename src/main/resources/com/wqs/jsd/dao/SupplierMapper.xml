@@ -18,6 +18,11 @@
     from supplier
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Supplier">
+    select
+    <include refid="Base_Column_List"/>
+    from supplier
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from supplier
     where id in

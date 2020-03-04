@@ -16,6 +16,11 @@
     from order_details
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.OrderDetails">
+    select
+    <include refid="Base_Column_List"/>
+    from order_details
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from order_details
     where id in

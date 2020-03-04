@@ -7,6 +7,8 @@ import java.util.List;
 public interface CommissionsMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Commissions> selectAll();
+
     int insert(Commissions record);
 
     int insertSelective(Commissions record);

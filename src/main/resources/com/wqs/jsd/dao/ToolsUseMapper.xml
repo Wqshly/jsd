@@ -20,6 +20,11 @@
     from tools_use
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.ToolsUse">
+    select
+    <include refid="Base_Column_List"/>
+    from tools_use
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from tools_use
     where id in

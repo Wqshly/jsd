@@ -18,6 +18,11 @@
     from bills_of_entry
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.BillsOfEntry">
+    select
+    <include refid="Base_Column_List"/>
+    from bills_of_entry
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from bills_of_entry
     where id in

@@ -17,6 +17,11 @@
     from auth_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.AuthRole">
+    select
+    <include refid="Base_Column_List"/>
+    from auth_role
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from auth_role
     where id in

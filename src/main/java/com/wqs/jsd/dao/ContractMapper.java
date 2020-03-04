@@ -7,6 +7,8 @@ import java.util.List;
 public interface ContractMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Contract> selectAll();
+
     int insert(Contract record);
 
     int insertSelective(Contract record);

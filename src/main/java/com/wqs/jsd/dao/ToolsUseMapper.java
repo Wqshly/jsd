@@ -8,6 +8,8 @@ public interface ToolsUseMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<ToolsUse> selectAll();
+
     int insert(ToolsUse record);
 
     int insertSelective(ToolsUse record);

@@ -19,6 +19,11 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.User">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+  </select>
   <select id="selectByStaffId" parameterType="com.wqs.jsd.pojo.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

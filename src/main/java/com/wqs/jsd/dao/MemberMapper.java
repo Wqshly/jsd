@@ -8,6 +8,8 @@ public interface MemberMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Member> selectAll();
+
     int insert(Member record);
 
     int insertSelective(Member record);

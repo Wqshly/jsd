@@ -23,6 +23,11 @@
     from bills_out_in
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.BillsOutIn">
+    select
+    <include refid="Base_Column_List"/>
+    from bills_out_in
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from bills_out_in
     where id in

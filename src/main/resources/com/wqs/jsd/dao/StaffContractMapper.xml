@@ -21,6 +21,11 @@
     from staff_contract
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.StaffContract">
+    select
+    <include refid="Base_Column_List"/>
+    from staff_contract
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from staff_contract
     where id in

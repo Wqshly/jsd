@@ -21,6 +21,11 @@
     from detail_tools_out_in
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.DetailToolsOutIn">
+    select
+    <include refid="Base_Column_List"/>
+    from detail_tools_out_in
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from detail_tools_out_in
     where id in

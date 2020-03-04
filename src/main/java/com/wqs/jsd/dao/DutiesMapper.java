@@ -8,6 +8,8 @@ public interface DutiesMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Duties> selectAll();
+
     int insert(Duties record);
 
     int insertSelective(Duties record);

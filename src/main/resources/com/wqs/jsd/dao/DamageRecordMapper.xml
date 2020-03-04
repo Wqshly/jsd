@@ -17,6 +17,11 @@
     from damage_record
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.DamageRecord">
+    select
+    <include refid="Base_Column_List"/>
+    from damage_record
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from damage_record
     where id in

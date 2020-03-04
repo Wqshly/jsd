@@ -17,6 +17,11 @@
     from order_task_model
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.OrderTaskModel">
+    select
+    <include refid="Base_Column_List"/>
+    from order_task_model
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from order_task_model
     where id in

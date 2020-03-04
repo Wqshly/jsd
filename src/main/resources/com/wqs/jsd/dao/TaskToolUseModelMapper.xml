@@ -18,6 +18,11 @@
     from task_tool_use_model
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.TaskToolUseModel">
+    select
+    <include refid="Base_Column_List"/>
+    from task_tool_use_model
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from task_tool_use_model
     where id in

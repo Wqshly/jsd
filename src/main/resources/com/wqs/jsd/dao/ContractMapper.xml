@@ -31,6 +31,11 @@
     from contract
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Contract">
+    select
+    <include refid="Base_Column_List"/>
+    from contract
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from contract
     where id in

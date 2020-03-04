@@ -19,6 +19,11 @@
     from outsource
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Outsource">
+    select
+    <include refid="Base_Column_List"/>
+    from outsource
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from outsource
     where id in

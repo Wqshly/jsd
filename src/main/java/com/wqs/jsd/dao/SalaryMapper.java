@@ -8,6 +8,8 @@ public interface SalaryMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Salary> selectAll();
+
     int insert(Salary record);
 
     int insertSelective(Salary record);

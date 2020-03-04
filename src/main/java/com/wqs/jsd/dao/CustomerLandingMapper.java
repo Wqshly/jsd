@@ -7,6 +7,8 @@ import java.util.List;
 public interface CustomerLandingMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<CustomerLanding> selectAll();
+
     int insert(CustomerLanding record);
 
     int insertSelective(CustomerLanding record);

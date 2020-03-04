@@ -16,6 +16,11 @@
     from customer_head_sculpture
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.CustomerHeadSculpture">
+    select
+    <include refid="Base_Column_List"/>
+    from customer_head_sculpture
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from customer_head_sculpture
     where id in

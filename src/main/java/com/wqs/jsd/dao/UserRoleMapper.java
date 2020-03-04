@@ -8,6 +8,8 @@ public interface UserRoleMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<UserRole> selectAll();
+
     int insert(UserRole record);
 
     int insertSelective(UserRole record);

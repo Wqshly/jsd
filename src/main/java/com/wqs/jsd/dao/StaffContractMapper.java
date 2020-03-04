@@ -8,6 +8,8 @@ public interface StaffContractMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<StaffContract> selectAll();
+
     int insert(StaffContract record);
 
     int insertSelective(StaffContract record);

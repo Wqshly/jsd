@@ -8,6 +8,8 @@ public interface IsQuitMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<IsQuit> selectAll();
+
     int insert(IsQuit record);
 
     int insertSelective(IsQuit record);

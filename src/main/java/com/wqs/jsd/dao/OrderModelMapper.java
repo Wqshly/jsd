@@ -8,6 +8,8 @@ public interface OrderModelMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<OrderModel> selectAll();
+
     int insert(OrderModel record);
 
     int insertSelective(OrderModel record);

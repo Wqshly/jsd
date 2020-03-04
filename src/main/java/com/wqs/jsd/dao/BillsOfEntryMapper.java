@@ -7,6 +7,8 @@ import java.util.List;
 public interface BillsOfEntryMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<BillsOfEntry> selectAll();
+
     int insert(BillsOfEntry record);
 
     int insertSelective(BillsOfEntry record);

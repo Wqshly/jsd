@@ -7,6 +7,8 @@ import java.util.List;
 public interface DayOffMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<DayOff> selectAll();
+
     int insert(DayOff record);
 
     int insertSelective(DayOff record);

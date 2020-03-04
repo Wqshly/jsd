@@ -8,6 +8,8 @@ public interface ToolsMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Tools> selectAll();
+
     int insert(Tools record);
 
     int insertSelective(Tools record);

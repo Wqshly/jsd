@@ -8,6 +8,8 @@ public interface OutsourceMapper {
     
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Outsource> selectAll();
+
     int insert(Outsource record);
 
     int insertSelective(Outsource record);

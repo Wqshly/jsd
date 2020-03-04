@@ -7,6 +7,8 @@ import java.util.List;
 public interface CarInfoMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<CarInfo> selectAll();
+
     int insert(CarInfo record);
 
     int insertSelective(CarInfo record);

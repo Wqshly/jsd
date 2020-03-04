@@ -8,6 +8,8 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<User> selectAll();
+
     int insert(User record);
 
     int insertSelective(User record);

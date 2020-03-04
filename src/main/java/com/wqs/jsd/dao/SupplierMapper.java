@@ -8,6 +8,8 @@ public interface SupplierMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Supplier> selectAll();
+
     int insert(Supplier record);
 
     int insertSelective(Supplier record);

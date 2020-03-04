@@ -7,6 +7,8 @@ import java.util.List;
 public interface DetailToolsOutInMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<DetailToolsOutIn> selectAll();
+
     int insert(DetailToolsOutIn record);
 
     int insertSelective(DetailToolsOutIn record);

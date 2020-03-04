@@ -8,6 +8,8 @@ public interface TaskMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Task> selectAll();
+
     int insert(Task record);
 
     int insertSelective(Task record);

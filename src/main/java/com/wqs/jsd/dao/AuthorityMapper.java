@@ -8,6 +8,8 @@ public interface AuthorityMapper {
 
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<Authority> selectAll();
+
     int insert(Authority record);
 
     int insertSelective(Authority record);

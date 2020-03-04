@@ -7,6 +7,8 @@ import java.util.List;
 public interface AuthRoleMapper {
     int deleteByPrimaryKey(List<Integer> id);
 
+    List<AuthRole> selectAll();
+
     int insert(AuthRole record);
 
     int insertSelective(AuthRole record);
