@@ -24,8 +24,13 @@ public class CarInfoController {
     @Autowired
     private CarInfoService carInfoService;
 
+    @PostMapping("addCarInfo")
+    public ResultBean<List<Void>> insertCarInfo(@RequestBody CarInfo carInfo) {
+        return carInfoService.insertCarInfo(carInfo);
+    }
+
     @PostMapping("findAllCarInfo")
-    public ResultBean<List<CarInfo>> findAllDivision(@RequestBody PageInfo pageInfo) {
+    public ResultBean<List<CarInfo>> findAllCarInfo(@RequestBody PageInfo pageInfo) {
         return carInfoService.findAllCarInfo(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 }

@@ -15,4 +15,6 @@ import java.util.List;
 @Service
 public interface CarInfoService {
     ResultBean<List<CarInfo>> findAllCarInfo(int currentPage, int pageSize);
+
+    ResultBean<List<Void>> insertCarInfo(CarInfo carInfo);
 }

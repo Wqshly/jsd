@@ -40,4 +40,9 @@ public class CarInfoServiceImpl implements CarInfoService {
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
         }
     }
+
+    @Override
+    public ResultBean<List<Void>> insertCarInfo(CarInfo carInfo) {
+        return null;
+    }
 }

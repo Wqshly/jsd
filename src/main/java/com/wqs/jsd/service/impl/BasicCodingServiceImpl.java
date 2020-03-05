@@ -46,6 +46,9 @@ public class BasicCodingServiceImpl implements BasicCodingService {
 
     @Override
     public ResultBean<Void> updateBasicCodingRecord(BasicCoding basicCoding) {
+        String abbr = commonMethod.getPinYinHeader(basicCoding.getName());
+        basicCoding.setAbbreviation(abbr);
+        basicCoding.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(basicCodingMapper.updateByPrimaryKey(basicCoding));
     }
 
