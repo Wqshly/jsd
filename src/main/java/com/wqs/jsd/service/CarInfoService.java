@@ -8,13 +8,20 @@ import java.util.List;
 
 /**
  * @Author: wan
- * @Date: Created in 9:16 2020/3/4
+ * @Date: Created in 21:04 2020/3/5
  * @Description:
  * @Modified By:
  */
 @Service
 public interface CarInfoService {
-    ResultBean<List<CarInfo>> findAllCarInfo(int currentPage, int pageSize);
 
-    ResultBean<List<Void>> insertCarInfo(CarInfo carInfo);
+    ResultBean<Void> insertCarInfoRecord(CarInfo record);
+
+    ResultBean<Void> updateCarInfoRecord(CarInfo record);
+
+    ResultBean<List<CarInfo>> findCarInfoRecord();
+
+    ResultBean<List<CarInfo>> findAllCarInfoRecord(int currentPage, int pageSize);
+
+    ResultBean<Void> deleteCarInfoRecord(List<Integer> id);
 }

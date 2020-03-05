@@ -8,9 +8,13 @@ public interface IsQuitMapper {
 
     int countTotal();
 
+    int countTotalByStaffId(Integer id);
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<IsQuit> selectAll();
+
+    List<IsQuit> selectByStaffId(Integer id);
 
     int insert(IsQuit record);
 

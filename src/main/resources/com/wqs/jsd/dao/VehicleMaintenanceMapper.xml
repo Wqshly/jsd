@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.VehicleMaintenanceMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.VehicleMaintenance">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="maintenance_person" jdbcType="VARCHAR" property="maintenancePerson" />
+    <result column="maintenance_time" jdbcType="TIMESTAMP" property="maintenanceTime" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, car_id, maintenance_person, maintenance_time, final_editor, final_edit_time
+  </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM vehicle_maintenance
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from vehicle_maintenance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.VehicleMaintenance">
+    select
+    <include refid="Base_Column_List"/>
+    from vehicle_maintenance
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.VehicleMaintenance" useGeneratedKeys="true">
+    insert into vehicle_maintenance (car_id, maintenance_person, maintenance_time, 
+      final_editor, final_edit_time)
+    values (#{carId,jdbcType=INTEGER}, #{maintenancePerson,jdbcType=VARCHAR}, #{maintenanceTime,jdbcType=TIMESTAMP}, 
+      #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.VehicleMaintenance" useGeneratedKeys="true">
+    insert into vehicle_maintenance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="maintenancePerson != null">
+        maintenance_person,
+      </if>
+      <if test="maintenanceTime != null">
+        maintenance_time,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="maintenancePerson != null">
+        #{maintenancePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenanceTime != null">
+        #{maintenanceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.VehicleMaintenance">
+    update vehicle_maintenance
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="maintenancePerson != null">
+        maintenance_person = #{maintenancePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenanceTime != null">
+        maintenance_time = #{maintenanceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.VehicleMaintenance">
+    update vehicle_maintenance
+    set car_id = #{carId,jdbcType=INTEGER},
+      maintenance_person = #{maintenancePerson,jdbcType=VARCHAR},
+      maintenance_time = #{maintenanceTime,jdbcType=TIMESTAMP},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

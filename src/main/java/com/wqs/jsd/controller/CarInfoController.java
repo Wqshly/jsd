@@ -5,10 +5,7 @@ import com.wqs.jsd.pojo.CarInfo;
 import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.service.CarInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,12 +22,28 @@ public class CarInfoController {
     private CarInfoService carInfoService;
 
     @PostMapping("addCarInfo")
-    public ResultBean<List<Void>> insertCarInfo(@RequestBody CarInfo carInfo) {
-        return carInfoService.insertCarInfo(carInfo);
+    public ResultBean<Void> insertCarInfo(@RequestBody CarInfo record) {
+        return carInfoService.insertCarInfoRecord(record);
+    }
+
+    @PostMapping("editCarInfo")
+    public ResultBean<Void> updateCarInfoRecord(@RequestBody CarInfo record) {
+        return carInfoService.updateCarInfoRecord(record);
+    }
+
+    @GetMapping("findAllCarInfo")
+    public ResultBean<List<CarInfo>> findAllCarInfo() {
+        return carInfoService.findCarInfoRecord();
     }
 
     @PostMapping("findAllCarInfo")
     public ResultBean<List<CarInfo>> findAllCarInfo(@RequestBody PageInfo pageInfo) {
-        return carInfoService.findAllCarInfo(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
+        return carInfoService.findAllCarInfoRecord(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
+
+    @PostMapping("deleteCarInfo")
+    public ResultBean<Void> deleteCarInfoRecord(@RequestBody List<Integer> selectMultipleId) {
+        return carInfoService.deleteCarInfoRecord(selectMultipleId);
+    }
+
 }

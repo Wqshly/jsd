@@ -2,9 +2,9 @@ package com.wqs.jsd.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
-import com.wqs.jsd.dao.IsQuitMapper;
-import com.wqs.jsd.pojo.IsQuit;
-import com.wqs.jsd.service.IsQuitService;
+import com.wqs.jsd.dao.VehicleMaintenanceMapper;
+import com.wqs.jsd.pojo.VehicleMaintenance;
+import com.wqs.jsd.service.VehicleMaintenanceService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
@@ -20,37 +20,37 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
 
 /**
  * @Author: wan
- * @Date: Created in 20:13 2020/3/5
+ * @Date: Created in 21:56 2020/3/5
  * @Description:
  * @Modified By:
  */
 @Service
-public class IsQuitServiceImpl implements IsQuitService {
+public class VehicleMaintenanceServiceImpl implements VehicleMaintenanceService {
 
-    private static final Logger logger = LoggerFactory.getLogger(IsQuitService.class);
+    private static final Logger logger = LoggerFactory.getLogger(VehicleMaintenanceService.class);
 
     @Resource
-    private IsQuitMapper mapper;
+    private VehicleMaintenanceMapper mapper;
 
     @Autowired
     private CommonMethod commonMethod;
 
     @Override
-    public ResultBean<Void> insertIsQuitRecord(IsQuit record) {
+    public ResultBean<Void> insertVehicleMaintenanceRecord(VehicleMaintenance record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));
     }
 
     @Override
-    public ResultBean<Void> updateIsQuitRecord(IsQuit record) {
+    public ResultBean<Void> updateVehicleMaintenanceRecord(VehicleMaintenance record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
 
     @Override
-    public ResultBean<List<IsQuit>> findIsQuitRecord() {
+    public ResultBean<List<VehicleMaintenance>> findVehicleMaintenanceRecord() {
         try {
-            List<IsQuit> records = mapper.selectAll();
+            List<VehicleMaintenance> records = mapper.selectAll();
             return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -59,11 +59,11 @@ public class IsQuitServiceImpl implements IsQuitService {
     }
 
     @Override
-    public ResultBean<List<IsQuit>> findAllIsQuitRecord(int currentPage, int pageSize, int id) {
+    public ResultBean<List<VehicleMaintenance>> findAllVehicleMaintenanceRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);
-            List<IsQuit> records = mapper.selectByStaffId(id);
-            int total = mapper.countTotalByStaffId(id);
+            List<VehicleMaintenance> records = mapper.selectAll();
+            int total = mapper.countTotal();
             return new ResultBean<>(records, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -72,7 +72,7 @@ public class IsQuitServiceImpl implements IsQuitService {
     }
 
     @Override
-    public ResultBean<Void> deleteIsQuitRecord(List<Integer> id) {
+    public ResultBean<Void> deleteVehicleMaintenanceRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
 }

@@ -21,7 +21,7 @@ public interface IsQuitService {
 
     ResultBean<List<IsQuit>> findIsQuitRecord();
 
-    ResultBean<List<IsQuit>> findAllIsQuitRecord(int currentPage, int pageSize);
+    ResultBean<List<IsQuit>> findAllIsQuitRecord(int currentPage, int pageSize, int id);
 
     ResultBean<Void> deleteIsQuitRecord(List<Integer> id);
 }

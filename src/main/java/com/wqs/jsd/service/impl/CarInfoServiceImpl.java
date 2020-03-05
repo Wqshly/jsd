@@ -5,8 +5,11 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.CarInfoMapper;
 import com.wqs.jsd.pojo.CarInfo;
 import com.wqs.jsd.service.CarInfoService;
+import com.wqs.jsd.util.CodeUtil;
+import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,8 +19,8 @@ import static com.wqs.jsd.beans.ResultBean.SUCCESS;
 import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
 
 /**
- * @Author:
- * @Date: Created in 9:19 2020/3/4
+ * @Author: wan
+ * @Date: Created in 21:49 2020/3/5
  * @Description:
  * @Modified By:
  */
@@ -27,15 +30,28 @@ public class CarInfoServiceImpl implements CarInfoService {
     private static final Logger logger = LoggerFactory.getLogger(CarInfoService.class);
 
     @Resource
-    private CarInfoMapper carInfoMapper;
+    private CarInfoMapper mapper;
+
+    @Autowired
+    private CommonMethod commonMethod;
 
     @Override
-    public ResultBean<List<CarInfo>> findAllCarInfo(int currentPage, int pageSize) {
+    public ResultBean<Void> insertCarInfoRecord(CarInfo record) {
+        record.setFinalEditTime(commonMethod.getTime());
+        return commonMethod.changeRecord(mapper.insert(record));
+    }
+
+    @Override
+    public ResultBean<Void> updateCarInfoRecord(CarInfo record) {
+        record.setFinalEditTime(commonMethod.getTime());
+        return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
+    }
+
+    @Override
+    public ResultBean<List<CarInfo>> findCarInfoRecord() {
         try {
-            PageHelper.startPage(currentPage, pageSize);
-            List<CarInfo> divisions = carInfoMapper.selectAll();
-            int total = carInfoMapper.countTotal();
-            return new ResultBean<>(divisions, SUCCESS, "success", total);
+            List<CarInfo> records = mapper.selectAll();
+            return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
@@ -43,7 +59,20 @@ public class CarInfoServiceImpl implements CarInfoService {
     }
 
     @Override
-    public ResultBean<List<Void>> insertCarInfo(CarInfo carInfo) {
-        return null;
+    public ResultBean<List<CarInfo>> findAllCarInfoRecord(int currentPage, int pageSize) {
+        try {
+            PageHelper.startPage(currentPage, pageSize);
+            List<CarInfo> records = mapper.selectAll();
+            int total = mapper.countTotal();
+            return new ResultBean<>(records, SUCCESS, "success", total);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
+    public ResultBean<Void> deleteCarInfoRecord(List<Integer> id) {
+        return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
 }
