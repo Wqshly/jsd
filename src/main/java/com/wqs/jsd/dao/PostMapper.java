@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface PostMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Post> selectAll();

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TaskMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Task> selectAll();

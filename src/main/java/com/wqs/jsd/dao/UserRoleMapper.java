@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserRoleMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<UserRole> selectAll();

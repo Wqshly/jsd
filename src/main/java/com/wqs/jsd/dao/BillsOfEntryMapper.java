@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.BillsOfEntry;
 import java.util.List;
 
 public interface BillsOfEntryMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<BillsOfEntry> selectAll();

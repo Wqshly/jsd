@@ -15,6 +15,10 @@
     id, tools_id, bills_out_in_id, warehouse_id, `type`, tools_document_number, finel_editor, 
     final_edit_time
   </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM detail_tools_out_in
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface WarehouseMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Warehouse> selectAll();

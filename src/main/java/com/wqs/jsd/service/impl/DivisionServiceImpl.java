@@ -56,7 +56,8 @@ public class DivisionServiceImpl implements DivisionService {
         try {
             PageHelper.startPage(currentPage, pageSize);
             List<Division> divisions = divisionMapper.selectAll();
-            return new ResultBean<>(divisions, SUCCESS, "success");
+            int total = divisionMapper.countTotal();
+            return new ResultBean<>(divisions, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.CustomerLanding;
 import java.util.List;
 
 public interface CustomerLandingMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<CustomerLanding> selectAll();

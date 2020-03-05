@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.CustomerHeadSculpture;
 import java.util.List;
 
 public interface CustomerHeadSculptureMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<CustomerHeadSculpture> selectAll();

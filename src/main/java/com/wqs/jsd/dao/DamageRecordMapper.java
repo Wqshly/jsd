@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.DamageRecord;
 import java.util.List;
 
 public interface DamageRecordMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<DamageRecord> selectAll();

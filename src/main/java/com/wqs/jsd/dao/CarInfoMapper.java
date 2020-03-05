@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.CarInfo;
 import java.util.List;
 
 public interface CarInfoMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<CarInfo> selectAll();

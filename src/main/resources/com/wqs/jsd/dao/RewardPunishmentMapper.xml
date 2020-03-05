@@ -17,6 +17,10 @@
     id, staff_id, r_or_p, `type`, reason, start_time, end_time, remarks, final_editor, 
     final_edit_time
   </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM reward_punishment
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

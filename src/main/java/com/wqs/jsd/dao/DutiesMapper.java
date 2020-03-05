@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface DutiesMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Duties> selectAll();

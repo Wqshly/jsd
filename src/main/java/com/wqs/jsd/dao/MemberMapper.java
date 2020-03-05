@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MemberMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Member> selectAll();

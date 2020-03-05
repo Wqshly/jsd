@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface OrderDetailsMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<OrderDetails> selectAll();

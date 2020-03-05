@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.CustomerAddress;
 import java.util.List;
 
 public interface CustomerAddressMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<CustomerAddress> selectAll();

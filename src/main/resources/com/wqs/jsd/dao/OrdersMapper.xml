@@ -17,6 +17,10 @@
     id, customer_id, service_type, service_name, address, estimated_price, order_time, 
     is_done, is_accept, accept_time
   </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM orders
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

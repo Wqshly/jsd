@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface StaffContractMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<StaffContract> selectAll();

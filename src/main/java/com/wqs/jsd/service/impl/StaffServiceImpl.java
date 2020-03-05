@@ -67,7 +67,8 @@ public class StaffServiceImpl implements StaffService {
         try {
             PageHelper.startPage(currentPage, pageSize);
             List<Staff> staff = staffMapper.selectAll();
-            return new ResultBean<>(staff, SUCCESS, "success");
+            int total = staffMapper.countTotal();
+            return new ResultBean<>(staff, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

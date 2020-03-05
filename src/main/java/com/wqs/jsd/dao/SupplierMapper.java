@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface SupplierMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Supplier> selectAll();

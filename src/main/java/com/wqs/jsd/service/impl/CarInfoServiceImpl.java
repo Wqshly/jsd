@@ -34,7 +34,8 @@ public class CarInfoServiceImpl implements CarInfoService {
         try {
             PageHelper.startPage(currentPage, pageSize);
             List<CarInfo> divisions = carInfoMapper.selectAll();
-            return new ResultBean<>(divisions, SUCCESS, "success");
+            int total = carInfoMapper.countTotal();
+            return new ResultBean<>(divisions, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

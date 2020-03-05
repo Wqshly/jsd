@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.Contract;
 import java.util.List;
 
 public interface ContractMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Contract> selectAll();

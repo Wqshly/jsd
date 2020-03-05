@@ -41,6 +41,7 @@ public class ResultBean<T> implements Serializable {
     private int code = SUCCESS;
     private String msg = "SUCCESS";
     private T data;
+    private int total;
 
     public ResultBean() {
         super();
@@ -63,6 +64,13 @@ public class ResultBean<T> implements Serializable {
         this.data = data;
         this.code = code;
         this.msg = msg;
+    }
+
+    public ResultBean(T data, int code, String msg, int total) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.total = total;
     }
 
     public ResultBean(Throwable e) {
@@ -93,5 +101,13 @@ public class ResultBean<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

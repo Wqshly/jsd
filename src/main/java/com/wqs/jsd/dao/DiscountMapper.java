@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.Discount;
 import java.util.List;
 
 public interface DiscountMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Discount> selectAll();

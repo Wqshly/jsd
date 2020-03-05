@@ -16,6 +16,10 @@
     id, staff_id, post_id, start_time, end_time, change_reason, remarks, final_editor, 
     final_edit_time
   </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM staff_post
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

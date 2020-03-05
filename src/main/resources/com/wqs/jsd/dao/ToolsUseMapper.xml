@@ -14,6 +14,10 @@
   <sql id="Base_Column_List">
     id, staff_id, warehouse_id, tools_id, `number`, is_giveback, final_editor, final_edit_time
   </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM tools_use
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

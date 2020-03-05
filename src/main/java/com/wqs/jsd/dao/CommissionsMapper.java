@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.Commissions;
 import java.util.List;
 
 public interface CommissionsMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Commissions> selectAll();

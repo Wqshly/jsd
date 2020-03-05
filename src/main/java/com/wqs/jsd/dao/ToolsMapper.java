@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ToolsMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Tools> selectAll();

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface AuthorityMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Authority> selectAll();

@@ -5,6 +5,8 @@ import com.wqs.jsd.pojo.Outsource;
 import java.util.List;
 
 public interface OutsourceMapper {
+
+    int countTotal();
     
     int deleteByPrimaryKey(List<Integer> id);
 

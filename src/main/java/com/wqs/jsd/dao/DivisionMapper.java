@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface DivisionMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<Division> selectAll();

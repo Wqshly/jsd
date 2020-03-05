@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.DetailToolsOutIn;
 import java.util.List;
 
 public interface DetailToolsOutInMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<DetailToolsOutIn> selectAll();

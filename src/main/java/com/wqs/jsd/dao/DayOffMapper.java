@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.DayOff;
 import java.util.List;
 
 public interface DayOffMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<DayOff> selectAll();

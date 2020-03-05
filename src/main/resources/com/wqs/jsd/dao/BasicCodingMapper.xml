@@ -13,6 +13,11 @@
   <sql id="Base_Column_List">
     id, `name`, `type`, abbreviation, coding_style, final_editor, final_edit_time
   </sql>
+  <select id="countByType" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM basic_coding
+    where type = #{type,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

@@ -55,7 +55,8 @@ public class PostServiceImpl implements PostService {
         try {
             PageHelper.startPage(currentPage, pageSize);
             List<Post> posts = postMapper.selectAll();
-            return new ResultBean<>(posts, SUCCESS, "success");
+            int total = postMapper.countTotal();
+            return new ResultBean<>(posts, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

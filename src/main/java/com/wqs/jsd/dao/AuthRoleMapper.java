@@ -5,6 +5,9 @@ import com.wqs.jsd.pojo.AuthRole;
 import java.util.List;
 
 public interface AuthRoleMapper {
+
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<AuthRole> selectAll();

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserLandingMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<UserLanding> selectAll();

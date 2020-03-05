@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BasicCodingMapper {
 
+    int countByType(String s);
+
     List<BasicCoding> selectByType(String s);
 
     List<BasicCoding> selectAll();

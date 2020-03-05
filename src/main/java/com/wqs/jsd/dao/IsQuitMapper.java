@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IsQuitMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<IsQuit> selectAll();

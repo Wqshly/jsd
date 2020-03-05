@@ -81,6 +81,11 @@ public class BasicCodingController {
         return basicCodingService.updateBasicCodingRecord(basicCoding);
     }
 
+    @GetMapping("findBasicCodingWithType/{type}")
+    public ResultBean<List<BasicCoding>> findBasicCoding(@PathVariable("type") String type) {
+        return basicCodingService.findBasicCodingByType(type);
+    }
+
     @PostMapping("findBasicCodingWithType/{type}")
     public ResultBean<List<BasicCoding>> findBasicCoding(@PathVariable("type") String type, @RequestBody PageInfo pageInfo) {
         return basicCodingService.findBasicCodingByType(type,pageInfo.getPage().getNum(),pageInfo.getPage().getSize());

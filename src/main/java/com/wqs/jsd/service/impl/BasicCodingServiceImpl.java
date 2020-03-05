@@ -53,11 +53,23 @@ public class BasicCodingServiceImpl implements BasicCodingService {
     }
 
     @Override
-    public ResultBean<List<BasicCoding>> findBasicCodingByType(String s,int currentPage, int pageSize) {
+    public ResultBean<List<BasicCoding>> findBasicCodingByType(String s) {
+        try {
+            List<BasicCoding> basicCoding = basicCodingMapper.selectByType(s);
+            return new ResultBean<>(basicCoding, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
+    public ResultBean<List<BasicCoding>> findBasicCodingByType(String s, int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);
             List<BasicCoding> basicCoding = basicCodingMapper.selectByType(s);
-            return new ResultBean<>(basicCoding, SUCCESS, "success");
+            int total = basicCodingMapper.countByType(s);
+            return new ResultBean<>(basicCoding, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");

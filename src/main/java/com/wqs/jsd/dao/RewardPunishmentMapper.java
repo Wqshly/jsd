@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface RewardPunishmentMapper {
 
+    int countTotal();
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<RewardPunishment> selectAll();
