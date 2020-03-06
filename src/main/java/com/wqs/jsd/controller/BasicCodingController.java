@@ -41,6 +41,11 @@ public class BasicCodingController {
         return divisionService.updateDivisionRecord(division);
     }
 
+    @GetMapping("findAllDivision")
+    public ResultBean<List<Division>> findAllDivision() {
+        return divisionService.findAllDivision();
+    }
+
     @PostMapping("findAllDivision")
     public ResultBean<List<Division>> findAllDivision(@RequestBody PageInfo pageInfo) {
         return divisionService.findAllDivision(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
@@ -59,6 +64,11 @@ public class BasicCodingController {
     @PostMapping("editPost")
     public ResultBean<Void> updatePostRecord(@RequestBody Post post) {
         return postService.updatePostRecord(post);
+    }
+
+    @GetMapping("findAllPost")
+    public ResultBean<List<Post>> findAllPost() {
+        return postService.findAllPost();
     }
 
     @PostMapping("findAllPost")

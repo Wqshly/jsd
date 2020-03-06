@@ -52,6 +52,17 @@ public class DivisionServiceImpl implements DivisionService {
     }
 
     @Override
+    public ResultBean<List<Division>> findAllDivision() {
+        try {
+            List<Division> divisions = divisionMapper.selectAll();
+            return new ResultBean<>(divisions, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<Division>> findAllDivision(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

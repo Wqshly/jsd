@@ -11,7 +11,7 @@
     <result column="current_position" jdbcType="VARCHAR" property="currentPosition"/>
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="email" jdbcType="VARCHAR" property="email"/>
-    <result column="birth" jdbcType="VARCHAR" property="birth"/>
+    <result column="birth" jdbcType="TIMESTAMP" property="birth"/>
     <result column="education" jdbcType="VARCHAR" property="education"/>
     <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool"/>
     <result column="discipline" jdbcType="VARCHAR" property="discipline"/>

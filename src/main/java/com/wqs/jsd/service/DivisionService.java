@@ -18,6 +18,8 @@ public interface DivisionService {
 
     ResultBean<Void> updateDivisionRecord(Division division);
 
+    ResultBean<List<Division>> findAllDivision();
+
     ResultBean<List<Division>> findAllDivision(int currentPage, int pageSize);
 
     ResultBean<Void> deleteDivision(List<Integer> id);

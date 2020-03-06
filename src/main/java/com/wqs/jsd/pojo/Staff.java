@@ -29,7 +29,7 @@ public class Staff implements Serializable {
 
     private String email;
 
-    private String birth;
+    private Date birth;
 
     private String education;
 
@@ -146,11 +146,11 @@ public class Staff implements Serializable {
         this.email = email;
     }
 
-    public String getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(String birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 
