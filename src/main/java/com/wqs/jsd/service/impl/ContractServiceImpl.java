@@ -38,6 +38,9 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public ResultBean<Void> insertContractRecord(Contract record) {
         record.setFinalEditTime(commonMethod.getTime());
+        if (!record.getRadio()) {
+            record.setContractNumber("HT" + CodeUtil.createCode());
+        }
         return commonMethod.changeRecord(mapper.insert(record));
     }
 

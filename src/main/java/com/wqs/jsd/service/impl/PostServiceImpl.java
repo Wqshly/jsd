@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public ResultBean<Void> insertPostRecord(Post post) {
         post.setFinalEditTime(commonMethod.getTime());
-        if (post.getRadio().equals("1")) {
+        if (!post.getRadio()) {
             post.setNumber("GW" + CodeUtil.createCode());
         }
         return commonMethod.changeRecord(postMapper.insert(post));

@@ -64,6 +64,17 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public ResultBean<List<Staff>> selectStaffAll() {
+        try {
+            List<Staff> staff = staffMapper.selectAll();
+            return new ResultBean<>(staff, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<Staff>> selectStaffAll(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

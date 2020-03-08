@@ -5,32 +5,26 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="contract_number" jdbcType="VARCHAR" property="contractNumber" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="customer_address" jdbcType="VARCHAR" property="customerAddress" />
-    <result column="customer_phone" jdbcType="VARCHAR" property="customerPhone" />
-    <result column="customer_represent" jdbcType="VARCHAR" property="customerRepresent" />
-    <result column="our_side" jdbcType="VARCHAR" property="ourSide" />
-    <result column="our_address" jdbcType="VARCHAR" property="ourAddress" />
-    <result column="our_phone" jdbcType="VARCHAR" property="ourPhone" />
-    <result column="our_represent" jdbcType="VARCHAR" property="ourRepresent" />
+    <result column="contract_status" jdbcType="VARCHAR" property="contractStatus" />
+    <result column="party_a" jdbcType="VARCHAR" property="partyA" />
+    <result column="party_b" jdbcType="VARCHAR" property="partyB" />
+    <result column="signatory_party_a" jdbcType="VARCHAR" property="signatoryPartyA" />
+    <result column="signatory_party_b" jdbcType="VARCHAR" property="signatoryPartyB" />
     <result column="signing_time" jdbcType="TIMESTAMP" property="signingTime" />
-    <result column="contract_content" jdbcType="VARCHAR" property="contractContent" />
-    <result column="pledge" jdbcType="VARCHAR" property="pledge" />
-    <result column="other_item" jdbcType="VARCHAR" property="otherItem" />
+    <result column="entry_into_force_time" jdbcType="TIMESTAMP" property="entryIntoForceTime" />
     <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, contract_number, project_name, customer_id, customer_address, customer_phone, 
-    customer_represent, our_side, our_address, our_phone, our_represent, signing_time, 
-    contract_content, pledge, other_item, final_editor, final_edit_time
+    id, contract_number, project_name, contract_status, party_a, party_b, signatory_party_a,
+    signatory_party_b, signing_time, entry_into_force_time, final_editor, final_edit_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
     FROM contract
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from contract
     where id = #{id,jdbcType=INTEGER}
@@ -48,18 +42,14 @@
     </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Contract" useGeneratedKeys="true">
-    insert into contract (contract_number, project_name, customer_id, 
-      customer_address, customer_phone, customer_represent, 
-      our_side, our_address, our_phone, 
-      our_represent, signing_time, contract_content, 
-      pledge, other_item, final_editor, 
-      final_edit_time)
-    values (#{contractNumber,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
-      #{customerAddress,jdbcType=VARCHAR}, #{customerPhone,jdbcType=VARCHAR}, #{customerRepresent,jdbcType=VARCHAR}, 
-      #{ourSide,jdbcType=VARCHAR}, #{ourAddress,jdbcType=VARCHAR}, #{ourPhone,jdbcType=VARCHAR}, 
-      #{ourRepresent,jdbcType=VARCHAR}, #{signingTime,jdbcType=TIMESTAMP}, #{contractContent,jdbcType=VARCHAR}, 
-      #{pledge,jdbcType=VARCHAR}, #{otherItem,jdbcType=VARCHAR}, #{finalEditor,jdbcType=VARCHAR}, 
-      #{finalEditTime,jdbcType=TIMESTAMP})
+    insert into contract (contract_number, project_name, contract_status, 
+      party_a, party_b, signatory_party_a,
+      signatory_party_b, signing_time, entry_into_force_time,
+      final_editor, final_edit_time)
+    values (#{contractNumber,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{contractStatus,jdbcType=VARCHAR}, 
+      #{partyA,jdbcType=VARCHAR}, #{partyB,jdbcType=VARCHAR}, #{signatoryPartyA,jdbcType=VARCHAR},
+      #{signatoryPartyB,jdbcType=VARCHAR}, #{signingTime,jdbcType=TIMESTAMP}, #{entryIntoForceTime,jdbcType=TIMESTAMP},
+      #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Contract" useGeneratedKeys="true">
     insert into contract
@@ -70,41 +60,26 @@
       <if test="projectName != null">
         project_name,
       </if>
-      <if test="customerId != null">
-        customer_id,
+      <if test="contractStatus != null">
+        contract_status,
       </if>
-      <if test="customerAddress != null">
-        customer_address,
+      <if test="partyA != null">
+        party_a,
       </if>
-      <if test="customerPhone != null">
-        customer_phone,
+      <if test="partyB != null">
+        party_b,
       </if>
-      <if test="customerRepresent != null">
-        customer_represent,
+      <if test="signatoryPartyA != null">
+        signatory_party_a,
       </if>
-      <if test="ourSide != null">
-        our_side,
-      </if>
-      <if test="ourAddress != null">
-        our_address,
-      </if>
-      <if test="ourPhone != null">
-        our_phone,
-      </if>
-      <if test="ourRepresent != null">
-        our_represent,
+      <if test="signatoryPartyB != null">
+        signatory_party_b,
       </if>
       <if test="signingTime != null">
         signing_time,
       </if>
-      <if test="contractContent != null">
-        contract_content,
-      </if>
-      <if test="pledge != null">
-        pledge,
-      </if>
-      <if test="otherItem != null">
-        other_item,
+      <if test="entryIntoForceTime != null">
+        entry_into_force_time,
       </if>
       <if test="finalEditor != null">
         final_editor,
@@ -120,41 +95,26 @@
       <if test="projectName != null">
         #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="customerId != null">
-        #{customerId,jdbcType=INTEGER},
+      <if test="contractStatus != null">
+        #{contractStatus,jdbcType=VARCHAR},
       </if>
-      <if test="customerAddress != null">
-        #{customerAddress,jdbcType=VARCHAR},
+      <if test="partyA != null">
+        #{partyA,jdbcType=VARCHAR},
       </if>
-      <if test="customerPhone != null">
-        #{customerPhone,jdbcType=VARCHAR},
+      <if test="partyB != null">
+        #{partyB,jdbcType=VARCHAR},
       </if>
-      <if test="customerRepresent != null">
-        #{customerRepresent,jdbcType=VARCHAR},
+      <if test="signatoryPartyA != null">
+        #{signatoryPartyA,jdbcType=VARCHAR},
       </if>
-      <if test="ourSide != null">
-        #{ourSide,jdbcType=VARCHAR},
-      </if>
-      <if test="ourAddress != null">
-        #{ourAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="ourPhone != null">
-        #{ourPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="ourRepresent != null">
-        #{ourRepresent,jdbcType=VARCHAR},
+      <if test="signatoryPartyB != null">
+        #{signatoryPartyB,jdbcType=VARCHAR},
       </if>
       <if test="signingTime != null">
         #{signingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contractContent != null">
-        #{contractContent,jdbcType=VARCHAR},
-      </if>
-      <if test="pledge != null">
-        #{pledge,jdbcType=VARCHAR},
-      </if>
-      <if test="otherItem != null">
-        #{otherItem,jdbcType=VARCHAR},
+      <if test="entryIntoForceTime != null">
+        #{entryIntoForceTime,jdbcType=TIMESTAMP},
       </if>
       <if test="finalEditor != null">
         #{finalEditor,jdbcType=VARCHAR},
@@ -173,41 +133,26 @@
       <if test="projectName != null">
         project_name = #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=INTEGER},
+      <if test="contractStatus != null">
+        contract_status = #{contractStatus,jdbcType=VARCHAR},
       </if>
-      <if test="customerAddress != null">
-        customer_address = #{customerAddress,jdbcType=VARCHAR},
+      <if test="partyA != null">
+        party_a = #{partyA,jdbcType=VARCHAR},
       </if>
-      <if test="customerPhone != null">
-        customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      <if test="partyB != null">
+        party_b = #{partyB,jdbcType=VARCHAR},
       </if>
-      <if test="customerRepresent != null">
-        customer_represent = #{customerRepresent,jdbcType=VARCHAR},
+      <if test="signatoryPartyA != null">
+        signatory_party_a = #{signatoryPartyA,jdbcType=VARCHAR},
       </if>
-      <if test="ourSide != null">
-        our_side = #{ourSide,jdbcType=VARCHAR},
-      </if>
-      <if test="ourAddress != null">
-        our_address = #{ourAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="ourPhone != null">
-        our_phone = #{ourPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="ourRepresent != null">
-        our_represent = #{ourRepresent,jdbcType=VARCHAR},
+      <if test="signatoryPartyB != null">
+        signatory_party_b = #{signatoryPartyB,jdbcType=VARCHAR},
       </if>
       <if test="signingTime != null">
         signing_time = #{signingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contractContent != null">
-        contract_content = #{contractContent,jdbcType=VARCHAR},
-      </if>
-      <if test="pledge != null">
-        pledge = #{pledge,jdbcType=VARCHAR},
-      </if>
-      <if test="otherItem != null">
-        other_item = #{otherItem,jdbcType=VARCHAR},
+      <if test="entryIntoForceTime != null">
+        entry_into_force_time = #{entryIntoForceTime,jdbcType=TIMESTAMP},
       </if>
       <if test="finalEditor != null">
         final_editor = #{finalEditor,jdbcType=VARCHAR},
@@ -222,18 +167,13 @@
     update contract
     set contract_number = #{contractNumber,jdbcType=VARCHAR},
       project_name = #{projectName,jdbcType=VARCHAR},
-      customer_id = #{customerId,jdbcType=INTEGER},
-      customer_address = #{customerAddress,jdbcType=VARCHAR},
-      customer_phone = #{customerPhone,jdbcType=VARCHAR},
-      customer_represent = #{customerRepresent,jdbcType=VARCHAR},
-      our_side = #{ourSide,jdbcType=VARCHAR},
-      our_address = #{ourAddress,jdbcType=VARCHAR},
-      our_phone = #{ourPhone,jdbcType=VARCHAR},
-      our_represent = #{ourRepresent,jdbcType=VARCHAR},
+      contract_status = #{contractStatus,jdbcType=VARCHAR},
+      party_a = #{partyA,jdbcType=VARCHAR},
+      party_b = #{partyB,jdbcType=VARCHAR},
+      signatory_party_a = #{signatoryPartyA,jdbcType=VARCHAR},
+      signatory_party_b = #{signatoryPartyB,jdbcType=VARCHAR},
       signing_time = #{signingTime,jdbcType=TIMESTAMP},
-      contract_content = #{contractContent,jdbcType=VARCHAR},
-      pledge = #{pledge,jdbcType=VARCHAR},
-      other_item = #{otherItem,jdbcType=VARCHAR},
+      entry_into_force_time = #{entryIntoForceTime,jdbcType=TIMESTAMP},
       final_editor = #{finalEditor,jdbcType=VARCHAR},
       final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

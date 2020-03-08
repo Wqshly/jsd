@@ -10,33 +10,25 @@ import java.util.Date;
 public class Contract implements Serializable {
     private Integer id;
 
+    private Boolean radio;
+
     private String contractNumber;
 
     private String projectName;
 
-    private Integer customerId;
+    private String contractStatus;
 
-    private String customerAddress;
+    private String partyA;
 
-    private String customerPhone;
+    private String partyB;
 
-    private String customerRepresent;
+    private String signatoryPartyA;
 
-    private String ourSide;
-
-    private String ourAddress;
-
-    private String ourPhone;
-
-    private String ourRepresent;
+    private String signatoryPartyB;
 
     private Date signingTime;
 
-    private String contractContent;
-
-    private String pledge;
-
-    private String otherItem;
+    private Date entryIntoForceTime;
 
     private String finalEditor;
 
@@ -50,6 +42,14 @@ public class Contract implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getRadio() {
+        return radio;
+    }
+
+    public void setRadio(Boolean radio) {
+        this.radio = radio;
     }
 
     public String getContractNumber() {
@@ -68,68 +68,44 @@ public class Contract implements Serializable {
         this.projectName = projectName;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public String getContractStatus() {
+        return contractStatus;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setContractStatus(String contractStatus) {
+        this.contractStatus = contractStatus;
     }
 
-    public String getCustomerAddress() {
-        return customerAddress;
+    public String getPartyA() {
+        return partyA;
     }
 
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
+    public void setPartyA(String partyA) {
+        this.partyA = partyA;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getPartyB() {
+        return partyB;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setPartyB(String partyB) {
+        this.partyB = partyB;
     }
 
-    public String getCustomerRepresent() {
-        return customerRepresent;
+    public String getSignatoryPartyA() {
+        return signatoryPartyA;
     }
 
-    public void setCustomerRepresent(String customerRepresent) {
-        this.customerRepresent = customerRepresent;
+    public void setSignatoryPartyA(String signatoryPartyA) {
+        this.signatoryPartyA = signatoryPartyA;
     }
 
-    public String getOurSide() {
-        return ourSide;
+    public String getSignatoryPartyB() {
+        return signatoryPartyB;
     }
 
-    public void setOurSide(String ourSide) {
-        this.ourSide = ourSide;
-    }
-
-    public String getOurAddress() {
-        return ourAddress;
-    }
-
-    public void setOurAddress(String ourAddress) {
-        this.ourAddress = ourAddress;
-    }
-
-    public String getOurPhone() {
-        return ourPhone;
-    }
-
-    public void setOurPhone(String ourPhone) {
-        this.ourPhone = ourPhone;
-    }
-
-    public String getOurRepresent() {
-        return ourRepresent;
-    }
-
-    public void setOurRepresent(String ourRepresent) {
-        this.ourRepresent = ourRepresent;
+    public void setSignatoryPartyB(String signatoryPartyB) {
+        this.signatoryPartyB = signatoryPartyB;
     }
 
     public Date getSigningTime() {
@@ -140,28 +116,12 @@ public class Contract implements Serializable {
         this.signingTime = signingTime;
     }
 
-    public String getContractContent() {
-        return contractContent;
+    public Date getEntryIntoForceTime() {
+        return entryIntoForceTime;
     }
 
-    public void setContractContent(String contractContent) {
-        this.contractContent = contractContent;
-    }
-
-    public String getPledge() {
-        return pledge;
-    }
-
-    public void setPledge(String pledge) {
-        this.pledge = pledge;
-    }
-
-    public String getOtherItem() {
-        return otherItem;
-    }
-
-    public void setOtherItem(String otherItem) {
-        this.otherItem = otherItem;
+    public void setEntryIntoForceTime(Date entryIntoForceTime) {
+        this.entryIntoForceTime = entryIntoForceTime;
     }
 
     public String getFinalEditor() {

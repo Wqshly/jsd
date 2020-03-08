@@ -1,0 +1,22 @@
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM contract
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contract
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Contract">
+    select
+    <include refid="Base_Column_List"/>
+    from contract
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from contract
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>

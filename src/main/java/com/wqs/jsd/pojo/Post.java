@@ -10,7 +10,7 @@ import java.util.Date;
 public class Post implements Serializable {
     private Integer id;
 
-    private String radio;
+    private Boolean radio;
 
     private String number;
 
@@ -36,11 +36,11 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public String getRadio() {
+    public Boolean getRadio() {
         return radio;
     }
 
-    public void setRadio(String radio) {
+    public void setRadio(Boolean radio) {
         this.radio = radio;
     }
 
