@@ -3,6 +3,7 @@ package com.wqs.jsd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.UserHeadSculptureMapper;
+import com.wqs.jsd.dao.UserMapper;
 import com.wqs.jsd.pojo.UserHeadSculpture;
 import com.wqs.jsd.service.UserHeadSculptureService;
 import com.wqs.jsd.util.CodeUtil;
@@ -31,6 +32,9 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
 
     @Resource
     private UserHeadSculptureMapper mapper;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Autowired
     private CommonMethod commonMethod;
@@ -72,5 +76,22 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
     @Override
     public ResultBean<Void> deleteUserHeadSculptureRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
+    }
+
+    @Override
+    public ResultBean<String> getImgUrl(String s) {
+        try {
+            int staffId = Integer.parseInt(s);
+            System.out.println(staffId);
+            int userId = userMapper.findUserIdByStaffId(staffId);
+            System.out.println(userId);
+            String imgUrl = mapper.selectByUserId(userId);
+            System.out.println(imgUrl);
+            imgUrl = "http://localhost:8080" + imgUrl;
+            return new ResultBean<>(imgUrl, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
     }
 }

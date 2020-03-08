@@ -49,21 +49,12 @@ public class Staff implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String radio;
+
     public Staff() {
     }
 
     public Staff(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {
-        this.number = number;
-        this.name = name;
-        this.sex = sex;
-        this.phone = phone;
-        this.identify = identify;
-        this.status = status;
-        this.finalEditor = finalEditor;
-        this.finalEditTime = finalEditTime;
-    }
-
-    public void getStaffInfo(String number, String name, String sex, String phone, String identify, String status, String finalEditor, Date finalEditTime) {
         this.number = number;
         this.name = name;
         this.sex = sex;
@@ -216,5 +207,13 @@ public class Staff implements Serializable {
 
     public void setFinalEditTime(Date finalEditTime) {
         this.finalEditTime = finalEditTime;
+    }
+
+    public String getRadio() {
+        return radio;
+    }
+
+    public void setRadio(String radio) {
+        this.radio = radio;
     }
 }

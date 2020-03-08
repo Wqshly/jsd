@@ -5,6 +5,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.service.StaffService;
+import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +79,9 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public ResultBean<Void> insertStaffRecord(Staff staff) {
         staff.setFinalEditTime(commonMethod.getTime());
+        if (staff.getRadio().equals("1")) {
+            staff.setNumber("BH" + CodeUtil.createCode());
+        }
         return commonMethod.changeRecord(staffMapper.insert(staff));
     }
 

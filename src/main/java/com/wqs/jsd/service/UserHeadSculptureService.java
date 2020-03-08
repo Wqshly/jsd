@@ -24,4 +24,6 @@ public interface UserHeadSculptureService {
     ResultBean<List<UserHeadSculpture>> findAllUserHeadSculptureRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteUserHeadSculptureRecord(List<Integer> id);
+
+    ResultBean<String> getImgUrl(String s);
 }

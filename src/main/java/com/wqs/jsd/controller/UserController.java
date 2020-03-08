@@ -5,6 +5,7 @@ import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.pojo.User;
 import com.wqs.jsd.service.RegisterAndLoginService;
+import com.wqs.jsd.service.UserHeadSculptureService;
 import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,20 @@ import java.io.IOException;
 @RequestMapping("/user")
 @RestController
 public class UserController {
+
     @Autowired
     private RegisterAndLoginService registerAndLoginService;
+
+    @Autowired
+    private UserHeadSculptureService userHeadSculptureService;
+
     @Autowired
     private CommonMethod commonMethod;
+
+    @GetMapping("/getImgUrl/{id}")
+    public ResultBean<String> getImgUrl(@PathVariable String id) {
+        return userHeadSculptureService.getImgUrl(id);
+    }
 
     @PostMapping("/initRegister")
     public ResultBean<Void> initRegister(@RequestBody SystemUserInfo systemUserInfo) {

@@ -10,7 +10,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `name`, nick_name `password`, phone, sex
+    id, `name`, nick_name, `password`, phone, sex
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -35,16 +35,19 @@
     </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Customer" useGeneratedKeys="true">
-    insert into customer (`name`, `password`, phone, 
-      sex)
-    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR})
+    insert into customer (`name`, nick_name, `password`,
+      phone, sex)
+    values (#{name,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Customer" useGeneratedKeys="true">
     insert into customer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         `name`,
+      </if>
+      <if test="nickName != null">
+        nick_name,
       </if>
       <if test="password != null">
         `password`,
@@ -59,6 +62,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -77,6 +83,9 @@
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
       </if>
@@ -92,6 +101,7 @@
   <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.Customer">
     update customer
     set `name` = #{name,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR}

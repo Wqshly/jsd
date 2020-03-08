@@ -21,4 +21,6 @@ public interface UserHeadSculptureMapper {
     int updateByPrimaryKeySelective(UserHeadSculpture record);
 
     int updateByPrimaryKey(UserHeadSculpture record);
+
+    String selectByUserId(int id);
 }

@@ -7,6 +7,7 @@ import com.wqs.jsd.pojo.Customer;
 import com.wqs.jsd.service.CustomerService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
+import com.wqs.jsd.util.RSACode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,28 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public ResultBean<Void> insertCustomerRecord(Customer record) {
-        return commonMethod.changeRecord(mapper.insert(record));
+        try {
+            byte[] decodedData = RSACode.decryptByPrivateKey(record.getPassword());
+            String password = new String(decodedData);
+            record.setPassword(commonMethod.MD5EncryptSalt(password, "wqs"));
+            return commonMethod.changeRecord(mapper.insert(record));
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
     }
 
     @Override
     public ResultBean<Void> updateCustomerRecord(Customer record) {
-        return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
+        try {
+            byte[] decodedData = RSACode.decryptByPrivateKey(record.getPassword());
+            String password = new String(decodedData);
+            record.setPassword(commonMethod.MD5EncryptSalt(password, "wqs"));
+            return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
     }
 
     @Override

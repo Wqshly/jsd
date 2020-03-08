@@ -39,6 +39,12 @@
     from user
     where staff_id = #{staffId,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
+  <select id="findUserIdByStaffId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    id
+    from user
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from user
     where id in
