@@ -53,7 +53,7 @@ public class StaffController {
         return staffService.insertStaffRecord(staff);
     }
 
-    @PostMapping("deleteOrderModel")
+    @PostMapping("deleteStaff")
     public ResultBean<Void> deleteStaffRecord(@RequestBody List<Integer> selectMultipleId) {
         return staffService.deleteStaffRecord(selectMultipleId);
     }
