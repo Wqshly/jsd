@@ -11,9 +11,9 @@
     <result column="current_position" jdbcType="VARCHAR" property="currentPosition"/>
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="email" jdbcType="VARCHAR" property="email"/>
-    <result column="birth" jdbcType="TIMESTAMP" property="birth"/>
-    <result column="father_birth" jdbcType="TIMESTAMP" property="fatherBirth"/>
-    <result column="mother_birth" jdbcType="TIMESTAMP" property="motherBirth"/>
+    <result column="birth" jdbcType="DATE" property="birth"/>
+    <result column="father_birth" jdbcType="DATE" property="fatherBirth"/>
+    <result column="mother_birth" jdbcType="DATE" property="motherBirth"/>
     <result column="education" jdbcType="VARCHAR" property="education"/>
     <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool"/>
     <result column="discipline" jdbcType="VARCHAR" property="discipline"/>
