@@ -59,11 +59,6 @@ public class UserController {
         return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "/uploadUserImg");
     }
 
-    @PostMapping("/imageUpload/{fileName}")
-    public ResultBean<String> UploadImage(@PathVariable String fileName, HttpServletResponse response, HttpServletRequest request, MultipartFile picture) throws IOException {
-        return commonMethod.UploadImage(picture, request, fileName, "/uploadUserImg");
-    }
-
     @PostMapping("/isUserExist")
     public ResultBean<Boolean> isUserExist(@RequestBody String phoneNum, HttpServletRequest request) {
         return new ResultBean<>();
