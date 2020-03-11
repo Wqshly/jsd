@@ -112,10 +112,11 @@ public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
     @Override
     public ResultBean<Void> register(RegisterInfo record) {
         try {
-//            User user = new User(record.getStaffId(), record.getNickName(), record.getPassword());
-//            userMapper.insert(user);
-//            UserHeadSculpture headSculpture = new UserHeadSculpture(user.getId(), record.getImageUrl(), "true");
-//            sculptureMapper.insert(headSculpture);
+            int staffId = staffMapper.selectIdByPhone(record.getPhone());
+            User user = new User(staffId, record.getNickName(), commonMethod.MD5EncryptSalt(record.getPassword(), "wqs"),"在职", record.getNickName(), commonMethod.getTime());
+            userMapper.insert(user);
+            UserHeadSculpture headSculpture = new UserHeadSculpture(user.getId(), record.getPicLocation(), "true");
+            sculptureMapper.insert(headSculpture);
             return new ResultBean<>(SUCCESS, "注册成功!");
         } catch (Exception e) {
             logger.error(e.getMessage());

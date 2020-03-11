@@ -42,21 +42,26 @@ public class UserController {
         return registerAndLoginService.initRegister(systemUserInfo);
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResultBean<Void> register(@RequestBody RegisterInfo record) {
         return registerAndLoginService.register(record);
     }
 
     // 登录
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResultBean<Staff> loginByPhoneCode(@RequestBody SystemUserInfo systemUserInfo) {
         return registerAndLoginService.login(systemUserInfo);
     }
 
     @PostMapping("imageUpload")
     public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
-        System.out.println(imageFile.getFile());
         return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "/uploadUserImg");
+    }
+
+    // 上传头像
+    @PostMapping("/imageUpload1")
+    public ResultBean<String> UploadImage(@RequestParam(value = "picture", required = false) MultipartFile picture, HttpServletRequest request) throws IOException {
+        return commonMethod.UploadImage(picture, request, "/uploadUserImg");
     }
 
     @PostMapping("/isUserExist")
