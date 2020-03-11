@@ -31,6 +31,10 @@ public class Staff implements Serializable {
 
     private Date birth;
 
+    private Date fatherBirth;
+
+    private Date motherBirth;
+
     private String education;
 
     private String graduateSchool;
@@ -143,6 +147,22 @@ public class Staff implements Serializable {
 
     public void setBirth(Date birth) {
         this.birth = birth;
+    }
+
+    public Date getFatherBirth() {
+        return fatherBirth;
+    }
+
+    public void setFatherBirth(Date fatherBirth) {
+        this.fatherBirth = fatherBirth;
+    }
+
+    public Date getMotherBirth() {
+        return motherBirth;
+    }
+
+    public void setMotherBirth(Date motherBirth) {
+        this.motherBirth = motherBirth;
     }
 
     public String getEducation() {

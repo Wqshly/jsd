@@ -2,8 +2,10 @@ package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Contract;
+import com.wqs.jsd.pojo.ContractDetail;
 import com.wqs.jsd.pojo.Customer;
 import com.wqs.jsd.pojo.PageInfo;
+import com.wqs.jsd.service.ContractDetailService;
 import com.wqs.jsd.service.ContractService;
 import com.wqs.jsd.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class CustomerController {
 
     @Autowired
     private ContractService contractService;
+
+    @Autowired
+    private ContractDetailService contractDetailService;
 
     @PostMapping("addCustomer")
     public ResultBean<Void> insertCustomerRecord(@RequestBody Customer record) {
@@ -74,6 +79,31 @@ public class CustomerController {
     @PostMapping("deleteContract")
     public ResultBean<Void> deleteContractRecord(@RequestBody List<Integer> selectMultipleId) {
         return contractService.deleteContractRecord(selectMultipleId);
+    }
+
+    @PostMapping("addContractDetail")
+    public ResultBean<Void> insertContractDetailRecord(@RequestBody ContractDetail record) {
+        return contractDetailService.insertContractDetailRecord(record);
+    }
+
+    @PostMapping("editContractDetail")
+    public ResultBean<Void> updateContractDetailRecord(@RequestBody ContractDetail record) {
+        return contractDetailService.updateContractDetailRecord(record);
+    }
+
+    @GetMapping("findAllContractDetail")
+    public ResultBean<List<ContractDetail>> findAllContractDetail() {
+        return contractDetailService.findContractDetailRecord();
+    }
+
+    @PostMapping("findAllContractDetail")
+    public ResultBean<List<ContractDetail>> findAllContractDetail(@RequestBody PageInfo pageInfo) {
+        return contractDetailService.findAllContractDetailRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    }
+
+    @PostMapping("deleteContractDetail")
+    public ResultBean<Void> deleteContractDetailRecord(@RequestBody List<Integer> selectMultipleId) {
+        return contractDetailService.deleteContractDetailRecord(selectMultipleId);
     }
 
 }

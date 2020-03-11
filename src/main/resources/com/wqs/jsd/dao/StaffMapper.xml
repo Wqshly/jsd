@@ -12,6 +12,8 @@
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="email" jdbcType="VARCHAR" property="email"/>
     <result column="birth" jdbcType="TIMESTAMP" property="birth"/>
+    <result column="father_birth" jdbcType="TIMESTAMP" property="fatherBirth"/>
+    <result column="mother_birth" jdbcType="TIMESTAMP" property="motherBirth"/>
     <result column="education" jdbcType="VARCHAR" property="education"/>
     <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool"/>
     <result column="discipline" jdbcType="VARCHAR" property="discipline"/>
@@ -22,7 +24,7 @@
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, `number`, `name`, sex, phone, identify, current_position, address, email, birth, 
+    id, `number`, `name`, sex, phone, identify, current_position, address, email, birth, father_birth, mother_birth,
     education, graduate_school, discipline, medical_num, bank_card_num, `status`, final_editor,
     final_edit_time
   </sql>
@@ -91,13 +93,13 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.wqs.jsd.pojo.Staff">
     insert into staff (`number`, `name`, sex,
       phone, identify, current_position,
-      address, email, birth,
+      address, email, birth, father_birth, mother_birth,
       education, graduate_school, discipline,
       medical_num, bank_card_num, `status`,
       final_editor, final_edit_time)
     values (#{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{identify,jdbcType=CHAR}, #{currentPosition,jdbcType=VARCHAR},
-      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{fatherBirth,jdbcType=VARCHAR}, #{motherBirth,jdbcType=VARCHAR},
       #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{discipline,jdbcType=VARCHAR},
       #{medicalNum,jdbcType=VARCHAR}, #{bankCardNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
@@ -132,6 +134,12 @@
       </if>
       <if test="birth != null">
         birth,
+      </if>
+      <if test="fatherBirth != null">
+        father_birth,
+      </if>
+      <if test="motherBirth != null">
+        mother_birth,
       </if>
       <if test="education != null">
         education,
@@ -185,6 +193,12 @@
       </if>
       <if test="birth != null">
         #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherBirth != null">
+        #{fatherBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="motherBirth != null">
+        #{motherBirth,jdbcType=VARCHAR},
       </if>
       <if test="education != null">
         #{education,jdbcType=VARCHAR},
@@ -242,6 +256,12 @@
       <if test="birth != null">
         birth = #{birth,jdbcType=VARCHAR},
       </if>
+      <if test="fatherBirth != null">
+        father_birth = #{fatherBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="motherBirth != null">
+        mother_birth = #{motherBirth,jdbcType=VARCHAR},
+      </if>
       <if test="education != null">
         education = #{education,jdbcType=VARCHAR},
       </if>
@@ -280,6 +300,8 @@
       address = #{address,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       birth = #{birth,jdbcType=VARCHAR},
+      father_birth = #{fatherBirth, jdbcType=VARCHAR},
+      mother_birth = #{motherBirth, jdbcType=VARCHAR},
       education = #{education,jdbcType=VARCHAR},
       graduate_school = #{graduateSchool,jdbcType=VARCHAR},
       discipline = #{discipline,jdbcType=VARCHAR},
