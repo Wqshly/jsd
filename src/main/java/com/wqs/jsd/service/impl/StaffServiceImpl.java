@@ -101,4 +101,9 @@ public class StaffServiceImpl implements StaffService {
         staff.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(staffMapper.updateByPrimaryKey(staff));
     }
+
+    @Override
+    public ResultBean<Void> deleteStaffRecord(List<Integer> id) {
+        return commonMethod.changeRecord(staffMapper.deleteByPrimaryKey(id));
+    }
 }

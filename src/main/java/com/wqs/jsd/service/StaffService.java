@@ -33,4 +33,6 @@ public interface StaffService {
     ResultBean<Void> insertStaffRecord(Staff staff);
 
     ResultBean<Void> updateStaffRecord(Staff staff);
+
+    ResultBean<Void> deleteStaffRecord(List<Integer> id);
 }
