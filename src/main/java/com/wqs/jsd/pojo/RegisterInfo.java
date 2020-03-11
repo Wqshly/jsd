@@ -11,26 +11,22 @@ import java.util.Date;
  */
 public class RegisterInfo implements Serializable {
 
-    private String phoneNum;
+    private String phone;
 
     private String nickName;
 
     private String password;
 
-    private String imgPath;
-
-    private String finalEditor;
-
-    private Date finalEditTime;
+    private String picLocation;
 
     private static final long serialVersionUID = 1L;
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getNickName() {
@@ -49,27 +45,11 @@ public class RegisterInfo implements Serializable {
         this.password = password;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public String getPicLocation() {
+        return picLocation;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
-    }
-
-    public String getFinalEditor() {
-        return finalEditor;
-    }
-
-    public void setFinalEditor(String finalEditor) {
-        this.finalEditor = finalEditor;
-    }
-
-    public Date getFinalEditTime() {
-        return finalEditTime;
-    }
-
-    public void setFinalEditTime(Date finalEditTime) {
-        this.finalEditTime = finalEditTime;
+    public void setPicLocation(String picLocation) {
+        this.picLocation = picLocation;
     }
 }

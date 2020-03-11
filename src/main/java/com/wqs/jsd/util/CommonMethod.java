@@ -7,10 +7,14 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.PrivateKey;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -108,6 +112,31 @@ public class CommonMethod {
         return val.toString();
     }
 
+    public ResultBean<String> UploadImage(String fileName, String file, String path) {
+        BASE64Decoder decoder = new BASE64Decoder();
+        try {
+            String imageFile = file.split(",")[1];
+            System.out.println("图片开始上传!");
+            byte[] bytes = decoder.decodeBuffer(imageFile);
+            for (int i = 0; i < bytes.length; ++i) {
+                if (bytes[i] < 0) {
+                    bytes[i] += 256; // 调整异常数据
+                }
+            }
+            String filePath = "C:/" + path + "/" + fileName;
+            // 生成图片
+            OutputStream out = new FileOutputStream(filePath);
+            out.write(bytes);
+            out.flush();
+            out.close();
+            return new ResultBean<>(filePath, SUCCESS, "上传成功");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "系统错误，请联系管理员!");
+        }
+    }
+
     /**
      * @description: 该方法用于上传文件
      * @param: picture 上传的图片
@@ -116,11 +145,10 @@ public class CommonMethod {
      * @author: van
      * @time: 2020/1/11 22:56
      */
-    public ResultBean<String> UploadImage(MultipartFile picture, HttpServletRequest request, String s) {
+    public ResultBean<String> UploadImage(MultipartFile picture, HttpServletRequest request, String fileName, String path) {
         try {
-            //获取文件在服务器的储存位置
-//            String path = request.getSession().getServletContext().getRealPath(s);
-            String path = "C:" + s;
+            System.out.println("图片开始上传!");
+            ServletInputStream inputStream = request.getInputStream();
             File filePath = new File(path);
             if (!filePath.exists() && !filePath.isDirectory()) {
                 System.out.println("目录不存在，创建目录:" + filePath);
@@ -129,32 +157,30 @@ public class CommonMethod {
                     throw new Exception("创建目录失败! 请重试!");
                 }
             }
-            //获取原始文件名称(包含格式)
-            String originalFileName = picture.getOriginalFilename();
-            System.out.println("原始文件名称：" + originalFileName);
-            if (originalFileName != null) {
+            System.out.println("原始文件名称：" + fileName);
+            if (fileName != null) {
                 //获取文件类型，以最后一个`.`为标识
-                String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+                String type = fileName.substring(fileName.lastIndexOf(".") + 1);
                 System.out.println("文件类型：" + type);
                 //获取文件名称（不包含格式）
-                String name = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+                String name = fileName.substring(0, fileName.lastIndexOf("."));
 
                 //设置文件新名称: 当前时间+文件名称（不包含格式）
                 Date d = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmmss");
                 String date = sdf.format(d);
-                String fileName = date + name + "." + type;
-                System.out.println("新文件名称：" + fileName);
+                String fName = date + name + "." + type;
+                System.out.println("新文件名称：" + fName);
 
                 //在指定路径下创建一个文件
-                File targetFile = new File(path, fileName);
+                File targetFile = new File(path, fName);
 
                 //将文件保存到服务器指定位置
                 try {
                     picture.transferTo(targetFile);
                     System.out.println("上传成功");
                     //将文件在服务器的存储路径返回
-                    return new ResultBean<>("/upload/" + fileName, 0, "success");
+                    return new ResultBean<>(filePath + "/" + fName, 0, "success");
                 } catch (IOException e) {
                     System.out.println("上传失败");
                     e.printStackTrace();

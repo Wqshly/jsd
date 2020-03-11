@@ -1,10 +1,7 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
-import com.wqs.jsd.pojo.RegisterInfo;
-import com.wqs.jsd.pojo.SystemUserInfo;
-import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.pojo.User;
+import com.wqs.jsd.pojo.*;
 import com.wqs.jsd.service.RegisterAndLoginService;
 import com.wqs.jsd.service.UserHeadSculptureService;
 import com.wqs.jsd.util.CommonMethod;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -55,10 +53,15 @@ public class UserController {
         return registerAndLoginService.login(systemUserInfo);
     }
 
-    // 上传头像
-    @PostMapping("/imageUpload")
-    public ResultBean<String> UploadImage(@RequestParam(value = "picture", required = false) MultipartFile picture, HttpServletRequest request) throws IOException {
-        return commonMethod.UploadImage(picture, request, "/uploadUserImg");
+    @PostMapping("imageUpload")
+    public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
+        System.out.println(imageFile.getFile());
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "/uploadUserImg");
+    }
+
+    @PostMapping("/imageUpload/{fileName}")
+    public ResultBean<String> UploadImage(@PathVariable String fileName, HttpServletResponse response, HttpServletRequest request, MultipartFile picture) throws IOException {
+        return commonMethod.UploadImage(picture, request, fileName, "/uploadUserImg");
     }
 
     @PostMapping("/isUserExist")

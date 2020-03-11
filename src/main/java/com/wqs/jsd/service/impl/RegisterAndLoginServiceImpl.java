@@ -4,10 +4,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.dao.UserHeadSculptureMapper;
 import com.wqs.jsd.dao.UserMapper;
-import com.wqs.jsd.pojo.Staff;
-import com.wqs.jsd.pojo.SystemUserInfo;
-import com.wqs.jsd.pojo.User;
-import com.wqs.jsd.pojo.UserHeadSculpture;
+import com.wqs.jsd.pojo.*;
 import com.wqs.jsd.service.RegisterAndLoginService;
 import com.wqs.jsd.util.CommonMethod;
 import com.wqs.jsd.util.RSACode;
@@ -102,10 +99,24 @@ public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
                         commonMethod.getTime());
                 userMapper.insert(user);
                 System.out.println(user.getId());
-                UserHeadSculpture userHeadSculpture = new UserHeadSculpture(user.getId(),systemUserInfo.getPicLocation(),"true");
+                UserHeadSculpture userHeadSculpture = new UserHeadSculpture(user.getId(), systemUserInfo.getPicLocation(), "true");
                 sculptureMapper.insert(userHeadSculpture);
                 return new ResultBean<>(SUCCESS, "注册成功!");
             }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误!");
+        }
+    }
+
+    @Override
+    public ResultBean<Void> register(RegisterInfo record) {
+        try {
+//            User user = new User(record.getStaffId(), record.getNickName(), record.getPassword());
+//            userMapper.insert(user);
+//            UserHeadSculpture headSculpture = new UserHeadSculpture(user.getId(), record.getImageUrl(), "true");
+//            sculptureMapper.insert(headSculpture);
+            return new ResultBean<>(SUCCESS, "注册成功!");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误!");
