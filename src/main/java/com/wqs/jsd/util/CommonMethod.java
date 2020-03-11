@@ -119,11 +119,13 @@ public class CommonMethod {
     public ResultBean<String> UploadImage(MultipartFile picture, HttpServletRequest request, String s) {
         try {
             //获取文件在服务器的储存位置
-            String path = request.getSession().getServletContext().getRealPath(s);
+//            String path = request.getSession().getServletContext().getRealPath(s);
+            String path = "C:" + s;
             File filePath = new File(path);
             if (!filePath.exists() && !filePath.isDirectory()) {
                 System.out.println("目录不存在，创建目录:" + filePath);
-                if (!filePath.mkdir()) {
+                boolean b = filePath.mkdir();
+                if (!b) {
                     throw new Exception("创建目录失败! 请重试!");
                 }
             }
