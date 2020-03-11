@@ -1,6 +1,7 @@
 package com.wqs.jsd.service;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.RegisterInfo;
 import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.pojo.User;
@@ -31,6 +32,8 @@ public interface RegisterAndLoginService {
      */
 //    int initRegister(SystemUserInfo systemUserInfo);
     ResultBean<Void> initRegister(SystemUserInfo systemUserInfo);
+
+    ResultBean<Void> register(RegisterInfo record);
 
     /**
      * @param user

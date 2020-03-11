@@ -1,6 +1,7 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.RegisterInfo;
 import com.wqs.jsd.pojo.SystemUserInfo;
 import com.wqs.jsd.pojo.Staff;
 import com.wqs.jsd.pojo.User;
@@ -44,8 +45,8 @@ public class UserController {
     }
 
     @PostMapping("register")
-    public ResultBean<User> register(@RequestBody User user) {
-        return new ResultBean<>();
+    public ResultBean<Void> register(@RequestBody RegisterInfo record) {
+        return registerAndLoginService.register(record);
     }
 
     // 登录
