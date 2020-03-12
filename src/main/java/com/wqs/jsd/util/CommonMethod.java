@@ -123,7 +123,12 @@ public class CommonMethod {
                     bytes[i] += 256; // 调整异常数据
                 }
             }
-            String filePath = "C:/" + path + "/" + fileName;
+            String fPath = "C://jsdData/" + path;
+            File fFile = new File(fPath);
+            if (!fFile.exists()) {
+                fFile.mkdirs();
+            }
+            String filePath = "C://jsdData/" + path + "/" + fileName;
             // 生成图片
             OutputStream out = new FileOutputStream(filePath);
             out.write(bytes);
