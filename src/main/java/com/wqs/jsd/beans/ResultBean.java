@@ -25,6 +25,7 @@ public class ResultBean<T> implements Serializable {
     public static final int UNAUTHORIZED = 1001;
     public static final int LOGIN_FAILED = 1002;
     public static final int NOT_EXIST_USER = 1003;
+    public static final int EXIST_USER = 1004;
     public static final int UNKNOWN_EXCEPTION = -99;
 
     /**

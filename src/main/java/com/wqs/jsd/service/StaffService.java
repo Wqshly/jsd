@@ -16,15 +16,6 @@ import java.util.List;
 @Service
 public interface StaffService {
     Integer staffCount();
-    
-    /**
-     * @description: 
-     * @param: s
-     * @return: int
-     * @author: van
-     * @time: 2020/1/12 17:24
-     */ 
-    ResultBean<Boolean> staffValid(String s);
 
     ResultBean<List<Staff>> selectStaffAll();
 

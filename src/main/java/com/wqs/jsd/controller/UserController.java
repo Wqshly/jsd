@@ -37,6 +37,11 @@ public class UserController {
         return userHeadSculptureService.getImgUrl(id);
     }
 
+    @GetMapping("/userValid/{phone}")
+    public ResultBean<Void> userValid(@PathVariable String phone) {
+        return registerAndLoginService.userValid(phone);
+    }
+
     @PostMapping("/initRegister")
     public ResultBean<Void> initRegister(@RequestBody SystemUserInfo systemUserInfo) {
         return registerAndLoginService.initRegister(systemUserInfo);

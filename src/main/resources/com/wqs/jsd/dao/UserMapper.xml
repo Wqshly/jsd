@@ -45,6 +45,12 @@
     from user
     where staff_id = #{staffId,jdbcType=INTEGER}
   </select>
+  <select id="countByStaffId" resultType="java.lang.Integer">
+    select count(1)
+    id
+    from user
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from user
     where id in

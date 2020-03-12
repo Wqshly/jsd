@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface RegisterAndLoginService {
 
+    ResultBean<Void> userValid(String s);
+
     /**
      * @param systemUserInfo
      * @description:

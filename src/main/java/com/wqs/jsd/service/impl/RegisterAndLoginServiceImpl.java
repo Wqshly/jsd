@@ -45,6 +45,23 @@ public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
     @Autowired
     private CommonMethod commonMethod;
 
+    @Override
+    public ResultBean<Void> userValid(String s) {
+        try {
+            int staffId = staffMapper.selectIdByPhone(s);
+            if (staffId != 0 &&userMapper.countByStaffId(staffId) == 0) {
+                return new ResultBean<>(SUCCESS, "success");
+            } else if (userMapper.countByStaffId(staffId) != 0) {
+                return new ResultBean<>(EXIST_USER, "该员工已注册!");
+            } else {
+                return new ResultBean<>(NOT_EXIST_USER, "无该员工!");
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, e.getMessage());
+        }
+    }
+
     /**
      * @param systemUserInfo
      * @description:
@@ -112,8 +129,10 @@ public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
     @Override
     public ResultBean<Void> register(RegisterInfo record) {
         try {
+            byte[] decodedData = RSACode.decryptByPrivateKey(record.getPassword());
+            String password = new String(decodedData);
             int staffId = staffMapper.selectIdByPhone(record.getPhone());
-            User user = new User(staffId, record.getNickName(), commonMethod.MD5EncryptSalt(record.getPassword(), "wqs"),"在职", record.getNickName(), commonMethod.getTime());
+            User user = new User(staffId, record.getNickName(), commonMethod.MD5EncryptSalt(password, "wqs"),"在职", record.getNickName(), commonMethod.getTime());
             userMapper.insert(user);
             UserHeadSculpture headSculpture = new UserHeadSculpture(user.getId(), record.getPicLocation(), "true");
             sculptureMapper.insert(headSculpture);

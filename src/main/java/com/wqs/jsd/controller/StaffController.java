@@ -27,12 +27,6 @@ public class StaffController {
         return new ResultBean<>(staffService.staffCount());
     }
 
-    // 注册员工账号时，用于查询是否有该员工。
-    @PostMapping("/staffValid")
-    public ResultBean<Boolean> staffValid(@RequestBody String phoneNum, HttpServletRequest request) {
-        return staffService.staffValid(phoneNum);
-    }
-
     @PostMapping("editStaff")
     public ResultBean<Void> updateStaff(@RequestBody Staff staff) {
         return staffService.updateStaffRecord(staff);

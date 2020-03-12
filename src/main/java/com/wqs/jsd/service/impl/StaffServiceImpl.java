@@ -40,29 +40,6 @@ public class StaffServiceImpl implements StaffService {
         return staffMapper.countStaff();
     }
 
-    /**
-     * @param s
-     * @description:
-     * @param: s
-     * @return: int
-     * @author: van
-     * @time: 2020/1/12 17:24
-     */
-    @Override
-    public ResultBean<Boolean> staffValid(String s) {
-        try {
-            int a = staffMapper.countPhone(s);
-            if (a == 1) {
-                return new ResultBean<>(true, SUCCESS, "success");
-            } else {
-                return new ResultBean<>(false, SUCCESS, "无该员工!");
-            }
-
-        } catch (Exception e) {
-            return new ResultBean<>(SQL_WRONG, "数据库异常!");
-        }
-    }
-
     @Override
     public ResultBean<List<Staff>> selectStaffAll() {
         try {
