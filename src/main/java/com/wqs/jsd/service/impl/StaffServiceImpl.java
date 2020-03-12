@@ -68,7 +68,7 @@ public class StaffServiceImpl implements StaffService {
     public ResultBean<Void> insertStaffRecord(Staff staff) {
         staff.setFinalEditTime(commonMethod.getTime());
         if (staff.getRadio().equals("1")) {
-            staff.setNumber("BH" + CodeUtil.createCode());
+            staff.setNumber("JWC" + CodeUtil.createCode());
         }
         return commonMethod.changeRecord(staffMapper.insert(staff));
     }
