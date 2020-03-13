@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static com.wqs.jsd.beans.ResultBean.SUCCESS;
@@ -79,7 +81,7 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
     }
 
     @Override
-    public ResultBean<String> getImgUrl(String s) {
+    public ResultBean<String> getImgUrl(String s, HttpServletRequest request, HttpServletResponse response) {
         try {
             int staffId = Integer.parseInt(s);
             System.out.println(staffId);
@@ -87,7 +89,7 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
             System.out.println(userId);
             String imgUrl = mapper.selectByUserId(userId);
             System.out.println(imgUrl);
-            imgUrl = "http://localhost:8080/jsd" + imgUrl;
+            imgUrl = "http://localhost:8080" + imgUrl;
             return new ResultBean<>(imgUrl, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());

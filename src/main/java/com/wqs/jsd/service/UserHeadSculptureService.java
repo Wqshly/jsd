@@ -4,6 +4,8 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.UserHeadSculpture;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,5 +27,5 @@ public interface UserHeadSculptureService {
 
     ResultBean<Void> deleteUserHeadSculptureRecord(List<Integer> id);
 
-    ResultBean<String> getImgUrl(String s);
+    ResultBean<String> getImgUrl(String s, HttpServletRequest request, HttpServletResponse response);
 }

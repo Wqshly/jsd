@@ -40,7 +40,7 @@ public class CommonMethod {
      * @time: 2020/1/13 10:24
      */
     public ResultBean<Void> changeRecord(int i) {
-        try {
+        try{
             int code = UNKNOWN_EXCEPTION;
             if (i > 0) {
                 code = SUCCESS;
@@ -48,7 +48,7 @@ public class CommonMethod {
             return new ResultBean<>(code, "success");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "catch the Exception");
+            return new ResultBean<>(UNKNOWN_EXCEPTION,"catch the Exception");
         }
     }
 
@@ -141,8 +141,8 @@ public class CommonMethod {
             out.flush();
             out.close();
             return new ResultBean<>(contextPath, SUCCESS, "上传成功");
-//            return new ResultBean<>(filePath, SUCCESS, "上传成功");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return new ResultBean<>(UNKNOWN_EXCEPTION, "系统错误，请联系管理员!");
         }
