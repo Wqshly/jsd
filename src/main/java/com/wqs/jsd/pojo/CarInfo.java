@@ -20,6 +20,8 @@ public class CarInfo implements Serializable {
 
     private String status;
 
+    private String remarks;
+
     private String finalEditor;
 
     private Date finalEditTime;
@@ -72,6 +74,14 @@ public class CarInfo implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public String getFinalEditor() {

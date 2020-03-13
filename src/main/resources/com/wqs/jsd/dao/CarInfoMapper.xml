@@ -8,11 +8,12 @@
     <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
     <result column="number_plate" jdbcType="VARCHAR" property="numberPlate" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, holder, `type`, car_number, number_plate, `status`, final_editor, final_edit_time
+    id, holder, `type`, car_number, number_plate, `status`, remarks, final_editor, final_edit_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -62,6 +63,9 @@
       <if test="status != null">
         `status`,
       </if>
+      <if test="remarks != null">
+        `remarks`,
+      </if>
       <if test="finalEditor != null">
         final_editor,
       </if>
@@ -84,6 +88,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR}
       </if>
       <if test="finalEditor != null">
         #{finalEditor,jdbcType=VARCHAR},
@@ -111,6 +118,9 @@
       <if test="status != null">
         `status` = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR}
+      </if>
       <if test="finalEditor != null">
         final_editor = #{finalEditor,jdbcType=VARCHAR},
       </if>
@@ -127,6 +137,7 @@
       car_number = #{carNumber,jdbcType=VARCHAR},
       number_plate = #{numberPlate,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
       final_editor = #{finalEditor,jdbcType=VARCHAR},
       final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
