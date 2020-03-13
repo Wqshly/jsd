@@ -27,5 +27,5 @@ public interface UserHeadSculptureService {
 
     ResultBean<Void> deleteUserHeadSculptureRecord(List<Integer> id);
 
-    ResultBean<String> getImgUrl(String s);
+    ResultBean<String> getImgUrl(String s, HttpServletRequest request);
 }

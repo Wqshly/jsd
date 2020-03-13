@@ -33,8 +33,8 @@ public class UserController {
     private CommonMethod commonMethod;
 
     @GetMapping("/getImgUrl/{id}")
-    public ResultBean<String> getImgUrl(@PathVariable String id) {
-        return userHeadSculptureService.getImgUrl(id);
+    public ResultBean<String> getImgUrl(@PathVariable String id, HttpServletRequest request) {
+        return userHeadSculptureService.getImgUrl(id, request);
     }
 
     @GetMapping("/userValid/{phone}")
