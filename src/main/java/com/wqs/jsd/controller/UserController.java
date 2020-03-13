@@ -59,8 +59,8 @@ public class UserController {
     }
 
     @PostMapping("imageUpload")
-    public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
-        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "/uploadUserImg");
+    public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile, HttpServletRequest request) {
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "uploadUserImg", request);
     }
 
     // 上传头像
