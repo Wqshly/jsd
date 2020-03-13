@@ -128,13 +128,13 @@ public class CommonMethod {
             if (!fFile.exists()) {
                 fFile.mkdirs();
             }
-            String realPath = "\\image\\" + path + "\\" + fileName;
+            String realPath = fPath + "\\" + fileName;
             // 生成图片
             OutputStream out = new FileOutputStream(realPath);
             out.write(bytes);
             out.flush();
             out.close();
-            String contextPate = "\\jsd\\jsdData\\" + path + "\\" + fileName;
+            String contextPate = "\\image\\" + path + "\\" + fileName;
             return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         }
         catch (Exception e) {
