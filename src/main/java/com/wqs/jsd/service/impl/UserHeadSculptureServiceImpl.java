@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.InetAddress;
 import java.util.List;
 
 import static com.wqs.jsd.beans.ResultBean.SUCCESS;
@@ -89,7 +90,10 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
             System.out.println(userId);
             String imgUrl = mapper.selectByUserId(userId);
             System.out.println(imgUrl);
-            imgUrl = "http://localhost:8080" + imgUrl;
+            String addr = InetAddress.getLocalHost().getHostAddress();
+            System.out.println(addr);
+            imgUrl = addr + ":8080" + imgUrl;
+            System.out.println(imgUrl);
             return new ResultBean<>(imgUrl, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());

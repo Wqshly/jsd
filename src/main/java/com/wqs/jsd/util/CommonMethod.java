@@ -123,18 +123,18 @@ public class CommonMethod {
                     bytes[i] += 256; // 调整异常数据
                 }
             }
-            String fPath = "C:\\jsdData\\" + path;
+            String fPath = "C:\\jsdData\\image\\" + path;
             File fFile = new File(fPath);
             if (!fFile.exists()) {
                 fFile.mkdirs();
             }
-            String realPath = "C:\\jsdData\\" + path + "\\" + fileName;
+            String realPath = "C:\\jsdData\\image\\" + path + "\\" + fileName;
             // 生成图片
             OutputStream out = new FileOutputStream(realPath);
             out.write(bytes);
             out.flush();
             out.close();
-            String contextPate = "/jsd/" + path + "/" + fileName;
+            String contextPate = "\\jsd\\jsdData\\" + path + "\\" + fileName;
             return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         }
         catch (Exception e) {

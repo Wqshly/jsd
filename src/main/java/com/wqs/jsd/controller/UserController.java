@@ -60,7 +60,7 @@ public class UserController {
 
     @PostMapping("imageUpload")
     public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
-        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "uploadUserImg");
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "user");
     }
 
     // 上传头像
