@@ -128,7 +128,7 @@ public class CommonMethod {
             if (!fFile.exists()) {
                 fFile.mkdirs();
             }
-            String realPath = "C:\\jsdData\\image\\" + path + "\\" + fileName;
+            String realPath = "\\image\\" + path + "\\" + fileName;
             // 生成图片
             OutputStream out = new FileOutputStream(realPath);
             out.write(bytes);
