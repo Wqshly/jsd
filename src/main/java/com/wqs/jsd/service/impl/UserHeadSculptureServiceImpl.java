@@ -81,7 +81,7 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
     }
 
     @Override
-    public ResultBean<String> getImgUrl(String s, HttpServletRequest request, HttpServletResponse response) {
+    public ResultBean<String> getImgUrl(String s) {
         try {
             int staffId = Integer.parseInt(s);
             System.out.println(staffId);
