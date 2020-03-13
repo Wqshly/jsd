@@ -112,11 +112,9 @@ public class CommonMethod {
         return val.toString();
     }
 
-    public ResultBean<String> UploadImage(String fileName, String file, String path, HttpServletRequest request) {
+    public ResultBean<String> UploadImage(String fileName, String file, String path) {
         BASE64Decoder decoder = new BASE64Decoder();
         try {
-            String realPath = request.getServletContext().getRealPath("/");
-            System.out.println(realPath);
             String imageFile = file.split(",")[1];
             System.out.println("图片开始上传!");
             byte[] bytes = decoder.decodeBuffer(imageFile);
@@ -125,22 +123,19 @@ public class CommonMethod {
                     bytes[i] += 256; // 调整异常数据
                 }
             }
-//            String fPath = "C:/jsdData/" + path;
-            String fPath = realPath + "jsdData\\" + path;
-            System.out.println(fPath);
+            String fPath = "C:\\jsdData\\" + path;
             File fFile = new File(fPath);
             if (!fFile.exists()) {
                 fFile.mkdirs();
             }
-            String contextPath = "\\jsdData\\" + path + fileName;
-            String filePath = fPath + "\\" + fileName;
-            System.out.println(filePath);
+            String realPath = "C:\\jsdData\\" + path + "\\" + fileName;
             // 生成图片
-            OutputStream out = new FileOutputStream(filePath);
+            OutputStream out = new FileOutputStream(realPath);
             out.write(bytes);
             out.flush();
             out.close();
-            return new ResultBean<>(contextPath, SUCCESS, "上传成功");
+            String contextPate = "/jsd/" + path + "/" + fileName;
+            return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -160,10 +155,10 @@ public class CommonMethod {
         try {
             //获取文件在服务器的储存位置
             String path = request.getSession().getServletContext().getRealPath(s);
-            File filePath = new File(path);
-            if (!filePath.exists() && !filePath.isDirectory()) {
-                System.out.println("目录不存在，创建目录:" + filePath);
-                if (!filePath.mkdir()) {
+            File realPath = new File(path);
+            if (!realPath.exists() && !realPath.isDirectory()) {
+                System.out.println("目录不存在，创建目录:" + realPath);
+                if (!realPath.mkdir()) {
                     throw new Exception("创建目录失败! 请重试!");
                 }
             }
