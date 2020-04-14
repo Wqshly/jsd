@@ -15,7 +15,7 @@ import java.util.List;
  * @Description:
  * @Modified By:
  */
-@RequestMapping("/")
+@RequestMapping("/postChange")
 @RestController
 public class PostChangeController {
     @Autowired
@@ -36,9 +36,9 @@ public class PostChangeController {
         return postChangeService.findPostChangeRecord();
     }
 
-    @PostMapping("findAllPostChange")
-    public ResultBean<List<PostChange>> findAllPostChange(@RequestBody PageInfo pageInfo) {
-        return postChangeService.findAllPostChangeRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    @PostMapping("findAllPostChange/{staffId}")
+    public ResultBean<List<PostChange>> findAllIsQuit(@RequestBody PageInfo pageInfo, @PathVariable Integer staffId) {
+        return postChangeService.findAllPostChangeRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize(), staffId);
     }
 
     @PostMapping("deletePostChange")

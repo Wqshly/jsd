@@ -2,9 +2,9 @@ package com.wqs.jsd.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
-import com.wqs.jsd.dao.PostChangeMapper;
-import com.wqs.jsd.pojo.PostChange;
-import com.wqs.jsd.service.PostChangeService;
+import com.wqs.jsd.dao.JobChangeMapper;
+import com.wqs.jsd.pojo.JobChange;
+import com.wqs.jsd.service.JobChangeService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
@@ -20,37 +20,37 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
 
 /**
  * @Author: wan
- * @Date: Created in 18:52 2020/4/14
+ * @Date: Created in 21:43 2020/4/14
  * @Description:
  * @Modified By:
  */
 @Service
-public class PostChangeServiceImpl implements PostChangeService {
+public class JobChangeServiceImpl implements JobChangeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PostChangeService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JobChangeService.class);
 
     @Resource
-    private PostChangeMapper mapper;
+    private JobChangeMapper mapper;
 
     @Autowired
     private CommonMethod commonMethod;
 
     @Override
-    public ResultBean<Void> insertPostChangeRecord(PostChange record) {
+    public ResultBean<Void> insertJobChangeRecord(JobChange record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));
     }
 
     @Override
-    public ResultBean<Void> updatePostChangeRecord(PostChange record) {
+    public ResultBean<Void> updateJobChangeRecord(JobChange record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
 
     @Override
-    public ResultBean<List<PostChange>> findPostChangeRecord() {
+    public ResultBean<List<JobChange>> findJobChangeRecord() {
         try {
-            List<PostChange> records = mapper.selectAll();
+            List<JobChange> records = mapper.selectAll();
             return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -59,12 +59,10 @@ public class PostChangeServiceImpl implements PostChangeService {
     }
 
     @Override
-    public ResultBean<List<PostChange>> findAllPostChangeRecord(int currentPage, int pageSize, int id) {
+    public ResultBean<List<JobChange>> findAllJobChangeRecord(int currentPage, int pageSize, int id) {
         try {
             PageHelper.startPage(currentPage, pageSize);
-//            List<PostChange> records = mapper.selectAll();
-//            int total = mapper.countTotal();
-            List<PostChange> records = mapper.selectByStaffId(id);
+            List<JobChange> records = mapper.selectByStaffId(id);
             int total = mapper.countTotalByStaffId(id);
             return new ResultBean<>(records, SUCCESS, "success", total);
         } catch (Exception e) {
@@ -74,7 +72,7 @@ public class PostChangeServiceImpl implements PostChangeService {
     }
 
     @Override
-    public ResultBean<Void> deletePostChangeRecord(List<Integer> id) {
+    public ResultBean<Void> deleteJobChangeRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
 }

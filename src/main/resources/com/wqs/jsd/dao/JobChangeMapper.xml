@@ -1,81 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wqs.jsd.dao.PostChangeMapper">
-  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.PostChange">
+<mapper namespace="com.wqs.jsd.dao.JobChangeMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.JobChange">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="before" jdbcType="VARCHAR" property="before" />
-    <result column="after" jdbcType="VARCHAR" property="after" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
     <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, `before`, `after`, start_time, end_time, remark, final_editor, final_edit_time
+    id, staff_id, `name`, start_time, duty, final_editor, final_edit_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from post_change
-    where id = #{id,jdbcType=INTEGER}
-  </select>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
-    FROM post_change
+    FROM job_change
   </select>
   <select id="countTotalByStaffId" resultType="java.lang.Integer">
     SELECT count(1)
-    FROM post_change
+    FROM job_change
     where staff_id = #{staffId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultType="com.wqs.jsd.pojo.PostChange">
-    select
-    <include refid="Base_Column_List"/>
-    from post_change
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from job_change
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByStaffId" parameterType="java.lang.Integer" resultType="com.wqs.jsd.pojo.PostChange">
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.JobChange">
     select
     <include refid="Base_Column_List"/>
-    from post_change
+    from job_change
+  </select>
+  <select id="selectByStaffId" parameterType="java.lang.Integer" resultType="com.wqs.jsd.pojo.JobChange">
+    select
+    <include refid="Base_Column_List"/>
+    from job_change
     WHERE staff_id = #{staffId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
-    delete from post_change
+    delete from job_change
     where id in
     <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
       #{item}
     </foreach>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.PostChange" useGeneratedKeys="true">
-    insert into post_change (staff_id, `before`, `after`, 
-      start_time, end_time, remark, 
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.JobChange" useGeneratedKeys="true">
+    insert into job_change (staff_id, name, start_time, duty,
       final_editor, final_edit_time)
-    values (#{staffId,jdbcType=INTEGER}, #{before,jdbcType=VARCHAR}, #{after,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+    values (#{staffId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{duty,jdbcType=VARCHAR},
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.PostChange" useGeneratedKeys="true">
-    insert into post_change
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.JobChange" useGeneratedKeys="true">
+    insert into job_change
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
         staff_id,
       </if>
-      <if test="before != null">
-        `before`,
-      </if>
-      <if test="after != null">
-        `after`,
+      <if test="name != null">
+        `name`,
       </if>
       <if test="startTime != null">
         start_time,
       </if>
-      <if test="endTime != null">
-        end_time,
-      </if>
-      <if test="remark != null">
-        remark,
+      <if test="duty != null">
+        duty,
       </if>
       <if test="finalEditor != null">
         final_editor,
@@ -88,20 +78,14 @@
       <if test="staffId != null">
         #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="before != null">
-        #{before,jdbcType=VARCHAR},
-      </if>
-      <if test="after != null">
-        #{after,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
       </if>
       <if test="finalEditor != null">
         #{finalEditor,jdbcType=VARCHAR},
@@ -111,26 +95,20 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.PostChange">
-    update post_change
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.JobChange">
+    update job_change
     <set>
       <if test="staffId != null">
         staff_id = #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="before != null">
-        `before` = #{before,jdbcType=VARCHAR},
-      </if>
-      <if test="after != null">
-        `after` = #{after,jdbcType=VARCHAR},
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
       </if>
       <if test="finalEditor != null">
         final_editor = #{finalEditor,jdbcType=VARCHAR},
@@ -141,14 +119,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.PostChange">
-    update post_change
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.JobChange">
+    update job_change
     set staff_id = #{staffId,jdbcType=INTEGER},
-      `before` = #{before,jdbcType=VARCHAR},
-      `after` = #{after,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
       final_editor = #{finalEditor,jdbcType=VARCHAR},
       final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

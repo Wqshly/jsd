@@ -21,7 +21,7 @@ public interface PostChangeService {
 
     ResultBean<List<PostChange>> findPostChangeRecord();
 
-    ResultBean<List<PostChange>> findAllPostChangeRecord(int currentPage, int pageSize);
+    ResultBean<List<PostChange>> findAllPostChangeRecord(int currentPage, int pageSize, int id);
 
     ResultBean<Void> deletePostChangeRecord(List<Integer> id);
 }
