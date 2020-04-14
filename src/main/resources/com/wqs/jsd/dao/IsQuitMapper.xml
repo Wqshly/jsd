@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id"/>
     <result column="staff_id" jdbcType="INTEGER" property="staffId"/>
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+    <result column="is_quit" jdbcType="VARCHAR" property="isQuit"/>
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
     <result column="reasons" jdbcType="VARCHAR" property="reasons"/>
     <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
@@ -12,7 +13,7 @@
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, start_time, end_time, reasons, remarks, final_editor, final_edit_time
+    id, staff_id, start_time, is_quit, end_time, reasons, remarks, final_editor, final_edit_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -48,10 +49,10 @@
     </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.IsQuit" useGeneratedKeys="true">
-    insert into is_quit (staff_id, start_time, end_time, 
+    insert into is_quit (staff_id, start_time, is_quit, end_time,
       reasons, remarks, final_editor, 
       final_edit_time)
-    values (#{staffId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+    values (#{staffId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{isQuit, jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
       #{reasons,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{finalEditor,jdbcType=VARCHAR}, 
       #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
@@ -64,6 +65,9 @@
       </if>
       <if test="startTime != null">
         start_time,
+      </if>
+      <if test="isQuit != null">
+        is_quit,
       </if>
       <if test="endTime != null">
         end_time,
@@ -87,6 +91,9 @@
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isQuit != null">
+        #{isQuit, jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
@@ -114,6 +121,9 @@
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isQuit != null">
+        is_quit = #{isQuit,jdbcType=VARCHAR},
+      </if>
       <if test="endTime != null">
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
@@ -136,6 +146,7 @@
     update is_quit
     set staff_id = #{staffId,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
+      is_quit = #{isQuit,jdbcType=VARCHAR},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       reasons = #{reasons,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},

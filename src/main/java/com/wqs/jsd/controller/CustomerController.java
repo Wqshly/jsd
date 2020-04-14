@@ -1,13 +1,11 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
-import com.wqs.jsd.pojo.Contract;
-import com.wqs.jsd.pojo.ContractDetail;
-import com.wqs.jsd.pojo.Customer;
-import com.wqs.jsd.pojo.PageInfo;
+import com.wqs.jsd.pojo.*;
 import com.wqs.jsd.service.ContractDetailService;
 import com.wqs.jsd.service.ContractService;
 import com.wqs.jsd.service.CustomerService;
+import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +28,9 @@ public class CustomerController {
 
     @Autowired
     private ContractDetailService contractDetailService;
+
+    @Autowired
+    private CommonMethod commonMethod;
 
     @PostMapping("addCustomer")
     public ResultBean<Void> insertCustomerRecord(@RequestBody Customer record) {
@@ -54,6 +55,11 @@ public class CustomerController {
     @PostMapping("deleteCustomer")
     public ResultBean<Void> deleteCustomerRecord(@RequestBody List<Integer> selectMultipleId) {
         return customerService.deleteCustomerRecord(selectMultipleId);
+    }
+
+    @PostMapping("imageUpload")
+    public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "customer");
     }
 
     @PostMapping("addContract")

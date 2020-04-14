@@ -12,6 +12,8 @@ public class IsQuit implements Serializable {
 
     private Integer staffId;
 
+    private String isQuit;
+
     private Date startTime;
 
     private Date endTime;
@@ -48,6 +50,14 @@ public class IsQuit implements Serializable {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public String getIsQuit() {
+        return isQuit;
+    }
+
+    public void setIsQuit(String isQuit) {
+        this.isQuit = isQuit;
     }
 
     public Date getEndTime() {
