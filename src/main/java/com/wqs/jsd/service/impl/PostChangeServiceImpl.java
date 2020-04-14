@@ -2,9 +2,9 @@ package com.wqs.jsd.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
-import com.wqs.jsd.dao.IsQuitMapper;
-import com.wqs.jsd.pojo.IsQuit;
-import com.wqs.jsd.service.IsQuitService;
+import com.wqs.jsd.dao.PostChangeMapper;
+import com.wqs.jsd.pojo.PostChange;
+import com.wqs.jsd.service.PostChangeService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
 import org.slf4j.Logger;
@@ -13,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static com.wqs.jsd.beans.ResultBean.SUCCESS;
@@ -23,46 +20,37 @@ import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
 
 /**
  * @Author: wan
- * @Date: Created in 20:13 2020/3/5
+ * @Date: Created in 18:52 2020/4/14
  * @Description:
  * @Modified By:
  */
 @Service
-public class IsQuitServiceImpl implements IsQuitService {
+public class PostChangeServiceImpl implements PostChangeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(IsQuitService.class);
+    private static final Logger logger = LoggerFactory.getLogger(PostChangeService.class);
 
     @Resource
-    private IsQuitMapper mapper;
+    private PostChangeMapper mapper;
 
     @Autowired
     private CommonMethod commonMethod;
 
     @Override
-    public ResultBean<Void> insertIsQuitRecord(IsQuit record) {
+    public ResultBean<Void> insertPostChangeRecord(PostChange record) {
         record.setFinalEditTime(commonMethod.getTime());
-        if (record.getIsQuit().equals("否")) {
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = dateFormat.parse("2099-12-31");
-                record.setEndTime(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
         return commonMethod.changeRecord(mapper.insert(record));
     }
 
     @Override
-    public ResultBean<Void> updateIsQuitRecord(IsQuit record) {
+    public ResultBean<Void> updatePostChangeRecord(PostChange record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
 
     @Override
-    public ResultBean<List<IsQuit>> findIsQuitRecord() {
+    public ResultBean<List<PostChange>> findPostChangeRecord() {
         try {
-            List<IsQuit> records = mapper.selectAll();
+            List<PostChange> records = mapper.selectAll();
             return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -71,11 +59,11 @@ public class IsQuitServiceImpl implements IsQuitService {
     }
 
     @Override
-    public ResultBean<List<IsQuit>> findAllIsQuitRecord(int currentPage, int pageSize, int id) {
+    public ResultBean<List<PostChange>> findAllPostChangeRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);
-            List<IsQuit> records = mapper.selectByStaffId(id);
-            int total = mapper.countTotalByStaffId(id);
+            List<PostChange> records = mapper.selectAll();
+            int total = mapper.countTotal();
             return new ResultBean<>(records, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -84,7 +72,7 @@ public class IsQuitServiceImpl implements IsQuitService {
     }
 
     @Override
-    public ResultBean<Void> deleteIsQuitRecord(List<Integer> id) {
+    public ResultBean<Void> deletePostChangeRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
 }
