@@ -1,6 +1,7 @@
 package com.wqs.jsd.pojo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -62,6 +63,11 @@ public class LeavingReporting implements Serializable {
 
     public String getEndTime() {
         return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.endTime = dateFormat.format(endTime);
     }
 
     public void setEndTime(String endTime) {

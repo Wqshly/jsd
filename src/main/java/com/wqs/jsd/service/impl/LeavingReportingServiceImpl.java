@@ -37,12 +37,20 @@ public class LeavingReportingServiceImpl implements LeavingReportingService {
 
     @Override
     public ResultBean<Void> insertLeavingReportingRecord(LeavingReporting record) {
+//        if (record.getIsEnd().equals("否")) {
+//            record.setEndTime("- - - -");
+//            System.out.println(record.getEndTime());
+//        }
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));
     }
 
     @Override
     public ResultBean<Void> updateLeavingReportingRecord(LeavingReporting record) {
+//        if (record.getIsEnd().equals("否")) {
+//            record.setEndTime("- - - -");
+//            System.out.println(record.getEndTime());
+//        }
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
