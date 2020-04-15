@@ -6,7 +6,7 @@
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="is_end" jdbcType="VARCHAR" property="isEnd" />
-    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="exe_person" jdbcType="VARCHAR" property="exePerson" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
@@ -53,7 +53,7 @@
       end_time, exe_person, remarks, 
       final_editor, final_edit_time)
     values (#{staffId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{isEnd,jdbcType=VARCHAR}, 
-      #{endTime,jdbcType=VARCHAR}, #{exePerson,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{exePerson,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.LeavingReporting" useGeneratedKeys="true">
@@ -95,7 +95,7 @@
         #{isEnd,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=VARCHAR},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="exePerson != null">
         #{exePerson,jdbcType=VARCHAR},
@@ -124,7 +124,7 @@
         is_end = #{isEnd,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=VARCHAR},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="exePerson != null">
         exe_person = #{exePerson,jdbcType=VARCHAR},
@@ -146,7 +146,7 @@
     set staff_id = #{staffId,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       is_end = #{isEnd,jdbcType=VARCHAR},
-      end_time = #{endTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       exe_person = #{exePerson,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       final_editor = #{finalEditor,jdbcType=VARCHAR},

@@ -17,7 +17,7 @@ public class LeavingReporting implements Serializable {
 
     private String isEnd;
 
-    private String endTime;
+    private Date endTime;
 
     private String exePerson;
 
@@ -61,16 +61,11 @@ public class LeavingReporting implements Serializable {
         this.isEnd = isEnd;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
     public void setEndTime(Date endTime) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.endTime = dateFormat.format(endTime);
-    }
-
-    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

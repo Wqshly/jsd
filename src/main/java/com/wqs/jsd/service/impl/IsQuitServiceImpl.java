@@ -42,19 +42,16 @@ public class IsQuitServiceImpl implements IsQuitService {
     public ResultBean<Void> insertIsQuitRecord(IsQuit record) {
         record.setFinalEditTime(commonMethod.getTime());
         if (record.getIsQuit().equals("否")) {
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = dateFormat.parse("2099-12-31");
-                record.setEndTime(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            record.setEndTime(null);
         }
         return commonMethod.changeRecord(mapper.insert(record));
     }
 
     @Override
     public ResultBean<Void> updateIsQuitRecord(IsQuit record) {
+        if (record.getIsQuit().equals("否")) {
+            record.setEndTime(null);
+        }
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
