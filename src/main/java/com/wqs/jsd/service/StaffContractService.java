@@ -21,7 +21,7 @@ public interface StaffContractService {
 
     ResultBean<List<StaffContract>> findStaffContractRecord();
 
-    ResultBean<List<StaffContract>> findAllStaffContractRecord(int currentPage, int pageSize);
+    ResultBean<List<StaffContract>> findAllStaffContractRecord(int currentPage, int pageSize, int id);
 
     ResultBean<Void> deleteStaffContractRecord(List<Integer> id);
 }

@@ -8,9 +8,13 @@ public interface StaffContractMapper {
 
     int countTotal();
 
+    int countTotalByStaffId(Integer id);
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<StaffContract> selectAll();
+
+    List<StaffContract> selectByStaffId(Integer id);
 
     int insert(StaffContract record);
 

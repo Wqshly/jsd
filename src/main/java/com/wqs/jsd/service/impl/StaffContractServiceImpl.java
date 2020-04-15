@@ -59,11 +59,11 @@ public class StaffContractServiceImpl implements StaffContractService {
     }
 
     @Override
-    public ResultBean<List<StaffContract>> findAllStaffContractRecord(int currentPage, int pageSize) {
+    public ResultBean<List<StaffContract>> findAllStaffContractRecord(int currentPage, int pageSize, int id) {
         try {
             PageHelper.startPage(currentPage, pageSize);
-            List<StaffContract> records = mapper.selectAll();
-            int total = mapper.countTotal();
+            List<StaffContract> records = mapper.selectByStaffId(id);
+            int total = mapper.countTotalByStaffId(id);
             return new ResultBean<>(records, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());

@@ -12,13 +12,19 @@ public class StaffContract implements Serializable {
 
     private Integer staffId;
 
-    private String type;
-
     private Date startTime;
+
+    private String year;
 
     private Date endTime;
 
     private String content;
+
+    private String isEnd;
+
+    private String reason;
+
+    private String isContinue;
 
     private String remarks;
 
@@ -44,20 +50,20 @@ public class StaffContract implements Serializable {
         this.staffId = staffId;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Date getStartTime() {
         return startTime;
     }
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public Date getEndTime() {
@@ -74,6 +80,30 @@ public class StaffContract implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getIsEnd() {
+        return isEnd;
+    }
+
+    public void setIsEnd(String isEnd) {
+        this.isEnd = isEnd;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getIsContinue() {
+        return isContinue;
+    }
+
+    public void setIsContinue(String isContinue) {
+        this.isContinue = isContinue;
     }
 
     public String getRemarks() {

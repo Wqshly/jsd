@@ -4,31 +4,45 @@
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.StaffContract">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="start_time" jdbcType="DATE" property="startTime" />
-    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="is_end" jdbcType="VARCHAR" property="isEnd" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="is_continue" jdbcType="VARCHAR" property="isContinue" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, `type`, start_time, end_time, content, remarks, final_editor, final_edit_time
+    id, staff_id, start_time, `year`, end_time, content, is_end, reason, is_continue, 
+    remarks, final_editor, final_edit_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
     FROM staff_contract
+  </select>
+  <select id="countTotalByStaffId" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM staff_contract
+    where staff_id = #{staffId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff_contract
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultType="com.wqs.jsd.pojo.StaffContract">
+  </select><select id="selectAll" resultType="com.wqs.jsd.pojo.StaffContract">
+  select
+  <include refid="Base_Column_List"/>
+  from staff_contract
+</select>
+  <select id="selectByStaffId" parameterType="java.lang.Integer" resultType="com.wqs.jsd.pojo.StaffContract">
     select
     <include refid="Base_Column_List"/>
     from staff_contract
+    WHERE staff_id = #{staffId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from staff_contract
@@ -38,11 +52,13 @@
     </foreach>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.StaffContract" useGeneratedKeys="true">
-    insert into staff_contract (staff_id, `type`, start_time, 
-      end_time, content, remarks, 
+    insert into staff_contract (staff_id, start_time, `year`, 
+      end_time, content, is_end, 
+      reason, is_continue, remarks, 
       final_editor, final_edit_time)
-    values (#{staffId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, 
-      #{endTime,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+    values (#{staffId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{year,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{isEnd,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{isContinue,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
       #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.StaffContract" useGeneratedKeys="true">
@@ -51,17 +67,26 @@
       <if test="staffId != null">
         staff_id,
       </if>
-      <if test="type != null">
-        `type`,
-      </if>
       <if test="startTime != null">
         start_time,
+      </if>
+      <if test="year != null">
+        `year`,
       </if>
       <if test="endTime != null">
         end_time,
       </if>
       <if test="content != null">
         content,
+      </if>
+      <if test="isEnd != null">
+        is_end,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="isContinue != null">
+        is_continue,
       </if>
       <if test="remarks != null">
         remarks,
@@ -77,17 +102,26 @@
       <if test="staffId != null">
         #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
       <if test="startTime != null">
-        #{startTime,jdbcType=DATE},
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        #{endTime,jdbcType=DATE},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null">
+        #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="isContinue != null">
+        #{isContinue,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
@@ -106,17 +140,26 @@
       <if test="staffId != null">
         staff_id = #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=VARCHAR},
-      </if>
       <if test="startTime != null">
-        start_time = #{startTime,jdbcType=DATE},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=VARCHAR},
       </if>
       <if test="endTime != null">
-        end_time = #{endTime,jdbcType=DATE},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null">
+        is_end = #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="isContinue != null">
+        is_continue = #{isContinue,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
@@ -133,10 +176,13 @@
   <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.StaffContract">
     update staff_contract
     set staff_id = #{staffId,jdbcType=INTEGER},
-      `type` = #{type,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=DATE},
-      end_time = #{endTime,jdbcType=DATE},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      `year` = #{year,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=VARCHAR},
+      is_end = #{isEnd,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      is_continue = #{isContinue,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       final_editor = #{finalEditor,jdbcType=VARCHAR},
       final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
