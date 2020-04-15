@@ -36,9 +36,9 @@ public class RewardPunishmentController {
         return rewardPunishmentService.findRewardPunishmentRecord();
     }
 
-    @PostMapping("findAllRewardPunishment")
-    public ResultBean<List<RewardPunishment>> findAllRewardPunishment(@RequestBody PageInfo pageInfo) {
-        return rewardPunishmentService.findAllRewardPunishmentRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    @PostMapping("findAllRewardPunishment/{staffId}")
+    public ResultBean<List<RewardPunishment>> findAllRewardPunishment(@RequestBody PageInfo pageInfo, @PathVariable Integer staffId) {
+        return rewardPunishmentService.findAllRewardPunishmentRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize(), staffId);
     }
 
     @PostMapping("deleteRewardPunishment")

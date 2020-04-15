@@ -21,6 +21,11 @@
     SELECT count(1)
     FROM reward_punishment
   </select>
+  <select id="countTotalByStaffId" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM reward_punishment
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -31,6 +36,12 @@
     select
     <include refid="Base_Column_List"/>
     from reward_punishment
+  </select>
+  <select id="selectByStaffId" parameterType="java.lang.Integer" resultType="com.wqs.jsd.pojo.RewardPunishment">
+    select
+    <include refid="Base_Column_List"/>
+    from reward_punishment
+    WHERE staff_id = #{staffId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from reward_punishment

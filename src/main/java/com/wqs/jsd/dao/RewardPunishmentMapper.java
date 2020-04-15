@@ -8,9 +8,13 @@ public interface RewardPunishmentMapper {
 
     int countTotal();
 
+    int countTotalByStaffId(Integer id);
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<RewardPunishment> selectAll();
+
+    List<RewardPunishment> selectByStaffId(Integer id);
 
     int insert(RewardPunishment record);
 

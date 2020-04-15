@@ -21,7 +21,7 @@ public interface RewardPunishmentService {
 
     ResultBean<List<RewardPunishment>> findRewardPunishmentRecord();
 
-    ResultBean<List<RewardPunishment>> findAllRewardPunishmentRecord(int currentPage, int pageSize);
+    ResultBean<List<RewardPunishment>> findAllRewardPunishmentRecord(int currentPage, int pageSize, int id);
 
     ResultBean<Void> deleteRewardPunishmentRecord(List<Integer> id);
 }

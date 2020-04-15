@@ -59,11 +59,13 @@ public class RewardPunishmentServiceImpl implements RewardPunishmentService {
     }
 
     @Override
-    public ResultBean<List<RewardPunishment>> findAllRewardPunishmentRecord(int currentPage, int pageSize) {
+    public ResultBean<List<RewardPunishment>> findAllRewardPunishmentRecord(int currentPage, int pageSize, int id) {
         try {
             PageHelper.startPage(currentPage, pageSize);
-            List<RewardPunishment> records = mapper.selectAll();
-            int total = mapper.countTotal();
+//            List<RewardPunishment> records = mapper.selectAll();
+//            int total = mapper.countTotal();
+            List<RewardPunishment> records = mapper.selectByStaffId(id);
+            int total = mapper.countTotalByStaffId(id);
             return new ResultBean<>(records, SUCCESS, "success", total);
         } catch (Exception e) {
             logger.error(e.getMessage());
