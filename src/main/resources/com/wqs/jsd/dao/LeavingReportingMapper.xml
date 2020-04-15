@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.LeavingReportingMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.LeavingReporting">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="is_end" jdbcType="VARCHAR" property="isEnd" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="exe_person" jdbcType="VARCHAR" property="exePerson" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, staff_id, start_time, is_end, end_time, exe_person, remarks, final_editor, final_edit_time
+  </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM leaving_reporting
+  </select>
+  <select id="countTotalByStaffId" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM leaving_reporting
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leaving_reporting
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.LeavingReporting">
+    select
+    <include refid="Base_Column_List"/>
+    from leaving_reporting
+  </select>
+  <select id="selectByStaffId" parameterType="java.lang.Integer" resultType="com.wqs.jsd.pojo.LeavingReporting">
+    select
+    <include refid="Base_Column_List"/>
+    from leaving_reporting
+    WHERE staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from leaving_reporting
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.LeavingReporting" useGeneratedKeys="true">
+    insert into leaving_reporting (staff_id, start_time, is_end, 
+      end_time, exe_person, remarks, 
+      final_editor, final_edit_time)
+    values (#{staffId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{isEnd,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{exePerson,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{finalEditor,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.LeavingReporting" useGeneratedKeys="true">
+    insert into leaving_reporting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="isEnd != null">
+        is_end,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="exePerson != null">
+        exe_person,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="finalEditor != null">
+        final_editor,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnd != null">
+        #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="exePerson != null">
+        #{exePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditor != null">
+        #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.LeavingReporting">
+    update leaving_reporting
+    <set>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnd != null">
+        is_end = #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="exePerson != null">
+        exe_person = #{exePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditor != null">
+        final_editor = #{finalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.LeavingReporting">
+    update leaving_reporting
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      is_end = #{isEnd,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      exe_person = #{exePerson,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      final_editor = #{finalEditor,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
