@@ -3,6 +3,7 @@ package com.wqs.jsd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.CustomerMapper;
+import com.wqs.jsd.manager.SendSms;
 import com.wqs.jsd.pojo.Customer;
 import com.wqs.jsd.service.CustomerService;
 import com.wqs.jsd.util.CodeUtil;
@@ -35,6 +36,20 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CommonMethod commonMethod;
+
+    @Autowired
+    private SendSms sendSms;
+
+    @Override
+    public ResultBean<Void> getVerifyCode(String phoneNumber) {
+        try {
+            int codeNumber = sendSms.randomCode(6);
+            sendSms.sendSms("SMS_192230877", phoneNumber, codeNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public ResultBean<Void> insertCustomerRecord(Customer record) {

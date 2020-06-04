@@ -15,6 +15,8 @@ import java.util.List;
 @Service
 public interface CustomerService {
 
+    ResultBean<Void> getVerifyCode(String phoneNumber);
+
     ResultBean<Void> insertCustomerRecord(Customer record);
 
     ResultBean<Void> updateCustomerRecord(Customer record);

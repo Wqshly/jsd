@@ -32,6 +32,11 @@ public class CustomerController {
     @Autowired
     private CommonMethod commonMethod;
 
+    @GetMapping("getVerifyCode/{phoneNumber}")
+    public ResultBean<Void> getVerifyCode(@PathVariable String phoneNumber) {
+        return customerService.getVerifyCode(phoneNumber);
+    }
+
     @PostMapping("addCustomer")
     public ResultBean<Void> insertCustomerRecord(@RequestBody Customer record) {
         return customerService.insertCustomerRecord(record);
