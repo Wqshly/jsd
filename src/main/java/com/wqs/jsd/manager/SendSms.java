@@ -23,7 +23,7 @@ pom.xml
 @Component
 public class SendSms {
 
-    public int sendSms(String templateCode, String phoneNumbers, int codeNumber) {
+    public void sendSms(String templateCode, String phoneNumbers, int codeNumber) {
 
         String TemplateParam = "{\"code\":\"" + codeNumber + "\"}";
 
@@ -50,7 +50,6 @@ public class SendSms {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-        return codeNumber;
     }
 
     //随机生成n位随机数

@@ -38,6 +38,7 @@ public class ResultBean<T> implements Serializable {
      * 3*** 代表一些已知的错误
      */
     public static final int NULL_DATA_EXCEPTION = 3001;
+    public static final int OVERTIME = 3002;
 
     private int code = SUCCESS;
     private String msg = "SUCCESS";

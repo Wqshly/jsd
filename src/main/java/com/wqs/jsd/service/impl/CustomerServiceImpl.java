@@ -5,6 +5,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.CustomerMapper;
 import com.wqs.jsd.manager.SendSms;
 import com.wqs.jsd.pojo.Customer;
+import com.wqs.jsd.pojo.Register4Phone;
 import com.wqs.jsd.service.CustomerService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
@@ -15,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
-import static com.wqs.jsd.beans.ResultBean.SUCCESS;
-import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
+import static com.wqs.jsd.beans.ResultBean.*;
 
 /**
  * @Author: wan
@@ -31,6 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
+    private HashMap<String, String> map = new HashMap<>();
+    private HashMap<String, String> time = new HashMap<>();
+
     @Resource
     private CustomerMapper mapper;
 
@@ -40,11 +47,55 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private SendSms sendSms;
 
+    @Autowired
+    private CodeUtil codeUtil;
+
+
     @Override
     public ResultBean<Void> getVerifyCode(String phoneNumber) {
         try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String date = dateFormat.format(new Date());
+            if (time.containsKey(phoneNumber)) {
+                java.util.Date begin = dateFormat.parse(time.get(phoneNumber));
+                java.util.Date end = dateFormat.parse(date);
+                long between = (end.getTime() - begin.getTime()) / 1000;
+                // 1分钟内禁止同一号码重复发送短信
+                if (between < 60) {
+                    System.out.println("一分钟内禁止重复发送短信");
+                    return new ResultBean<>(OVERTIME, "catch the Exception");
+                }
+            }
+            time.put(phoneNumber, date);
             int codeNumber = sendSms.randomCode(6);
             sendSms.sendSms("SMS_192230877", phoneNumber, codeNumber);
+            map.put(phoneNumber, String.valueOf(codeNumber));
+            System.out.println(map);
+            return new ResultBean<>(SUCCESS, "success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "catch the Exception");
+        }
+    }
+
+    @Override
+    public ResultBean<Void> register4Phone(Register4Phone record) {
+        try {
+            if (map.containsKey(record.getPhone())) {
+                if (map.get(record.getPhone()).equals(record.getCode())) {
+                    Customer customer = new Customer();
+                    customer.setName(codeUtil.createCode9());
+                    customer.setNickName(codeUtil.randomNickName());
+                    customer.setPassword(commonMethod.MD5EncryptSalt(record.getPhone(), "wqs"));
+                    customer.setPhone(record.getPhone());
+                    customer.setSex("男");
+                    mapper.insert(customer);
+                    map.remove(record.getPhone());
+                    System.out.println(map);
+                } else {
+                    System.out.println("验证码错误!");
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

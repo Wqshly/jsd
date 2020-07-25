@@ -2,6 +2,7 @@ package com.wqs.jsd.service;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Customer;
+import com.wqs.jsd.pojo.Register4Phone;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
 public interface CustomerService {
 
     ResultBean<Void> getVerifyCode(String phoneNumber);
+
+    ResultBean<Void> register4Phone(Register4Phone record);
 
     ResultBean<Void> insertCustomerRecord(Customer record);
 

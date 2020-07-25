@@ -37,6 +37,14 @@ public class CustomerController {
         return customerService.getVerifyCode(phoneNumber);
     }
 
+    // 移动端普通用户注册
+    @PostMapping("register4Phone")
+    public ResultBean<Void> register4Phone(@RequestBody Register4Phone register4Phone) {
+        System.out.println(register4Phone.getPhone());
+        System.out.println(register4Phone.getCode());
+        return customerService.register4Phone(register4Phone);
+    }
+
     @PostMapping("addCustomer")
     public ResultBean<Void> insertCustomerRecord(@RequestBody Customer record) {
         return customerService.insertCustomerRecord(record);
