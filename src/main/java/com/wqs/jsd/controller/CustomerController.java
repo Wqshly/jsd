@@ -45,7 +45,7 @@ public class CustomerController {
 
     // 移动端普通用户注册
     @PostMapping("register4Phone")
-    public ResultBean<Void> register4Phone(@RequestBody Register4Phone register4Phone) {
+    public ResultBean<Customer> register4Phone(@RequestBody Register4Phone register4Phone) {
         return customerService.register4Phone(register4Phone);
     }
 

@@ -88,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public ResultBean<Void> register4Phone(Register4Phone record) {
+    public ResultBean<Customer> register4Phone(Register4Phone record) {
         try {
             if (map.containsKey(record.getPhone())) {
                 if (mapper.checkPhoneNum(record.getPhone()) == 0) {
@@ -102,7 +102,7 @@ public class CustomerServiceImpl implements CustomerService {
                         mapper.insert(customer);
                         map.remove(record.getPhone());
                         System.out.println(map);
-                        return new ResultBean<>(SUCCESS, "注册成功！");
+                        return new ResultBean<>(customer,SUCCESS, "注册成功！");
                     } else {
                         System.out.println("验证码错误!");
                         return new ResultBean<>(CODE_WRONG, "验证码错误！");

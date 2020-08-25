@@ -20,7 +20,7 @@ public interface CustomerService {
 
     ResultBean<Boolean> validPhoneNum(String phoneNum);
 
-    ResultBean<Void> register4Phone(Register4Phone record);
+    ResultBean<Customer> register4Phone(Register4Phone record);
 
     ResultBean<Void> insertCustomerRecord(Customer record);
 
