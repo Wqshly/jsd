@@ -23,9 +23,7 @@ pom.xml
 @Component
 public class SendSms {
 
-    public void sendSms(String templateCode, String phoneNumbers, int codeNumber) {
-
-        String TemplateParam = "{\"code\":\"" + codeNumber + "\"}";
+    public void sendSms(String signName, String templateCode, String phoneNumbers, String templateParam) {
 
         //设置超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "5000");
@@ -41,9 +39,9 @@ public class SendSms {
         request.setSysAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
-        request.putQueryParameter("SignName", "青岛洁时代");
+        request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templateCode);
-        request.putQueryParameter("TemplateParam", TemplateParam);
+        request.putQueryParameter("TemplateParam", templateParam);
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());

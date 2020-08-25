@@ -51,7 +51,7 @@ public class CustomerController {
 
     // 手机端的登录
     @PostMapping("login4Phone")
-    public ResultBean<Void> login4Phone(@RequestBody Customer customer) {
+    public ResultBean<Customer> login4Phone(@RequestBody Customer customer) {
         return customerService.login4Phone(customer);
     }
 

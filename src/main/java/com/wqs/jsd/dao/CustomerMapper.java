@@ -27,4 +27,6 @@ public interface CustomerMapper {
     int login4Phone(String phone, String password);
 
     int checkPhoneNum(String phone);
+
+    Customer selectByPhone(String phone);
 }

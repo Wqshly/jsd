@@ -2,6 +2,7 @@ package com.wqs.jsd.service;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Orders;
+import com.wqs.jsd.pojo.PlaceOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface OrdersService {
     ResultBean<List<Orders>> findAllOrdersRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteOrdersRecord(List<Integer> id);
+
+    ResultBean<Void> placeOrder(PlaceOrder placeOrder);
 }

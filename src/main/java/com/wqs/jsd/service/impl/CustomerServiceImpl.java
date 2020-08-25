@@ -68,12 +68,11 @@ public class CustomerServiceImpl implements CustomerService {
                 }
                 time.put(phoneNumber, date);
                 int codeNumber = sendSms.randomCode(6);
-                sendSms.sendSms("SMS_192230877", phoneNumber, codeNumber);
+                sendSms.sendSms("青岛洁时代","SMS_192230877", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
                 map.put(phoneNumber, String.valueOf(codeNumber));
                 System.out.println(map);
                 return new ResultBean<>(SUCCESS, "success");
-            }
-            else {
+            } else {
                 return new ResultBean<>(EXIST_USER, "用户已注册！");
             }
         } catch (Exception e) {
@@ -108,8 +107,7 @@ public class CustomerServiceImpl implements CustomerService {
                         System.out.println("验证码错误!");
                         return new ResultBean<>(CODE_WRONG, "验证码错误！");
                     }
-                }
-                else {
+                } else {
                     return new ResultBean<>(EXIST_USER, "用户已注册！");
                 }
             }
@@ -175,12 +173,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public ResultBean<Void> login4Phone(Customer customer) {
+    public ResultBean<Customer> login4Phone(Customer customer) {
         try {
             System.out.println(customer.getPhone());
             System.out.println(commonMethod.MD5EncryptSalt(customer.getPassword(), "wqs"));
-            if (mapper.login4Phone(customer.getPhone(),commonMethod.MD5EncryptSalt(customer.getPassword(), "wqs")) == 1) {
-                return new ResultBean<>(SUCCESS, "success");
+            if (mapper.login4Phone(customer.getPhone(), commonMethod.MD5EncryptSalt(customer.getPassword(), "wqs")) == 1) {
+                return new ResultBean<>(mapper.selectByPhone(customer.getPhone()), SUCCESS, "success");
             } else {
                 return new ResultBean<>(FAILURE, "wrong");
             }

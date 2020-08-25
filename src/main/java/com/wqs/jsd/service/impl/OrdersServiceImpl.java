@@ -3,7 +3,9 @@ package com.wqs.jsd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.OrdersMapper;
+import com.wqs.jsd.manager.SendSms;
 import com.wqs.jsd.pojo.Orders;
+import com.wqs.jsd.pojo.PlaceOrder;
 import com.wqs.jsd.service.OrdersService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
@@ -34,6 +36,9 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Autowired
     private CommonMethod commonMethod;
+
+    @Autowired
+    private SendSms sendSms;
 
     @Override
     public ResultBean<Void> insertOrdersRecord(Orders record) {
@@ -72,5 +77,15 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public ResultBean<Void> deleteOrdersRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
+    }
+
+    @Override
+    public ResultBean<Void> placeOrder(PlaceOrder placeOrder) {
+        System.out.println(placeOrder.getCustomerName());
+        System.out.println(placeOrder.getPhoneNumber());
+        System.out.println(placeOrder.getTime());
+        sendSms.sendSms("青岛洁万城", "SMS_193243567", "17685724016", "{\"name\":\"" + placeOrder.getCustomerName() + "\",\"phone\":\"" + placeOrder.getPhoneNumber() + "\",\"time\":\"" + placeOrder.getTime() + "\"}");
+        System.out.println(placeOrder);
+        return null;
     }
 }
