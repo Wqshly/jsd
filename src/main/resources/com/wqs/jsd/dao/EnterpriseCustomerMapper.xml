@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.EnterpriseCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.EnterpriseCustomer">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress"/>
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail"/>
+    <result column="contact" jdbcType="VARCHAR" property="contact"/>
+    <result column="contact_phone_number" jdbcType="VARCHAR" property="contactPhoneNumber"/>
+    <result column="company_email" jdbcType="VARCHAR" property="companyEmail"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson"/>
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_name, company_address, address_detail, contact, contact_phone_number, company_email, `password`,
+    legal_person, final_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from enterprise_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM enterprise_customer
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.EnterpriseCustomer">
+    select
+    <include refid="Base_Column_List"/>
+    from enterprise_customer
+  </select>
+  <select id="validPhoneNum" parameterType="java.lang.String" resultType="java.lang.String">
+    select contact_phone_number
+    from enterprise_customer
+    where contact_phone_number = #{contact_phone_number,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from enterprise_customer
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.EnterpriseCustomer"
+          useGeneratedKeys="true">
+    insert into enterprise_customer (company_name, company_address, address_detail, 
+      contact, contact_phone_number, company_email, `password`,
+      legal_person, final_edit_time)
+    values (#{companyName,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR},
+      #{contact,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR}, #{companyEmail, jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{legalPerson,jdbcType=VARCHAR}, #{finalEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.EnterpriseCustomer"
+          useGeneratedKeys="true">
+    insert into enterprise_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyAddress != null">
+        company_address,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="contactPhoneNumber != null">
+        contact_phone_number,
+      </if>
+      <if test="companyEmail != null">
+        company_email,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="legalPerson != null">
+        legal_person,
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNumber != null">
+        #{contactPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null">
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.EnterpriseCustomer">
+    update enterprise_customer
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNumber != null">
+        contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null">
+        company_email = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="finalEditTime != null">
+        final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.EnterpriseCustomer">
+    update enterprise_customer
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      contact_phone_number = #{contactPhoneNumber,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

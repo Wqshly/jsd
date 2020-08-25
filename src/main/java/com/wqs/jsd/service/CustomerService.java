@@ -18,6 +18,8 @@ public interface CustomerService {
 
     ResultBean<Void> getVerifyCode(String phoneNumber);
 
+    ResultBean<Boolean> validPhoneNum(String phoneNum);
+
     ResultBean<Void> register4Phone(Register4Phone record);
 
     ResultBean<Void> insertCustomerRecord(Customer record);
@@ -29,4 +31,6 @@ public interface CustomerService {
     ResultBean<List<Customer>> findAllCustomerRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteCustomerRecord(List<Integer> id);
+
+    ResultBean<Void> login4Phone(Customer customer);
 }

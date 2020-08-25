@@ -21,4 +21,10 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    String validPhoneNum(String phoneNum);
+
+    int login4Phone(String phone, String password);
+
+    int checkPhoneNum(String phone);
 }

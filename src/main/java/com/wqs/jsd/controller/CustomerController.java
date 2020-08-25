@@ -9,6 +9,7 @@ import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -37,12 +38,21 @@ public class CustomerController {
         return customerService.getVerifyCode(phoneNumber);
     }
 
+    @PostMapping("validPhoneNum")
+    public ResultBean<Boolean> validPhoneNum(@RequestBody String phoneNum, HttpServletRequest request) {
+        return customerService.validPhoneNum(phoneNum);
+    }
+
     // 移动端普通用户注册
     @PostMapping("register4Phone")
     public ResultBean<Void> register4Phone(@RequestBody Register4Phone register4Phone) {
-        System.out.println(register4Phone.getPhone());
-        System.out.println(register4Phone.getCode());
         return customerService.register4Phone(register4Phone);
+    }
+
+    // 手机端的登录
+    @PostMapping("login4Phone")
+    public ResultBean<Void> login4Phone(@RequestBody Customer customer) {
+        return customerService.login4Phone(customer);
     }
 
     @PostMapping("addCustomer")

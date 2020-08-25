@@ -162,4 +162,5 @@ public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
     public ResultBean<Void> insertStaffRecord(Staff staff) {
         return commonMethod.changeRecord(staffMapper.insert(staff));
     }
+
 }

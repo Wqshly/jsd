@@ -27,6 +27,21 @@
     <include refid="Base_Column_List"/>
     from customer
   </select>
+  <select id="validPhoneNum" parameterType="java.lang.String" resultType="java.lang.String">
+    select phone
+    from customer
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  <select id="login4Phone" resultType="java.lang.Integer">
+    select count(*)
+    from customer
+    where phone = #{phone,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="checkPhoneNum" resultType="java.lang.Integer">
+    select count(*)
+    from customer
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from customer
     where id in

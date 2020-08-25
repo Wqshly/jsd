@@ -53,6 +53,24 @@ public class CommonMethod {
     }
 
     /**
+     * p判断是否有该元素
+     * @param s
+     * @return
+     */
+    public static ResultBean<Boolean> validPhoneNum(String s) {
+        try {
+            if (s == null || s.equals("")) {
+                return new ResultBean<>(true, SUCCESS, "don't have");
+            } else {
+                return new ResultBean<>(false, FAILURE, "have");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultBean<>(false, UNKNOWN_EXCEPTION, "catch the Exception");
+        }
+    }
+
+    /**
      * 获取系统当前时间
      *
      * @return Timestamp
