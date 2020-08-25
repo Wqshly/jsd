@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static com.wqs.jsd.beans.ResultBean.SUCCESS;
-import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
+import static com.wqs.jsd.beans.ResultBean.*;
 
 /**
  * @Author: wan
@@ -81,11 +80,11 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public ResultBean<Void> placeOrder(PlaceOrder placeOrder) {
-        System.out.println(placeOrder.getCustomerName());
-        System.out.println(placeOrder.getPhoneNumber());
-        System.out.println(placeOrder.getTime());
-        sendSms.sendSms("青岛洁万城", "SMS_193243567", "17685724016", "{\"name\":\"" + placeOrder.getCustomerName() + "\",\"phone\":\"" + placeOrder.getPhoneNumber() + "\",\"time\":\"" + placeOrder.getTime() + "\"}");
-        System.out.println(placeOrder);
-        return null;
+        try {
+            sendSms.sendSms("青岛洁万城", "SMS_193243567", "17685724016", "{\"name\":\"" + placeOrder.getCustomerName() + "\",\"phone\":\"" + placeOrder.getPhoneNumber() + "\",\"time\":\"" + placeOrder.getTime() + "\"}");
+            return new ResultBean<>(SUCCESS,"下单成功");
+        } catch (Exception e) {
+            return new ResultBean<>(FAILURE, "下单失败");
+        }
     }
 }
