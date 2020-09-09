@@ -80,4 +80,16 @@ public class BasicCodingServiceImpl implements BasicCodingService {
     public ResultBean<Void> deleteBasicCoding(List<Integer> id) {
         return commonMethod.changeRecord(basicCodingMapper.deleteByPrimaryKey(id));
     }
+
+    @Override
+    public ResultBean<Void> deleteBasicCodingForName(String type, String name) {
+        try {
+            basicCodingMapper.deleteByTypeAndName(type, name);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+        return null;
+    }
 }

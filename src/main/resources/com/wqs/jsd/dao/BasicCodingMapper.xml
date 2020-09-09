@@ -42,6 +42,10 @@
       #{item}
     </foreach>
   </delete>
+  <delete id="deleteByTypeAndName">
+    delete from basic_coding
+    where type = #{type,jdbcType=VARCHAR} and name = #{name,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BasicCoding"
           useGeneratedKeys="true">
     insert into basic_coding (`name`, `type`, abbreviation, 

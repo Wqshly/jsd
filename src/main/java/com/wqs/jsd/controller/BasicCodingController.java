@@ -101,6 +101,11 @@ public class BasicCodingController {
         return basicCodingService.findBasicCodingByType(type,pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
+    @GetMapping("deleteBasicCoding/{type}/{name}")
+    public ResultBean<Void> deleteBasicCodingForName(@PathVariable("type") String type,@PathVariable("name") String name) {
+        return basicCodingService.deleteBasicCodingForName(type, name);
+    }
+
     @PostMapping("deleteBasicCoding")
     public ResultBean<Void> deleteBasicCoding(@RequestBody List<Integer> selectMultipleId) {
         return basicCodingService.deleteBasicCoding(selectMultipleId);

@@ -24,4 +24,6 @@ public interface BasicCodingService {
     ResultBean<List<BasicCoding>> findBasicCodingByType(String s, int currentPage, int pageSize);
 
     ResultBean<Void> deleteBasicCoding(List<Integer> id);
+
+    ResultBean<Void> deleteBasicCodingForName(String type, String name);
 }

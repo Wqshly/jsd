@@ -23,4 +23,6 @@ public interface BasicCodingMapper {
     int updateByPrimaryKeySelective(BasicCoding record);
 
     int updateByPrimaryKey(BasicCoding record);
+
+    int deleteByTypeAndName(String type, String name);
 }
