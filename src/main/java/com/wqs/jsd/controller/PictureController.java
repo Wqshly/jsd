@@ -28,7 +28,7 @@ public class PictureController {
 
     @PostMapping("uploadPicture")
     public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
-        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "image\\user");
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "app\\carouselImage");
     }
 
     @PostMapping("addPicture")
