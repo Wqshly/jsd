@@ -152,7 +152,7 @@ public class CommonMethod {
             out.write(bytes);
             out.flush();
             out.close();
-            String contextPate = "\\" + path + "\\" + fileName;
+            String contextPate = "http://39.107.49.176:8080\\" + path + "\\" + fileName;
             return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         }
         catch (Exception e) {

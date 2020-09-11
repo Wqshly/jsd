@@ -95,7 +95,7 @@ public class UserHeadSculptureServiceImpl implements UserHeadSculptureService {
             System.out.println(request.getRequestURL());
             System.out.println(request.getRemoteAddr());
             System.out.println(request.getRemoteHost());
-            imgUrl = "http://39.107.49.176:8080" + imgUrl;
+//            imgUrl = "http://39.107.49.176:8080" + imgUrl;
             System.out.println(imgUrl);
             return new ResultBean<>(imgUrl, SUCCESS, "success");
         } catch (Exception e) {
