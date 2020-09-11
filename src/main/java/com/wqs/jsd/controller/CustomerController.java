@@ -82,7 +82,7 @@ public class CustomerController {
 
     @PostMapping("imageUpload")
     public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
-        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "customer");
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "image\\customer");
     }
 
     @PostMapping("addContract")

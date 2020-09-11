@@ -141,7 +141,7 @@ public class CommonMethod {
                     bytes[i] += 256; // 调整异常数据
                 }
             }
-            String fPath = "C:\\jsdData\\image\\" + path;
+            String fPath = "C:\\jsdData\\" + path;
             File fFile = new File(fPath);
             if (!fFile.exists()) {
                 fFile.mkdirs();
@@ -152,7 +152,7 @@ public class CommonMethod {
             out.write(bytes);
             out.flush();
             out.close();
-            String contextPate = "\\image\\" + path + "\\" + fileName;
+            String contextPate = "\\" + path + "\\" + fileName;
             return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         }
         catch (Exception e) {
