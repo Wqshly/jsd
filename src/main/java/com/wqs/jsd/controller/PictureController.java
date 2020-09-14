@@ -41,6 +41,11 @@ public class PictureController {
         return pictureService.updatePictureRecord(record);
     }
 
+    @GetMapping("picTotalNum")
+    public ResultBean<Integer> picTotalNum() {
+        return pictureService.picTotalNum();
+    }
+
     @GetMapping("findAllPicture")
     public ResultBean<List<Picture>> findAllPicture() {
         return pictureService.findPictureRecord();
@@ -49,6 +54,11 @@ public class PictureController {
     @PostMapping("findAllPicture")
     public ResultBean<List<Picture>> findAllPicture(@RequestBody PageInfo pageInfo) {
         return pictureService.findAllPictureRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    }
+
+    @PostMapping("deletePicture2")
+    public ResultBean<Boolean> deletePicture(@RequestBody String path) {
+        return new ResultBean<Boolean>(commonMethod.deleteFile(path));
     }
 
     @PostMapping("deletePicture")

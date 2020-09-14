@@ -21,7 +21,7 @@
     from picture
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultType="com.wqs.jsd.pojo.Outsource">
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Picture">
     select
     <include refid="Base_Column_List"/>
     from picture

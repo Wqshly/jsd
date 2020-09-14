@@ -59,6 +59,17 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
+    public ResultBean<Integer> picTotalNum() {
+        try {
+            return new ResultBean<>(mapper.countTotal());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<Picture>> findAllPictureRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

@@ -21,6 +21,8 @@ public interface PictureService {
 
     ResultBean<List<Picture>> findPictureRecord();
 
+    ResultBean<Integer> picTotalNum();
+
     ResultBean<List<Picture>> findAllPictureRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deletePictureRecord(List<Integer> id);

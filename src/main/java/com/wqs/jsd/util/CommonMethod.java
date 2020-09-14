@@ -219,4 +219,14 @@ public class CommonMethod {
             return new ResultBean<>(UNKNOWN_EXCEPTION, "系统错误，请联系管理员!");
         }
     }
+
+    public boolean deleteFile(String filePath) {
+        int i = filePath.indexOf('\\');
+        String s = filePath.substring(i);
+        System.out.println(s);
+        boolean delete_flag;
+        File file = new File(s);
+        delete_flag = file.exists() && file.isFile() && file.delete();
+        return delete_flag;
+    }
 }
