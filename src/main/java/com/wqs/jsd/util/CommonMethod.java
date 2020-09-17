@@ -161,19 +161,9 @@ public class CommonMethod {
         }
     }
 
-    public boolean deleteFile(String filePath) {
-        int i = filePath.indexOf('\\');
-        String s = filePath.substring(i);
-        String realPath = "C:\\jsdData" + s;
-        System.out.println(realPath);
-        boolean delete_flag;
-        File file = new File(realPath);
-        if (file.exists()) {
-            delete_flag = file.isFile() && file.delete();
-        } else {
-            delete_flag = true;
-        }
-        return delete_flag;
+    public boolean deleteFile (String path) {
+        File file = new File(path);
+        return file.exists() && file.isFile() && file.delete();
     }
 
     /**

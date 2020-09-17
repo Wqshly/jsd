@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static com.wqs.jsd.beans.ResultBean.SUCCESS;
-import static com.wqs.jsd.beans.ResultBean.UNKNOWN_EXCEPTION;
+import static com.wqs.jsd.beans.ResultBean.*;
 
 /**
  * @Author: wan
@@ -86,10 +85,14 @@ public class PictureServiceImpl implements PictureService {
     public ResultBean<Void> deletePictureRecord(Integer id) {
         try {
             String path = mapper.getPathById(id);
-            if(commonMethod.deleteFile(path)) {
-                return commonMethod.changeRecord(mapper.deleteById(id));
+            boolean delete_flag = true;
+            if (path.contains("http://39.107.49.176:8080")) {
+                int i = path.indexOf('\\');
+                String s = path.substring(i);
+                String realPath = "C:\\jsdData" + s;
+                delete_flag = commonMethod.deleteFile(realPath);
             }
-            return null;
+            return delete_flag ? commonMethod.changeRecord(mapper.deleteById(id)) : new ResultBean<>(DELETE_FAILED, "未能成功删除图片!");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
