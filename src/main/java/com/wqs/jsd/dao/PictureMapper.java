@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface PictureMapper {
 
+    String getPathById(Integer id);
+
     int countTotal();
+
+    int deleteById(Integer id);
 
     int deleteByPrimaryKey(List<Integer> id);
 

@@ -83,6 +83,22 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
+    public ResultBean<Void> deletePictureRecord(Integer id) {
+        try {
+            String path = mapper.getPathById(id);
+            System.out.println(path);
+            if(commonMethod.deleteFile(path)) {
+                System.out.println("删除成功");
+                mapper.deleteById(id);
+            }
+            return null;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<Void> deletePictureRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }

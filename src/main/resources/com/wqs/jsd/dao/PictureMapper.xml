@@ -26,6 +26,15 @@
     <include refid="Base_Column_List"/>
     from picture
   </select>
+  <select id="getPathById" resultType="java.lang.String">
+    select path
+    from picture
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from picture
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from picture
     where id in

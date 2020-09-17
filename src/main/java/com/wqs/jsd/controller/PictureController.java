@@ -56,12 +56,12 @@ public class PictureController {
         return pictureService.findAllPictureRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
     }
 
-    @PostMapping("deletePicture2")
-    public ResultBean<Boolean> deletePicture(@RequestBody String path) {
-        return new ResultBean<Boolean>(commonMethod.deleteFile(path));
+    @GetMapping("deletePicture/{id}")
+    public ResultBean<Void> deletePictureRecord(@PathVariable Integer id) {
+        return pictureService.deletePictureRecord(id);
     }
 
-    @PostMapping("deletePicture")
+    @PostMapping("deletePicture1")
     public ResultBean<Void> deletePictureRecord(@RequestBody List<Integer> selectMultipleId) {
         return pictureService.deletePictureRecord(selectMultipleId);
     }
