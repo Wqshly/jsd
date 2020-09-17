@@ -168,7 +168,11 @@ public class CommonMethod {
         System.out.println(realPath);
         boolean delete_flag;
         File file = new File(realPath);
-        delete_flag = file.isFile() && file.delete();
+        if (file.exists()) {
+            delete_flag = file.isFile() && file.delete();
+        } else {
+            delete_flag = true;
+        }
         return delete_flag;
     }
 
