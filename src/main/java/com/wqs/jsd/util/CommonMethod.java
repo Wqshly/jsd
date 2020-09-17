@@ -164,7 +164,7 @@ public class CommonMethod {
     public boolean deleteFile(String filePath) {
         int i = filePath.indexOf('\\');
         String s = filePath.substring(i);
-        String realPath = "C:\\jsdData\\" + s;
+        String realPath = "C:\\jsdData" + s;
         System.out.println(realPath);
         boolean delete_flag;
         File file = new File(realPath);
