@@ -86,10 +86,8 @@ public class PictureServiceImpl implements PictureService {
     public ResultBean<Void> deletePictureRecord(Integer id) {
         try {
             String path = mapper.getPathById(id);
-            System.out.println(path);
             if(commonMethod.deleteFile(path)) {
-                System.out.println("删除成功");
-                mapper.deleteById(id);
+                return commonMethod.changeRecord(mapper.deleteById(id));
             }
             return null;
         } catch (Exception e) {
