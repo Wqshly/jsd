@@ -161,6 +161,17 @@ public class CommonMethod {
         }
     }
 
+    public boolean deleteFile(String filePath) {
+        int i = filePath.indexOf('\\');
+        String s = filePath.substring(i);
+        String realPath = "C:\\jsdData\\" + s;
+        System.out.println(realPath);
+        boolean delete_flag;
+        File file = new File(s);
+        delete_flag = file.exists() && file.isFile() && file.delete();
+        return delete_flag;
+    }
+
     /**
      * @description: 该方法用于上传文件
      * @param: picture 上传的图片
@@ -218,15 +229,5 @@ public class CommonMethod {
             e.printStackTrace();
             return new ResultBean<>(UNKNOWN_EXCEPTION, "系统错误，请联系管理员!");
         }
-    }
-
-    public boolean deleteFile(String filePath) {
-        int i = filePath.indexOf('\\');
-        String s = filePath.substring(i);
-        System.out.println(s);
-        boolean delete_flag;
-        File file = new File(s);
-        delete_flag = file.exists() && file.isFile() && file.delete();
-        return delete_flag;
     }
 }
