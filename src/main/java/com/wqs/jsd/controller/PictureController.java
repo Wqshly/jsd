@@ -61,9 +61,4 @@ public class PictureController {
         return pictureService.deletePictureRecord(id);
     }
 
-    @PostMapping("deletePicture1")
-    public ResultBean<Void> deletePictureRecord(@RequestBody List<Integer> selectMultipleId) {
-        return pictureService.deletePictureRecord(selectMultipleId);
-    }
-
 }
