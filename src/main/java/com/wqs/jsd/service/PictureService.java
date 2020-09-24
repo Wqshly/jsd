@@ -15,6 +15,10 @@ import java.util.List;
 @Service
 public interface PictureService {
 
+    ResultBean<Void> exchangePreId(Integer id);
+
+    ResultBean<Void> exchangeNextId(Integer id);
+
     ResultBean<Void> insertPictureRecord(Picture record);
 
     ResultBean<Void> updatePictureRecord(Picture record);

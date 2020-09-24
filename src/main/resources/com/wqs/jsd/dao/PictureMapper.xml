@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wqs.jsd.dao.PictureMapper">
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Picture">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="path" jdbcType="VARCHAR" property="path" />
-    <result column="link_path" jdbcType="VARCHAR" property="linkPath" />
-    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor" />
-    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="path" jdbcType="VARCHAR" property="path"/>
+    <result column="link_path" jdbcType="VARCHAR" property="linkPath"/>
+    <result column="final_editor" jdbcType="VARCHAR" property="finalEditor"/>
+    <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, `path`, link_path, final_editor, final_edit_time
@@ -16,10 +16,18 @@
     FROM picture
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from picture
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findPreRecord" resultType="java.lang.Integer">
+    select id from picture
+    where id = (select id from picture where id &lt; #{id,jdbcType=INTEGER} order by id desc limit 1)
+  </select>
+  <select id="findNextRecord" resultType="java.lang.Integer">
+    select id from picture
+    where id = (select id from picture where id &gt; #{id,jdbcType=INTEGER} order by id asc limit 1)
   </select>
   <select id="selectAll" resultType="com.wqs.jsd.pojo.Picture">
     select
@@ -48,7 +56,8 @@
     values (#{path,jdbcType=VARCHAR}, #{linkPath,jdbcType=VARCHAR}, #{finalEditor,jdbcType=VARCHAR}, 
       #{finalEditTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Picture" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Picture"
+          useGeneratedKeys="true">
     insert into picture
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="path != null">
@@ -104,5 +113,21 @@
       final_editor = #{finalEditor,jdbcType=VARCHAR},
       final_edit_time = #{finalEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="exchangeRecord">
+    UPDATE
+      picture AS picture1
+    JOIN picture AS picture2 ON
+      (picture1.id = #{id1,jdbcType=INTEGER} AND picture2.id = #{id2,jdbcType=INTEGER})
+      OR (picture1.id = #{id2,jdbcType=INTEGER} AND picture2.id = #{id1,jdbcType=INTEGER})
+    SET
+      picture1.`path`  = picture2.`path`,
+      picture2.`path`  = picture1.`path`,
+      picture1.link_path = picture2.link_path,
+      picture2.link_path = picture1.link_path,
+      picture1.final_editor  = picture2.final_editor,
+      picture2.final_editor = picture1.final_editor,
+      picture1.final_edit_time = picture2.final_edit_time,
+      picture2.final_edit_time = picture1.final_edit_time;
   </update>
 </mapper>

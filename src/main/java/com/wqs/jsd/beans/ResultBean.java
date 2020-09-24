@@ -39,6 +39,8 @@ public class ResultBean<T> implements Serializable {
      */
     public static final int NULL_DATA_EXCEPTION = 3001;
     public static final int OVERTIME = 3002;
+    public static final int BOUNDS_DOWN = 3003;
+    public static final int BOUNDS_UP = 3004;
 
     /**
      *  4*** 代表文件操作错误

@@ -35,6 +35,24 @@ public class PictureServiceImpl implements PictureService {
     private CommonMethod commonMethod;
 
     @Override
+    public ResultBean<Void> exchangePreId(Integer id) {
+        try {
+            return mapper.exchangeRecord(id, mapper.findPreRecord(id)) > 0 ? new ResultBean<>(SUCCESS, "完成交换") : new ResultBean<>(FAILURE, "交换失败");
+        } catch (Exception e) {
+            return new ResultBean<>(BOUNDS_DOWN, "越下/前界");
+        }
+    }
+
+    @Override
+    public ResultBean<Void> exchangeNextId(Integer id) {
+        try {
+            return mapper.exchangeRecord(id, mapper.findNextRecord(id)) > 0 ? new ResultBean<>(SUCCESS, "完成交换") : new ResultBean<>(FAILURE, "交换失败");
+        } catch (Exception e) {
+            return new ResultBean<>(BOUNDS_UP, "越上/后界");
+        }
+    }
+
+    @Override
     public ResultBean<Void> insertPictureRecord(Picture record) {
         record.setFinalEditTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));

@@ -26,6 +26,16 @@ public class PictureController {
     @Autowired
     private CommonMethod commonMethod;
 
+    @GetMapping("exchangePreId/{id}")
+    public ResultBean<Void> exchangePreId(@PathVariable Integer id) {
+        return pictureService.exchangePreId(id);
+    }
+
+    @GetMapping("exchangeNextId/{id}")
+    public ResultBean<Void> exchangeNextId(@PathVariable Integer id) {
+        return pictureService.exchangeNextId(id);
+    }
+
     @PostMapping("uploadPicture")
     public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
         return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "app\\carouselImage");

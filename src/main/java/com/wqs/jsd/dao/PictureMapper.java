@@ -16,6 +16,12 @@ public interface PictureMapper {
 
     List<Picture> selectAll();
 
+    int findPreRecord(Integer id);
+
+    int findNextRecord(Integer id);
+
+    int exchangeRecord(Integer id1, Integer id2);
+
     int insert(Picture record);
 
     int insertSelective(Picture record);
