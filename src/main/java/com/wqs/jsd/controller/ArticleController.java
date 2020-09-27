@@ -2,8 +2,10 @@ package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Article;
+import com.wqs.jsd.pojo.ImageFile;
 import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.service.ArticleService;
+import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,15 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private CommonMethod commonMethod;
+
+
+    @PostMapping("uploadPicture")
+    public ResultBean<String> UploadImage(@RequestBody ImageFile imageFile) {
+        return commonMethod.UploadImage(imageFile.getName(), imageFile.getFile(), "app\\articleThumbnail");
+    }
 
     @PostMapping("addArticle")
     public ResultBean<Void> insertArticleRecord(@RequestBody Article record) {
