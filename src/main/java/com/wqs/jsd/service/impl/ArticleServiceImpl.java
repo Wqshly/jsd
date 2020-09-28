@@ -37,7 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResultBean<Void> insertArticleRecord(Article record) {
-        record.setCreatTime(commonMethod.getTime());
+        record.setCreateTime(commonMethod.getTime());
         record.setUpdateTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));
     }

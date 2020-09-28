@@ -9,12 +9,12 @@
     <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
     <result column="pic_link" jdbcType="VARCHAR" property="picLink"/>
     <result column="content" jdbcType="VARCHAR" property="content"/>
-    <result column="creat_time" jdbcType="DATE" property="creatTime"/>
+    <result column="create_time" jdbcType="DATE" property="createTime"/>
     <result column="update_time" jdbcType="DATE" property="updateTime"/>
     <result column="title_status" jdbcType="INTEGER" property="titleStatus"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, sort_name, title, author, introduction, pic_link, content, creat_time, update_time,
+    id, sort_name, title, author, introduction, pic_link, content, create_time, update_time,
     title_status
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
@@ -42,11 +42,11 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Article" useGeneratedKeys="true">
     insert into article (sort_name, title, author,
       introduction, pic_link, content, 
-      creat_time, update_time, title_status
+      create_time, update_time, title_status
       )
     values (#{sortName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
       #{introduction,jdbcType=VARCHAR}, #{picLink,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{creatTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{titleStatus,jdbcType=INTEGER}
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{titleStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Article"
@@ -71,8 +71,8 @@
       <if test="content != null">
         content,
       </if>
-      <if test="creatTime != null">
-        creat_time,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="updateTime != null">
         update_time,
@@ -100,8 +100,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="creatTime != null">
-        #{creatTime,jdbcType=DATE},
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=DATE},
@@ -132,8 +132,8 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="creatTime != null">
-        creat_time = #{creatTime,jdbcType=DATE},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=DATE},
@@ -152,7 +152,7 @@
       introduction = #{introduction,jdbcType=VARCHAR},
       pic_link = #{picLink,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      creat_time = #{creatTime,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE},
       title_status = #{titleStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
