@@ -157,7 +157,7 @@ public class CommonMethod {
             return new ResultBean<>(contextPate, SUCCESS, "上传成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "系统错误，请联系管理员!");
+            return new ResultBean<>(PIC_WRONG, "系统错误，请联系管理员!");
         }
     }
 

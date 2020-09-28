@@ -47,6 +47,11 @@ public class ResultBean<T> implements Serializable {
      */
     public static final int DELETE_FAILED = 4001;
 
+    /**
+     * 5*** 代表图片相关的错误
+     */
+    public static final int PIC_WRONG = 5000;
+
     private int code = SUCCESS;
     private String msg = "SUCCESS";
     private T data;
