@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqs.jsd.dao.BusinessCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.BusinessCategory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="classification" jdbcType="VARCHAR" property="classification" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, classification, introduction, pic_path
+  </sql>
+  <select id="countTotal" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM business_category
+  </select>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.BusinessCategory">
+    select
+    <include refid="Base_Column_List"/>
+    from business_category
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+    delete from business_category
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BusinessCategory" useGeneratedKeys="true">
+    insert into business_category (`name`, classification, introduction, pic_path
+      )
+    values (#{name,jdbcType=VARCHAR}, #{classification, jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.BusinessCategory" useGeneratedKeys="true">
+    insert into business_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="classification != null">
+        classification
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="picPath != null">
+        pic_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        #{classification, jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqs.jsd.pojo.BusinessCategory">
+    update business_category
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        classification = #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.BusinessCategory">
+    update business_category
+    set `name` = #{name,jdbcType=VARCHAR},
+      classification = #{classification,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
