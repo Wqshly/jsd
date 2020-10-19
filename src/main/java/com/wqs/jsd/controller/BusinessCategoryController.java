@@ -52,17 +52,17 @@ public class BusinessCategoryController {
         return businessCategoryService.findCategoryByClassRecord(classification);
     }
 
-    @GetMapping("findCategoryByClass/{classification}")
+    @GetMapping("findName/{classification}")
     public ResultBean<List<String>> findName(@PathVariable("classification") String classification) {
         return businessCategoryService.findName(classification);
     }
 
-    @GetMapping("findCategoryByClass/{classification}")
+    @GetMapping("findIntroduction/{classification}")
     public ResultBean<List<String>> findIntroduction(@PathVariable("classification") String classification) {
         return businessCategoryService.findIntroduction(classification);
     }
 
-    @GetMapping("findCategoryByClass/{classification}")
+    @GetMapping("findPicPath/{classification}")
     public ResultBean<List<String>> findPicPath(@PathVariable("classification") String classification) {
         return businessCategoryService.findPicPath(classification);
     }
