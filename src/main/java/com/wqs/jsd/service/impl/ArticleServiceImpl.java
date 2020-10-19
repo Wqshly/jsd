@@ -103,13 +103,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResultBean<String> findArticle(Integer id) {
+    public String findArticle(Integer id) {
         try {
             String records = mapper.selectContentByPrimaryKey(id);
-            return new ResultBean<>(records, SUCCESS, "success");
+            return records;
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+            return "404";
         }
     }
 

@@ -74,7 +74,7 @@ public class ArticleController {
     }
 
     @GetMapping("findArticle/{id}")
-    public ResultBean<String> findArticle(@PathVariable("id") Integer id) {
+    public String findArticle(@PathVariable("id") Integer id) {
         return articleService.findArticle(id);
     }
 

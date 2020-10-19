@@ -33,5 +33,5 @@ public interface ArticleService {
 
     ResultBean<List<String>> findArticleAuthorRecord();
 
-    ResultBean<String> findArticle(Integer id);
+    String findArticle(Integer id);
 }
