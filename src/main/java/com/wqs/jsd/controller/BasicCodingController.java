@@ -95,6 +95,10 @@ public class BasicCodingController {
     public ResultBean<List<BasicCoding>> findBasicCoding(@PathVariable("type") String type) {
         return basicCodingService.findBasicCodingByType(type);
     }
+    @GetMapping("findBasicCodingByType/{type}")
+    public ResultBean<List<String>> findBasicCodingByType(@PathVariable("type") String type) {
+        return basicCodingService.findCodingByType(type);
+    }
 
     @PostMapping("findBasicCodingWithType/{type}")
     public ResultBean<List<BasicCoding>> findBasicCoding(@PathVariable("type") String type, @RequestBody PageInfo pageInfo) {
