@@ -53,6 +53,10 @@
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllId" resultType="java.lang.String">
+    select id
+    from article
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from article
     where id in

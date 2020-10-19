@@ -31,4 +31,6 @@ public interface ArticleMapper {
     List<String> selectAllAuthor();
 
     String selectContentByPrimaryKey(int id);
+
+    List<String> selectAllId();
 }

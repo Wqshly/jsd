@@ -34,4 +34,6 @@ public interface ArticleService {
     ResultBean<List<String>> findArticleAuthorRecord();
 
     String findArticle(Integer id);
+
+    ResultBean<List<String>> findArticleIdRecord();
 }

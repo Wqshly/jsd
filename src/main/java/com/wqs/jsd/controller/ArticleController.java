@@ -68,6 +68,11 @@ public class ArticleController {
         return articleService.findArticleAuthorRecord();
     }
 
+    @GetMapping("findAllArticleId")
+    public ResultBean<List<String>> findAllArticleId() {
+        return articleService.findArticleIdRecord();
+    }
+
     @PostMapping("findAllArticle")
     public ResultBean<List<Article>> findAllArticle(@RequestBody PageInfo pageInfo) {
         return articleService.findAllArticleRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
