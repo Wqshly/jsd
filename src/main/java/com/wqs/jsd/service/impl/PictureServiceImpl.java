@@ -77,7 +77,13 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public ResultBean<List<String>> findPictureRecordPath() {
-        return null;
+        try {
+            List<String> records = mapper.selectPicPath();
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
     }
 
     @Override
