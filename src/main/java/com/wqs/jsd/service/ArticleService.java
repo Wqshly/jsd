@@ -32,4 +32,6 @@ public interface ArticleService {
     ResultBean<List<String>> findArticleIntroductionRecord();
 
     ResultBean<List<String>> findArticleAuthorRecord();
+
+    ResultBean<String> findArticle(Integer id);
 }

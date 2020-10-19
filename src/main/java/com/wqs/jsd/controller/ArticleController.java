@@ -7,6 +7,7 @@ import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.service.ArticleService;
 import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,6 +71,11 @@ public class ArticleController {
     @PostMapping("findAllArticle")
     public ResultBean<List<Article>> findAllArticle(@RequestBody PageInfo pageInfo) {
         return articleService.findAllArticleRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    }
+
+    @GetMapping("findArticle/{id}")
+    public ResultBean<String> findArticle(@PathVariable("id") Integer id) {
+        return articleService.findArticle(id);
     }
 
     @PostMapping("deleteArticle")

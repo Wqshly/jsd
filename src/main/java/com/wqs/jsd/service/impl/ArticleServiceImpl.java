@@ -103,6 +103,17 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public ResultBean<String> findArticle(Integer id) {
+        try {
+            String records = mapper.selectContentByPrimaryKey(id);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<Article>> findAllArticleRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

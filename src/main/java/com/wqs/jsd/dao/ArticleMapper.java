@@ -29,4 +29,6 @@ public interface ArticleMapper {
     List<String> selectAllIntroduction();
 
     List<String> selectAllAuthor();
+
+    String selectContentByPrimaryKey(int id);
 }

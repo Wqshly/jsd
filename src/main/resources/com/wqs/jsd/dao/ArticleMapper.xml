@@ -48,6 +48,11 @@
     select author
     from article
   </select>
+  <select id="selectContentByPrimaryKey" resultType="java.lang.String">
+    select content
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from article
     where id in
