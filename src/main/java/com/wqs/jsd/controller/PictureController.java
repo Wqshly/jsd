@@ -61,6 +61,11 @@ public class PictureController {
         return pictureService.findPictureRecord();
     }
 
+    @GetMapping("findAllPicturePath")
+    public ResultBean<List<String>> findAllPicturePath() {
+        return pictureService.findPictureRecordPath();
+    }
+
     @PostMapping("findAllPicture")
     public ResultBean<List<Picture>> findAllPicture(@RequestBody PageInfo pageInfo) {
         return pictureService.findAllPictureRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());

@@ -16,6 +16,8 @@ public interface PictureMapper {
 
     List<Picture> selectAll();
 
+    List<String> selectPicPath();
+
     int findPreRecord(Integer id);
 
     int findNextRecord(Integer id);

@@ -32,4 +32,6 @@ public interface PictureService {
     ResultBean<Void> deletePictureRecord(Integer id);
 
     ResultBean<Void> deletePictureRecord(List<Integer> id);
+
+    ResultBean<List<String>> findPictureRecordPath();
 }

@@ -76,6 +76,11 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
+    public ResultBean<List<String>> findPictureRecordPath() {
+        return null;
+    }
+
+    @Override
     public ResultBean<Integer> picTotalNum() {
         try {
             return new ResultBean<>(mapper.countTotal());
