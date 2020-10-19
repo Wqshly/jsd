@@ -23,4 +23,6 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<String> selectAllTitle();
+
+    List<String> selectAllImg();
 }

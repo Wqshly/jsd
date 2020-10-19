@@ -36,6 +36,10 @@
     select title
     from article
   </select>
+  <select id="selectAllImg" resultType="java.lang.String">
+    select path
+    from article
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from article
     where id in
