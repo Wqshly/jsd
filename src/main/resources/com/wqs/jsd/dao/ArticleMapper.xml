@@ -40,6 +40,10 @@
     select pic_link
     from article
   </select>
+  <select id="selectAllIntroduction" resultType="java.lang.String">
+    select introduction
+    from article
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from article
     where id in

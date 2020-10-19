@@ -57,6 +57,11 @@ public class ArticleController {
         return articleService.findArticleImgRecord();
     }
 
+    @GetMapping("findAllArticleIntroduction")
+    public ResultBean<List<String>> findAllArticleIntroduction() {
+        return articleService.findArticleIntroductionRecord();
+    }
+
     @PostMapping("findAllArticle")
     public ResultBean<List<Article>> findAllArticle(@RequestBody PageInfo pageInfo) {
         return articleService.findAllArticleRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());

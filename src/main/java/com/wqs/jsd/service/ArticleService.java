@@ -28,4 +28,6 @@ public interface ArticleService {
     ResultBean<List<String>> findArticleTitleRecord();
 
     ResultBean<List<String>> findArticleImgRecord();
+
+    ResultBean<List<String>> findArticleIntroductionRecord();
 }
