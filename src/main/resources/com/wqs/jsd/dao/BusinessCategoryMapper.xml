@@ -26,6 +26,12 @@
     from business_category
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByClassification" resultType="com.wqs.jsd.pojo.BusinessCategory">
+    select
+    <include refid="Base_Column_List" />
+    from business_category
+    where classification = #{classification, jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from business_category
     where id in

@@ -47,6 +47,11 @@ public class BusinessCategoryController {
         return businessCategoryService.findBusinessCategoryRecord();
     }
 
+    @GetMapping("findCategoryByClass/{classification}")
+    public ResultBean<List<BusinessCategory>> findCategoryByClass(@PathVariable("classification") String classification) {
+        return businessCategoryService.findCategoryByClassRecord(classification);
+    }
+
     @PostMapping("findAllBusinessCategory")
     public ResultBean<List<BusinessCategory>> findAllBusinessCategory(@RequestBody PageInfo pageInfo) {
         return businessCategoryService.findAllBusinessCategoryRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());

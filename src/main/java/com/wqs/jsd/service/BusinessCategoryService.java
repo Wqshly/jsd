@@ -24,4 +24,6 @@ public interface BusinessCategoryService {
     ResultBean<List<BusinessCategory>> findAllBusinessCategoryRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteBusinessCategoryRecord(List<Integer> id);
+
+    ResultBean<List<BusinessCategory>> findCategoryByClassRecord(String classification);
 }

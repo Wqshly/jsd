@@ -57,6 +57,17 @@ public class BusinessCategoryServiceImpl implements BusinessCategoryService {
     }
 
     @Override
+    public ResultBean<List<BusinessCategory>> findCategoryByClassRecord(String classification) {
+        try {
+            List<BusinessCategory> records = mapper.selectByClassification(classification);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<BusinessCategory>> findAllBusinessCategoryRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);
@@ -73,4 +84,5 @@ public class BusinessCategoryServiceImpl implements BusinessCategoryService {
     public ResultBean<Void> deleteBusinessCategoryRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
+
 }

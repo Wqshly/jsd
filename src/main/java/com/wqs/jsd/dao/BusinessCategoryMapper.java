@@ -21,4 +21,6 @@ public interface BusinessCategoryMapper {
     int updateByPrimaryKeySelective(BusinessCategory record);
 
     int updateByPrimaryKey(BusinessCategory record);
+
+    List<BusinessCategory> selectByClassification(String classification);
 }
