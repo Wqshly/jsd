@@ -32,6 +32,21 @@
     from business_category
     where classification = #{classification, jdbcType=VARCHAR}
   </select>
+  <select id="findName" resultType="java.lang.String">
+    select name
+    from business_category
+    where classification = #{classification, jdbcType=VARCHAR}
+  </select>
+  <select id="findIntroduction" resultType="java.lang.String">
+    select introduction
+    from business_category
+    where classification = #{classification, jdbcType=VARCHAR}
+  </select>
+  <select id="findPicPath" resultType="java.lang.String">
+    select pic_path
+    from business_category
+    where classification = #{classification, jdbcType=VARCHAR}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from business_category
     where id in

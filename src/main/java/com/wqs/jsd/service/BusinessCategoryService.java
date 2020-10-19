@@ -26,4 +26,10 @@ public interface BusinessCategoryService {
     ResultBean<Void> deleteBusinessCategoryRecord(List<Integer> id);
 
     ResultBean<List<BusinessCategory>> findCategoryByClassRecord(String classification);
+
+    ResultBean<List<String>> findName(String classification);
+
+    ResultBean<List<String>> findIntroduction(String classification);
+
+    ResultBean<List<String>> findPicPath(String classification);
 }

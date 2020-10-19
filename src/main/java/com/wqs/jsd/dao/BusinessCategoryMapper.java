@@ -23,4 +23,10 @@ public interface BusinessCategoryMapper {
     int updateByPrimaryKey(BusinessCategory record);
 
     List<BusinessCategory> selectByClassification(String classification);
+
+    List<String> findName(String classification);
+
+    List<String> findIntroduction(String classification);
+
+    List<String> findPicPath(String classification);
 }

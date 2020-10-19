@@ -52,6 +52,21 @@ public class BusinessCategoryController {
         return businessCategoryService.findCategoryByClassRecord(classification);
     }
 
+    @GetMapping("findCategoryByClass/{classification}")
+    public ResultBean<List<String>> findName(@PathVariable("classification") String classification) {
+        return businessCategoryService.findName(classification);
+    }
+
+    @GetMapping("findCategoryByClass/{classification}")
+    public ResultBean<List<String>> findIntroduction(@PathVariable("classification") String classification) {
+        return businessCategoryService.findIntroduction(classification);
+    }
+
+    @GetMapping("findCategoryByClass/{classification}")
+    public ResultBean<List<String>> findPicPath(@PathVariable("classification") String classification) {
+        return businessCategoryService.findPicPath(classification);
+    }
+
     @PostMapping("findAllBusinessCategory")
     public ResultBean<List<BusinessCategory>> findAllBusinessCategory(@RequestBody PageInfo pageInfo) {
         return businessCategoryService.findAllBusinessCategoryRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
