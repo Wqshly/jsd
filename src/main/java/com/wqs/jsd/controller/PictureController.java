@@ -75,5 +75,4 @@ public class PictureController {
     public ResultBean<Void> deletePictureRecord(@PathVariable Integer id) {
         return pictureService.deletePictureRecord(id);
     }
-
 }
