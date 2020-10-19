@@ -24,4 +24,6 @@ public interface ArticleService {
     ResultBean<List<Article>> findAllArticleRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteArticleRecord(List<Integer> id);
+
+    ResultBean<List<String>> findArticleTitleRecord();
 }
