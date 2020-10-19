@@ -27,4 +27,6 @@ public interface ArticleMapper {
     List<String> selectAllImg();
 
     List<String> selectAllIntroduction();
+
+    List<String> selectAllAuthor();
 }

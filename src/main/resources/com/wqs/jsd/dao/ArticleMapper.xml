@@ -44,6 +44,10 @@
     select introduction
     from article
     </select>
+  <select id="selectAllAuthor" resultType="java.lang.String">
+    select author
+    from article
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from article
     where id in

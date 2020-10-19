@@ -62,6 +62,12 @@ public class ArticleController {
         return articleService.findArticleIntroductionRecord();
     }
 
+    @GetMapping("findAllArticleAuthor")
+    public ResultBean<List<String>> findAllArticleAuthor() {
+        return articleService.findArticleAuthorRecord();
+    }
+
+
     @PostMapping("findAllArticle")
     public ResultBean<List<Article>> findAllArticle(@RequestBody PageInfo pageInfo) {
         return articleService.findAllArticleRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
