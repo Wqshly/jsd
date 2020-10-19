@@ -153,8 +153,9 @@ public class CommonMethod {
             out.write(bytes);
             out.flush();
             out.close();
-            String contextPate = "http://39.107.49.176:8080\\" + path + "\\" + fileName;
-            return new ResultBean<>(contextPate, SUCCESS, "上传成功");
+            String contextPath = "http://39.107.49.176:8080\\" + path + "\\" + fileName;
+            String savePath = contextPath.replace("\\","/");
+            return new ResultBean<>(savePath, SUCCESS, "上传成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultBean<>(PIC_WRONG, "系统错误，请联系管理员!");
