@@ -40,6 +40,11 @@
     from basic_coding
     where type = #{type,jdbcType=VARCHAR}
   </select>
+  <select id="findBusinessCategoryId" resultType="java.lang.Integer">
+    select id
+    from basic_coding
+    where type = #{type,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from basic_coding
     where id in

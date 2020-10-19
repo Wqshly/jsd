@@ -28,4 +28,6 @@ public interface BasicCodingService {
     ResultBean<Void> deleteBasicCodingForName(String type, String name);
 
     ResultBean<List<String>> findCodingByType(String type);
+
+    ResultBean<List<Integer>> findBusinessCategoryId(String type);
 }

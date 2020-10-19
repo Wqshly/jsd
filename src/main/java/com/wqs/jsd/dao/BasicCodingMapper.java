@@ -27,4 +27,6 @@ public interface BasicCodingMapper {
     int deleteByTypeAndName(String type, String name);
 
     List<String> selectCodingByType(String type);
+
+    List<Integer> findBusinessCategoryId(String type);
 }
