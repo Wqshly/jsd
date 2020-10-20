@@ -11,11 +11,11 @@ public class CustomerAddress implements Serializable {
 
     private Integer customerId;
 
+    private String customerName;
+
     private Byte isDefaultAddress;
 
     private String addressName;
-
-    private Integer sorting;
 
     private static final long serialVersionUID = 1L;
 
@@ -51,11 +51,11 @@ public class CustomerAddress implements Serializable {
         this.addressName = addressName;
     }
 
-    public Integer getSorting() {
-        return sorting;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setSorting(Integer sorting) {
-        this.sorting = sorting;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
