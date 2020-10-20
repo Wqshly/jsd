@@ -73,4 +73,15 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
     public ResultBean<Void> deleteCustomerAddressRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }
+
+    @Override
+    public ResultBean<List<CustomerAddress>> findAddressByCustomer(int id) {
+        try {
+            List<CustomerAddress> records = mapper.selectAddressByCustomer(id);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
 }

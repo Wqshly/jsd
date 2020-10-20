@@ -36,6 +36,11 @@ public class CustomerAddressController {
         return customerAddressService.findCustomerAddressRecord();
     }
 
+    @GetMapping("findAddressByCustomer/{id}")
+    public ResultBean<List<CustomerAddress>> findAddressByCustomer(@PathVariable("id") int id) {
+        return customerAddressService.findAddressByCustomer(id);
+    }
+
     @PostMapping("findAllCustomerAddress")
     public ResultBean<List<CustomerAddress>> findAllCustomerAddress(@RequestBody PageInfo pageInfo) {
         return customerAddressService.findAllCustomerAddressRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());

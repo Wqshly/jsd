@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wqs.jsd.dao.CustomerAddressMapper">
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.CustomerAddress">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="is_default_address" jdbcType="TINYINT" property="isDefaultAddress" />
-    <result column="address_name" jdbcType="VARCHAR" property="addressName" />
-    <result column="sorting" jdbcType="INTEGER" property="sorting" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+    <result column="is_default_address" jdbcType="TINYINT" property="isDefaultAddress"/>
+    <result column="address_name" jdbcType="VARCHAR" property="addressName"/>
+    <result column="sorting" jdbcType="INTEGER" property="sorting"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, customer_id, is_default_address, address_name, sorting
@@ -16,8 +16,8 @@
     FROM customer_address
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from customer_address
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -26,6 +26,12 @@
     <include refid="Base_Column_List"/>
     from customer_address
   </select>
+  <select id="selectAddressByCustomer" resultType="com.wqs.jsd.pojo.CustomerAddress">
+    select
+    <include refid="Base_Column_List"/>
+    from customer_address
+    where customer_id=#{customerId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from customer_address
     where id in
@@ -33,13 +39,15 @@
       #{item}
     </foreach>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CustomerAddress" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CustomerAddress"
+          useGeneratedKeys="true">
     insert into customer_address (customer_id, is_default_address, address_name, 
       sorting)
     values (#{customerId,jdbcType=INTEGER}, #{isDefaultAddress,jdbcType=TINYINT}, #{addressName,jdbcType=VARCHAR}, 
       #{sorting,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CustomerAddress" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.CustomerAddress"
+          useGeneratedKeys="true">
     insert into customer_address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="customerId != null">

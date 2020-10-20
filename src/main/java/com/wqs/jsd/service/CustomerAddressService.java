@@ -24,4 +24,6 @@ public interface CustomerAddressService {
     ResultBean<List<CustomerAddress>> findAllCustomerAddressRecord(int currentPage, int pageSize);
 
     ResultBean<Void> deleteCustomerAddressRecord(List<Integer> id);
+
+    ResultBean<List<CustomerAddress>> findAddressByCustomer(int id);
 }

@@ -21,4 +21,6 @@ public interface CustomerAddressMapper {
     int updateByPrimaryKeySelective(CustomerAddress record);
 
     int updateByPrimaryKey(CustomerAddress record);
+
+    List<CustomerAddress> selectAddressByCustomer(int customerId);
 }
