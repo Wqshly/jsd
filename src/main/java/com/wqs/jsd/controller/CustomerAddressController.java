@@ -37,7 +37,7 @@ public class CustomerAddressController {
     }
 
     @GetMapping("findAddressByCustomer/{id}")
-    public ResultBean<List<CustomerAddress>> findAddressByCustomer(@PathVariable("id") String id) {
+    public List<CustomerAddress> findAddressByCustomer(@PathVariable("id") String id) {
         return customerAddressService.findAddressByCustomer(Integer.parseInt(id));
     }
 
