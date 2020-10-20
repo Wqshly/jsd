@@ -75,12 +75,13 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
     }
 
     @Override
-    public List<CustomerAddress> findAddressByCustomer(int id) {
+    public ResultBean<List<CustomerAddress>> findAddressByCustomer(int id) {
         try {
-            return mapper.selectAddressByCustomer(id);
+            List<CustomerAddress> records = mapper.selectAddressByCustomer(id);
+            return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return null;
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
         }
     }
 }
