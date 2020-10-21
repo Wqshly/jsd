@@ -13,6 +13,8 @@ public class CustomerAddress implements Serializable {
 
     private String customerName;
 
+    private String customerPhone;
+
     private Byte isDefaultAddress;
 
     private String addressName;
@@ -35,6 +37,22 @@ public class CustomerAddress implements Serializable {
         this.customerId = customerId;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
     public Byte getIsDefaultAddress() {
         return isDefaultAddress;
     }
@@ -49,13 +67,5 @@ public class CustomerAddress implements Serializable {
 
     public void setAddressName(String addressName) {
         this.addressName = addressName;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 }
