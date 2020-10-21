@@ -70,6 +70,11 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
     }
 
     @Override
+    public ResultBean<Void> deleteAddressRecord(Integer id) {
+        return commonMethod.changeRecord(mapper.deleteById(id));
+    }
+
+    @Override
     public ResultBean<Void> deleteCustomerAddressRecord(List<Integer> id) {
         return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
     }

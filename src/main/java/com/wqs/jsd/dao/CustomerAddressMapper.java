@@ -8,6 +8,8 @@ public interface CustomerAddressMapper {
 
     int countTotal();
 
+    int deleteById(Integer id);
+
     int deleteByPrimaryKey(List<Integer> id);
 
     List<CustomerAddress> selectAll();

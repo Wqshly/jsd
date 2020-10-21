@@ -33,6 +33,10 @@
     from customer_address
     where customer_id=#{customerId,jdbcType=INTEGER}
   </select>
+  <delete id="deleteById">
+    delete from customer_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List">
     delete from customer_address
     where id in
