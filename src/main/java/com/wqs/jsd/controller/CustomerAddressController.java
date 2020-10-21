@@ -46,9 +46,9 @@ public class CustomerAddressController {
         return customerAddressService.findAllCustomerAddressRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
     }
 
-    @PostMapping("deleteAddress")
-    public ResultBean<Void> deleteAddress(@RequestBody Integer id) {
-        return customerAddressService.deleteAddressRecord(id);
+    @GetMapping("deleteAddress/{id}")
+    public ResultBean<Void> deleteAddress(@PathVariable("id") String id) {
+        return customerAddressService.deleteAddressRecord(Integer.parseInt(id));
     }
 
     @PostMapping("deleteCustomerAddress")
