@@ -155,6 +155,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public ResultBean<Customer> getCustomerInfo(int id) {
+        try {
+            Customer records = mapper.selectByPrimaryKey(id);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<List<Customer>> findAllCustomerRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

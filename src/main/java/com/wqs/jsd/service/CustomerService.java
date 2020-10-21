@@ -33,4 +33,6 @@ public interface CustomerService {
     ResultBean<Void> deleteCustomerRecord(List<Integer> id);
 
     ResultBean<Customer> login4Phone(Customer customer);
+
+    ResultBean<Customer> getCustomerInfo(int id);
 }

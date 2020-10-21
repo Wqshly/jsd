@@ -65,6 +65,12 @@ public class CustomerController {
         return customerService.updateCustomerRecord(record);
     }
 
+    @GetMapping("getCustomerInfo/{id}")
+    public ResultBean<Customer> getCustomerInfo(@PathVariable("id") String id) {
+        return customerService.getCustomerInfo(Integer.parseInt(id));
+    }
+
+
     @GetMapping("findAllCustomer")
     public ResultBean<List<Customer>> findAllCustomer() {
         return customerService.findCustomerRecord();
