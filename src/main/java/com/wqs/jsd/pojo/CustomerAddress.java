@@ -19,6 +19,8 @@ public class CustomerAddress implements Serializable {
 
     private String addressName;
 
+    private String detailAddress;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -67,5 +69,13 @@ public class CustomerAddress implements Serializable {
 
     public void setAddressName(String addressName) {
         this.addressName = addressName;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 }
