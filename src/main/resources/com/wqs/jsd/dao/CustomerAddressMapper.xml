@@ -126,7 +126,7 @@
       customer_phone = #{customerPhone,jdbcType=VARCHAR},
       is_default_address = #{isDefaultAddress,jdbcType=TINYINT},
       address_name = #{addressName,jdbcType=VARCHAR},
-      detailAddress = #{detailAddress,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
