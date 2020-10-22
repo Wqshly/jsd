@@ -42,13 +42,6 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
 
     @Override
     public ResultBean<Void> updateCustomerAddressRecord(CustomerAddress record) {
-        System.out.println(record.getId());
-        System.out.println(record.getAddressName());
-        System.out.println(record.getCustomerId());
-        System.out.println(record.getCustomerName());
-        System.out.println(record.getCustomerPhone());
-        System.out.println(record.getDetailAddress());
-        System.out.println(record.getIsDefaultAddress());
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
 
