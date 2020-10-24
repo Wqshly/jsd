@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public interface CustomerService {
 
+    ResultBean<Void> quickLoginGetVerify(String phoneNumber);
+
     ResultBean<Void> getVerifyCode(String phoneNumber);
 
     ResultBean<Boolean> validPhoneNum(String phoneNum);

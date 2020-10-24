@@ -33,6 +33,11 @@ public class CustomerController {
     @Autowired
     private CommonMethod commonMethod;
 
+    @GetMapping("quickLoginGetVerify/{phoneNumber}")
+    public ResultBean<Void> quickLoginGetVerify(@PathVariable String phoneNumber) {
+        return customerService.quickLoginGetVerify(phoneNumber);
+    }
+
     @GetMapping("getVerifyCode/{phoneNumber}")
     public ResultBean<Void> getVerifyCode(@PathVariable String phoneNumber) {
         return customerService.getVerifyCode(phoneNumber);

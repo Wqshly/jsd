@@ -51,6 +51,32 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    public ResultBean<Void> quickLoginGetVerify(String phoneNumber) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String date = dateFormat.format(new Date());
+            if (time.containsKey(phoneNumber)) {
+                java.util.Date begin = dateFormat.parse(time.get(phoneNumber));
+                java.util.Date end = dateFormat.parse(date);
+                long between = (end.getTime() - begin.getTime()) / 1000;
+                // 1分钟内禁止同一号码重复发送短信
+                if (between < 60) {
+                    System.out.println("一分钟内禁止重复发送短信");
+                    return new ResultBean<>(OVERTIME, "catch the Exception");
+                }
+            }
+            time.put(phoneNumber, date);
+            int codeNumber = sendSms.randomCode(6);
+            sendSms.sendSms("青岛洁时代","SMS_205136102", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
+            map.put(phoneNumber, String.valueOf(codeNumber));
+            System.out.println(map);
+            return new ResultBean<>(SUCCESS, "success");
+        } catch (Exception e) {
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "获取验证码失败！");
+        }
+    }
+
+    @Override
     public ResultBean<Void> getVerifyCode(String phoneNumber) {
         try {
             if (mapper.checkPhoneNum(phoneNumber) == 0) {
