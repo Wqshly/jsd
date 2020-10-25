@@ -30,4 +30,6 @@ public interface BasicCodingService {
     ResultBean<List<String>> findCodingByType(String type);
 
     ResultBean<List<Integer>> findBusinessCategoryId(String type);
+
+    ResultBean<String> findFirstMasterCategoryName();
 }

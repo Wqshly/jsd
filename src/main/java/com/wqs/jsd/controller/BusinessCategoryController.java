@@ -47,7 +47,6 @@ public class BusinessCategoryController {
         return businessCategoryService.findBusinessCategoryRecord();
     }
 
-
     @GetMapping("findCategoryByClass/{classification}")
     public ResultBean<List<BusinessCategory>> findCategoryByClass(@PathVariable("classification") String classification) {
         return businessCategoryService.findCategoryByClassRecord(classification);

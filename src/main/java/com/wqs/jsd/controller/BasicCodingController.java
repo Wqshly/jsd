@@ -111,6 +111,11 @@ public class BasicCodingController {
         return basicCodingService.findBasicCodingByType(type,pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
     }
 
+    @PostMapping("findFirstMasterCategoryName")
+    public ResultBean<String> findFirstMasterCategoryName() {
+        return basicCodingService.findFirstMasterCategoryName();
+    }
+
     @GetMapping("deleteBasicCoding/{type}/{name}")
     public ResultBean<Void> deleteBasicCodingForName(@PathVariable("type") String type,@PathVariable("name") String name) {
         return basicCodingService.deleteBasicCodingForName(type, name);

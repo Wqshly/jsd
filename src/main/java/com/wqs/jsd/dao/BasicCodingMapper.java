@@ -29,4 +29,6 @@ public interface BasicCodingMapper {
     List<String> selectCodingByType(String type);
 
     List<Integer> findBusinessCategoryId(String type);
+
+    String findFirstMasterCategoryName(String type);
 }
