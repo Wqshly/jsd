@@ -31,5 +31,5 @@ public interface BasicCodingService {
 
     ResultBean<List<Integer>> findBusinessCategoryId(String type);
 
-    ResultBean<String> findFirstMasterCategoryName();
+    ResultBean<String> findInitMasterCategoryName();
 }

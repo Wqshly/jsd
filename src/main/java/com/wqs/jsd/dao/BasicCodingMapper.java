@@ -30,5 +30,5 @@ public interface BasicCodingMapper {
 
     List<Integer> findBusinessCategoryId(String type);
 
-    String findFirstMasterCategoryName(String type);
+    String findInitMasterCategoryName(String type);
 }

@@ -86,9 +86,9 @@ public class BasicCodingServiceImpl implements BasicCodingService {
     }
 
     @Override
-    public ResultBean<String> findFirstMasterCategoryName() {
+    public ResultBean<String> findInitMasterCategoryName() {
         try {
-            return new ResultBean<>(basicCodingMapper.findFirstMasterCategoryName("businessCategory"), SUCCESS, "success");
+            return new ResultBean<>(basicCodingMapper.findInitMasterCategoryName("businessCategory"), SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
