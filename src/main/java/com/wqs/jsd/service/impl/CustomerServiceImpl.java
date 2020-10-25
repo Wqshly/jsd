@@ -130,7 +130,7 @@ public class CustomerServiceImpl implements CustomerService {
                         return new ResultBean<>(customer, SUCCESS, "注册成功！");
                     } else {
                         return new ResultBean<>(
-                                mapper.selectByPhone(record.getPhone()), SUCCESS, "验证码错误！");
+                                mapper.selectByPhone(record.getPhone()), SUCCESS, "登录成功！");
                     }
                 } else {
                     System.out.println("验证码错误!");
