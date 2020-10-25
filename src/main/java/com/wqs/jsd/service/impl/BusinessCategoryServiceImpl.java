@@ -68,39 +68,6 @@ public class BusinessCategoryServiceImpl implements BusinessCategoryService {
     }
 
     @Override
-    public ResultBean<List<String>> findName(String classification) {
-        try {
-            List<String> records = mapper.findName(classification);
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findIntroduction(String classification) {
-        try {
-            List<String> records = mapper.findIntroduction(classification);
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findPicPath(String classification) {
-        try {
-            List<String> records = mapper.findPicPath(classification);
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
     public ResultBean<List<BusinessCategory>> findAllBusinessCategoryRecord(int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);

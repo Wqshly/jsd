@@ -27,9 +27,4 @@ public interface BusinessCategoryService {
 
     ResultBean<List<BusinessCategory>> findCategoryByClassRecord(String classification);
 
-    ResultBean<List<String>> findName(String classification);
-
-    ResultBean<List<String>> findIntroduction(String classification);
-
-    ResultBean<List<String>> findPicPath(String classification);
 }
