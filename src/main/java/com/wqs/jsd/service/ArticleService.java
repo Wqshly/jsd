@@ -25,15 +25,6 @@ public interface ArticleService {
 
     ResultBean<Void> deleteArticleRecord(List<Integer> id);
 
-    ResultBean<List<String>> findArticleTitleRecord();
-
-    ResultBean<List<String>> findArticleImgRecord();
-
-    ResultBean<List<String>> findArticleIntroductionRecord();
-
-    ResultBean<List<String>> findArticleAuthorRecord();
-
     String findArticle(Integer id);
 
-    ResultBean<List<String>> findArticleIdRecord();
 }

@@ -59,67 +59,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResultBean<List<String>> findArticleTitleRecord() {
-        try {
-            List<String> records = mapper.selectAllTitle();
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findArticleImgRecord() {
-        try {
-            List<String> records = mapper.selectAllImg();
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findArticleIntroductionRecord() {
-        try {
-            List<String> records = mapper.selectAllIntroduction();
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findArticleAuthorRecord() {
-        try {
-            List<String> records = mapper.selectAllAuthor();
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
-
-    @Override
     public String findArticle(Integer id) {
         try {
             return mapper.selectContentByPrimaryKey(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return "404";
-        }
-    }
-
-    @Override
-    public ResultBean<List<String>> findArticleIdRecord() {
-        try {
-            List<String> records = mapper.selectAllId();
-            return new ResultBean<>(records, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
         }
     }
 

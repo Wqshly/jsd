@@ -140,7 +140,7 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误！");
     }
 
 
