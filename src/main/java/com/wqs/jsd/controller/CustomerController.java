@@ -38,6 +38,11 @@ public class CustomerController {
         return customerService.quickLoginGetVerify(phoneNumber);
     }
 
+    @PostMapping("quickLogin")
+    public ResultBean<Customer> quickLogin(@RequestBody PhoneValidCode phoneValidCode) {
+        return customerService.quickLogin(phoneValidCode);
+    }
+
     @GetMapping("getVerifyCode/{phoneNumber}")
     public ResultBean<Void> getVerifyCode(@PathVariable String phoneNumber) {
         return customerService.getVerifyCode(phoneNumber);
@@ -50,8 +55,8 @@ public class CustomerController {
 
     // 移动端普通用户注册
     @PostMapping("register4Phone")
-    public ResultBean<Customer> register4Phone(@RequestBody Register4Phone register4Phone) {
-        return customerService.register4Phone(register4Phone);
+    public ResultBean<Customer> register4Phone(@RequestBody PhoneValidCode phoneValidCode) {
+        return customerService.register4Phone(phoneValidCode);
     }
 
     // 手机端的登录

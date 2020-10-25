@@ -2,7 +2,7 @@ package com.wqs.jsd.service;
 
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.pojo.Customer;
-import com.wqs.jsd.pojo.Register4Phone;
+import com.wqs.jsd.pojo.PhoneValidCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,9 @@ public interface CustomerService {
 
     ResultBean<Boolean> validPhoneNum(String phoneNum);
 
-    ResultBean<Customer> register4Phone(Register4Phone record);
+    ResultBean<Customer> quickLogin(PhoneValidCode record);
+
+    ResultBean<Customer> register4Phone(PhoneValidCode record);
 
     ResultBean<Void> insertCustomerRecord(Customer record);
 

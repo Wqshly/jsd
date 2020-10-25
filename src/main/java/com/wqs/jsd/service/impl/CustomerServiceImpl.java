@@ -5,7 +5,7 @@ import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.CustomerMapper;
 import com.wqs.jsd.manager.SendSms;
 import com.wqs.jsd.pojo.Customer;
-import com.wqs.jsd.pojo.Register4Phone;
+import com.wqs.jsd.pojo.PhoneValidCode;
 import com.wqs.jsd.service.CustomerService;
 import com.wqs.jsd.util.CodeUtil;
 import com.wqs.jsd.util.CommonMethod;
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
             }
             time.put(phoneNumber, date);
             int codeNumber = sendSms.randomCode(6);
-            sendSms.sendSms("青岛洁时代","SMS_205136102", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
+            sendSms.sendSms("青岛洁时代", "SMS_205136102", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
             map.put(phoneNumber, String.valueOf(codeNumber));
             System.out.println(map);
             return new ResultBean<>(SUCCESS, "success");
@@ -94,7 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
                 }
                 time.put(phoneNumber, date);
                 int codeNumber = sendSms.randomCode(6);
-                sendSms.sendSms("青岛洁时代","SMS_192230877", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
+                sendSms.sendSms("青岛洁时代", "SMS_192230877", phoneNumber, "{\"code\":\"" + codeNumber + "\"}");
                 map.put(phoneNumber, String.valueOf(codeNumber));
                 System.out.println(map);
                 return new ResultBean<>(SUCCESS, "success");
@@ -112,9 +112,40 @@ public class CustomerServiceImpl implements CustomerService {
         return CommonMethod.validPhoneNum(mapper.validPhoneNum(phoneNum));
     }
 
+    @Override
+    public ResultBean<Customer> quickLogin(PhoneValidCode record) {
+        try {
+            if (map.containsKey(record.getPhone())) {
+                if (map.get(record.getPhone()).equals(record.getCode())) {
+                    if (mapper.checkPhoneNum(record.getPhone()) == 0) {
+                        Customer customer = new Customer();
+                        customer.setName(codeUtil.createCode9());
+                        customer.setNickName(codeUtil.randomNickName());
+                        customer.setPassword(commonMethod.MD5EncryptSalt(record.getPhone(), "wqs"));
+                        customer.setPhone(record.getPhone());
+                        customer.setSex("男");
+                        mapper.insert(customer);
+                        map.remove(record.getPhone());
+                        System.out.println(map);
+                        return new ResultBean<>(customer, SUCCESS, "注册成功！");
+                    } else {
+                        return new ResultBean<>(
+                                mapper.selectByPhone(record.getPhone()), SUCCESS, "验证码错误！");
+                    }
+                } else {
+                    System.out.println("验证码错误!");
+                    return new ResultBean<>(CODE_WRONG, "验证码错误！");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
-    public ResultBean<Customer> register4Phone(Register4Phone record) {
+    public ResultBean<Customer> register4Phone(PhoneValidCode record) {
         try {
             if (map.containsKey(record.getPhone())) {
                 if (mapper.checkPhoneNum(record.getPhone()) == 0) {
@@ -128,7 +159,7 @@ public class CustomerServiceImpl implements CustomerService {
                         mapper.insert(customer);
                         map.remove(record.getPhone());
                         System.out.println(map);
-                        return new ResultBean<>(customer,SUCCESS, "注册成功！");
+                        return new ResultBean<>(customer, SUCCESS, "注册成功！");
                     } else {
                         System.out.println("验证码错误!");
                         return new ResultBean<>(CODE_WRONG, "验证码错误！");

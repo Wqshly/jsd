@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @Description:
  * @Modified By:
  */
-public class Register4Phone implements Serializable {
+public class PhoneValidCode implements Serializable {
     private String phone;
     private String code;
 
