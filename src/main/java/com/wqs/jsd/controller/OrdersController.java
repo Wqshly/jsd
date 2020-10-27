@@ -1,30 +1,51 @@
 package com.wqs.jsd.controller;
 
 import com.wqs.jsd.beans.ResultBean;
+import com.wqs.jsd.pojo.Orders;
+import com.wqs.jsd.pojo.PageInfo;
 import com.wqs.jsd.pojo.PlaceOrder;
 import com.wqs.jsd.service.OrdersService;
-import com.wqs.jsd.util.CommonMethod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 /**
  * @Author: wan
- * @Date: Created in 14:18 2020/8/25
+ * @Date: Created in 19:34 2020/10/27
  * @Description:
  * @Modified By:
  */
-@RequestMapping("/order")
+@RequestMapping("/orders")
 @RestController
 public class OrdersController {
     @Autowired
-    OrdersService ordersService;
+    private OrdersService ordersService;
 
-    @Autowired
-    private CommonMethod commonMethod;
+    @PostMapping("addOrders")
+    public ResultBean<Void> insertOrdersRecord(@RequestBody Orders record) {
+        return ordersService.insertOrdersRecord(record);
+    }
+
+    @PostMapping("editOrders")
+    public ResultBean<Void> updateOrdersRecord(@RequestBody Orders record) {
+        return ordersService.updateOrdersRecord(record);
+    }
+
+    @GetMapping("findAllOrders")
+    public ResultBean<List<Orders>> findAllOrders() {
+        return ordersService.findOrdersRecord();
+    }
+
+    @PostMapping("findAllOrders")
+    public ResultBean<List<Orders>> findAllOrders(@RequestBody PageInfo pageInfo) {
+        return ordersService.findAllOrdersRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
+    }
+
+    @PostMapping("deleteOrders")
+    public ResultBean<Void> deleteOrdersRecord(@RequestBody List<Integer> selectMultipleId) {
+        return ordersService.deleteOrdersRecord(selectMultipleId);
+    }
 
     @PostMapping("placeOrder")
     public ResultBean<Void> placeOrder(@RequestBody PlaceOrder placeOrder) {
