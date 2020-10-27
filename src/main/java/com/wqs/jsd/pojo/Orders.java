@@ -25,11 +25,13 @@ public class Orders implements Serializable {
 
     private String addressDetail;
 
-    private BigDecimal actualPrice;
-
     private Byte isAccept;
 
+    private Date expectedTime;
+
     private Date orderTime;
+
+    private BigDecimal actualPrice;
 
     private Date acceptTime;
 
@@ -99,14 +101,6 @@ public class Orders implements Serializable {
         this.addressDetail = addressDetail;
     }
 
-    public BigDecimal getActualPrice() {
-        return actualPrice;
-    }
-
-    public void setActualPrice(BigDecimal actualPrice) {
-        this.actualPrice = actualPrice;
-    }
-
     public Byte getIsAccept() {
         return isAccept;
     }
@@ -115,12 +109,28 @@ public class Orders implements Serializable {
         this.isAccept = isAccept;
     }
 
+    public Date getExpectedTime() {
+        return expectedTime;
+    }
+
+    public void setExpectedTime(Date expectedTime) {
+        this.expectedTime = expectedTime;
+    }
+
     public Date getOrderTime() {
         return orderTime;
     }
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+
+    public BigDecimal getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
     }
 
     public Date getAcceptTime() {

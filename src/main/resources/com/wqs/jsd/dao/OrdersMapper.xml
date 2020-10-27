@@ -10,14 +10,15 @@
     <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
-    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
     <result column="is_accept" jdbcType="TINYINT" property="isAccept" />
+    <result column="expected_time" jdbcType="TIMESTAMP" property="expectedTime" />
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
     <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, customer_id, order_number, goods_type, goods_name, customer_name, address, address_detail, 
-    actual_price, is_accept, order_time, accept_time
+    is_accept, expected_time, order_time, actual_price, accept_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -48,12 +49,14 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders (customer_id, order_number, goods_type, 
       goods_name, customer_name, address, 
-      address_detail, actual_price, is_accept, 
-      order_time, accept_time)
+      address_detail, is_accept, expected_time, 
+      order_time, actual_price, accept_time
+      )
     values (#{customerId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{addressDetail,jdbcType=VARCHAR}, #{actualPrice,jdbcType=DECIMAL}, #{isAccept,jdbcType=TINYINT}, 
-      #{orderTime,jdbcType=TIMESTAMP}, #{acceptTime,jdbcType=TIMESTAMP})
+      #{addressDetail,jdbcType=VARCHAR}, #{isAccept,jdbcType=TINYINT}, #{expectedTime,jdbcType=TIMESTAMP}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{actualPrice,jdbcType=DECIMAL}, #{acceptTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders
@@ -79,14 +82,17 @@
       <if test="addressDetail != null">
         address_detail,
       </if>
-      <if test="actualPrice != null">
-        actual_price,
-      </if>
       <if test="isAccept != null">
         is_accept,
       </if>
+      <if test="expectedTime != null">
+        expected_time,
+      </if>
       <if test="orderTime != null">
         order_time,
+      </if>
+      <if test="actualPrice != null">
+        actual_price,
       </if>
       <if test="acceptTime != null">
         accept_time,
@@ -114,14 +120,17 @@
       <if test="addressDetail != null">
         #{addressDetail,jdbcType=VARCHAR},
       </if>
-      <if test="actualPrice != null">
-        #{actualPrice,jdbcType=DECIMAL},
-      </if>
       <if test="isAccept != null">
         #{isAccept,jdbcType=TINYINT},
       </if>
+      <if test="expectedTime != null">
+        #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="orderTime != null">
         #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualPrice != null">
+        #{actualPrice,jdbcType=DECIMAL},
       </if>
       <if test="acceptTime != null">
         #{acceptTime,jdbcType=TIMESTAMP},
@@ -152,14 +161,17 @@
       <if test="addressDetail != null">
         address_detail = #{addressDetail,jdbcType=VARCHAR},
       </if>
-      <if test="actualPrice != null">
-        actual_price = #{actualPrice,jdbcType=DECIMAL},
-      </if>
       <if test="isAccept != null">
         is_accept = #{isAccept,jdbcType=TINYINT},
       </if>
+      <if test="expectedTime != null">
+        expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="orderTime != null">
         order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualPrice != null">
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
       </if>
       <if test="acceptTime != null">
         accept_time = #{acceptTime,jdbcType=TIMESTAMP},
@@ -176,9 +188,10 @@
       customer_name = #{customerName,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
-      actual_price = #{actualPrice,jdbcType=DECIMAL},
       is_accept = #{isAccept,jdbcType=TINYINT},
+      expected_time = #{expectedTime,jdbcType=TIMESTAMP},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
       accept_time = #{acceptTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
