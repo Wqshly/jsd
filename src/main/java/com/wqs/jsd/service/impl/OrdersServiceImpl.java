@@ -39,8 +39,12 @@ public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private SendSms sendSms;
 
+    @Autowired
+    private CodeUtil codeUtil;
+
     @Override
     public ResultBean<Void> insertOrdersRecord(Orders record) {
+        record.setOrderNumber(record.getCustomerId() + "_" + codeUtil.createCode9());
         record.setIsAccept((byte) 0);
         record.setIsDone((byte) 0);
         record.setOrderTime(commonMethod.getTime());
@@ -85,7 +89,7 @@ public class OrdersServiceImpl implements OrdersService {
     public ResultBean<Void> placeOrder(PlaceOrder placeOrder) {
         try {
             sendSms.sendSms("青岛洁万城", "SMS_193243567", "17685724016", "{\"name\":\"" + placeOrder.getCustomerName() + "\",\"phone\":\"" + placeOrder.getPhoneNumber() + "\",\"time\":\"" + placeOrder.getTime() + "\"}");
-            return new ResultBean<>(SUCCESS,"下单成功");
+            return new ResultBean<>(SUCCESS, "下单成功");
         } catch (Exception e) {
             return new ResultBean<>(FAILURE, "下单失败");
         }
