@@ -31,6 +31,10 @@
     from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByPrimaryKeys" parameterType="java.util.List">
     delete from orders
     where id in
@@ -43,10 +47,6 @@
     <include refid="Base_Column_List"/>
     from orders
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orders
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders (customer_id, order_number, goods_type, 
       goods_name, customer_name, address, 
