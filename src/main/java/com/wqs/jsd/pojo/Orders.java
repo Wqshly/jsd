@@ -27,6 +27,8 @@ public class Orders implements Serializable {
 
     private Byte isAccept;
 
+    private Byte isDone;
+
     private Date expectedTime;
 
     private Date orderTime;
@@ -107,6 +109,14 @@ public class Orders implements Serializable {
 
     public void setIsAccept(Byte isAccept) {
         this.isAccept = isAccept;
+    }
+
+    public Byte getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(Byte isDone) {
+        this.isDone = isDone;
     }
 
     public Date getExpectedTime() {

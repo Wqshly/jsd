@@ -11,6 +11,7 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
     <result column="is_accept" jdbcType="TINYINT" property="isAccept" />
+    <result column="is_done" jdbcType="TINYINT" property="isDone" />
     <result column="expected_time" jdbcType="TIMESTAMP" property="expectedTime" />
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
     <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
@@ -18,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, customer_id, order_number, goods_type, goods_name, customer_name, address, address_detail, 
-    is_accept, expected_time, order_time, actual_price, accept_time
+    is_accept, is_done, expected_time, order_time, actual_price, accept_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -30,10 +31,6 @@
     from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orders
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <delete id="deleteByPrimaryKeys" parameterType="java.util.List">
     delete from orders
     where id in
@@ -46,17 +43,21 @@
     <include refid="Base_Column_List"/>
     from orders
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders (customer_id, order_number, goods_type, 
       goods_name, customer_name, address, 
-      address_detail, is_accept, expected_time, 
-      order_time, actual_price, accept_time
-      )
+      address_detail, is_accept, is_done, 
+      expected_time, order_time, actual_price, 
+      accept_time)
     values (#{customerId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{addressDetail,jdbcType=VARCHAR}, #{isAccept,jdbcType=TINYINT}, #{expectedTime,jdbcType=TIMESTAMP}, 
-      #{orderTime,jdbcType=TIMESTAMP}, #{actualPrice,jdbcType=DECIMAL}, #{acceptTime,jdbcType=TIMESTAMP}
-      )
+      #{addressDetail,jdbcType=VARCHAR}, #{isAccept,jdbcType=TINYINT}, #{isDone,jdbcType=TINYINT}, 
+      #{expectedTime,jdbcType=TIMESTAMP}, #{orderTime,jdbcType=TIMESTAMP}, #{actualPrice,jdbcType=DECIMAL}, 
+      #{acceptTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders
@@ -84,6 +85,9 @@
       </if>
       <if test="isAccept != null">
         is_accept,
+      </if>
+      <if test="isDone != null">
+        is_done,
       </if>
       <if test="expectedTime != null">
         expected_time,
@@ -122,6 +126,9 @@
       </if>
       <if test="isAccept != null">
         #{isAccept,jdbcType=TINYINT},
+      </if>
+      <if test="isDone != null">
+        #{isDone,jdbcType=TINYINT},
       </if>
       <if test="expectedTime != null">
         #{expectedTime,jdbcType=TIMESTAMP},
@@ -164,6 +171,9 @@
       <if test="isAccept != null">
         is_accept = #{isAccept,jdbcType=TINYINT},
       </if>
+      <if test="isDone != null">
+        is_done = #{isDone,jdbcType=TINYINT},
+      </if>
       <if test="expectedTime != null">
         expected_time = #{expectedTime,jdbcType=TIMESTAMP},
       </if>
@@ -189,6 +199,7 @@
       address = #{address,jdbcType=VARCHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
       is_accept = #{isAccept,jdbcType=TINYINT},
+      is_done = #{isDone,jdbcType=TINYINT},
       expected_time = #{expectedTime,jdbcType=TIMESTAMP},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
       actual_price = #{actualPrice,jdbcType=DECIMAL},
