@@ -4,18 +4,20 @@
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Orders">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="service_type" jdbcType="VARCHAR" property="serviceType" />
-    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="goods_type" jdbcType="VARCHAR" property="goodsType" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="estimated_price" jdbcType="DECIMAL" property="estimatedPrice" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+    <result column="is_accept" jdbcType="TINYINT" property="isAccept" />
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
-    <result column="is_done" jdbcType="VARCHAR" property="isDone" />
-    <result column="is_accept" jdbcType="VARCHAR" property="isAccept" />
     <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, customer_id, service_type, service_name, address, estimated_price, order_time, 
-    is_done, is_accept, accept_time
+    id, customer_id, order_number, goods_type, goods_name, customer_name, address, address_detail, 
+    actual_price, is_accept, order_time, accept_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -27,27 +29,31 @@
     from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultType="com.wqs.jsd.pojo.Orders">
-    select
-    <include refid="Base_Column_List"/>
-    from orders
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.List">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryKeys" parameterType="java.util.List">
     delete from orders
     where id in
     <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
       #{item}
     </foreach>
   </delete>
+  <select id="selectAll" resultType="com.wqs.jsd.pojo.Orders">
+    select
+    <include refid="Base_Column_List"/>
+    from orders
+  </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
-    insert into orders (customer_id, service_type, service_name, 
-      address, estimated_price, order_time, 
-      is_done, is_accept, accept_time
-      )
-    values (#{customerId,jdbcType=INTEGER}, #{serviceType,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{estimatedPrice,jdbcType=DECIMAL}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{isDone,jdbcType=VARCHAR}, #{isAccept,jdbcType=VARCHAR}, #{acceptTime,jdbcType=TIMESTAMP}
-      )
+    insert into orders (customer_id, order_number, goods_type, 
+      goods_name, customer_name, address, 
+      address_detail, actual_price, is_accept, 
+      order_time, accept_time)
+    values (#{customerId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR}, #{actualPrice,jdbcType=DECIMAL}, #{isAccept,jdbcType=TINYINT}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{acceptTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders
@@ -55,26 +61,32 @@
       <if test="customerId != null">
         customer_id,
       </if>
-      <if test="serviceType != null">
-        service_type,
+      <if test="orderNumber != null">
+        order_number,
       </if>
-      <if test="serviceName != null">
-        service_name,
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="customerName != null">
+        customer_name,
       </if>
       <if test="address != null">
         address,
       </if>
-      <if test="estimatedPrice != null">
-        estimated_price,
+      <if test="addressDetail != null">
+        address_detail,
       </if>
-      <if test="orderTime != null">
-        order_time,
-      </if>
-      <if test="isDone != null">
-        is_done,
+      <if test="actualPrice != null">
+        actual_price,
       </if>
       <if test="isAccept != null">
         is_accept,
+      </if>
+      <if test="orderTime != null">
+        order_time,
       </if>
       <if test="acceptTime != null">
         accept_time,
@@ -84,26 +96,32 @@
       <if test="customerId != null">
         #{customerId,jdbcType=INTEGER},
       </if>
-      <if test="serviceType != null">
-        #{serviceType,jdbcType=VARCHAR},
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
       </if>
-      <if test="serviceName != null">
-        #{serviceName,jdbcType=VARCHAR},
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="estimatedPrice != null">
-        #{estimatedPrice,jdbcType=DECIMAL},
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="actualPrice != null">
+        #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isAccept != null">
+        #{isAccept,jdbcType=TINYINT},
       </if>
       <if test="orderTime != null">
         #{orderTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDone != null">
-        #{isDone,jdbcType=VARCHAR},
-      </if>
-      <if test="isAccept != null">
-        #{isAccept,jdbcType=VARCHAR},
       </if>
       <if test="acceptTime != null">
         #{acceptTime,jdbcType=TIMESTAMP},
@@ -116,26 +134,32 @@
       <if test="customerId != null">
         customer_id = #{customerId,jdbcType=INTEGER},
       </if>
-      <if test="serviceType != null">
-        service_type = #{serviceType,jdbcType=VARCHAR},
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
       </if>
-      <if test="serviceName != null">
-        service_name = #{serviceName,jdbcType=VARCHAR},
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="estimatedPrice != null">
-        estimated_price = #{estimatedPrice,jdbcType=DECIMAL},
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="actualPrice != null">
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isAccept != null">
+        is_accept = #{isAccept,jdbcType=TINYINT},
       </if>
       <if test="orderTime != null">
         order_time = #{orderTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDone != null">
-        is_done = #{isDone,jdbcType=VARCHAR},
-      </if>
-      <if test="isAccept != null">
-        is_accept = #{isAccept,jdbcType=VARCHAR},
       </if>
       <if test="acceptTime != null">
         accept_time = #{acceptTime,jdbcType=TIMESTAMP},
@@ -146,13 +170,15 @@
   <update id="updateByPrimaryKey" parameterType="com.wqs.jsd.pojo.Orders">
     update orders
     set customer_id = #{customerId,jdbcType=INTEGER},
-      service_type = #{serviceType,jdbcType=VARCHAR},
-      service_name = #{serviceName,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      estimated_price = #{estimatedPrice,jdbcType=DECIMAL},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      is_accept = #{isAccept,jdbcType=TINYINT},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
-      is_done = #{isDone,jdbcType=VARCHAR},
-      is_accept = #{isAccept,jdbcType=VARCHAR},
       accept_time = #{acceptTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -1,6 +1,7 @@
 package com.wqs.jsd.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,19 +13,23 @@ public class Orders implements Serializable {
 
     private Integer customerId;
 
-    private String serviceType;
+    private String orderNumber;
 
-    private String serviceName;
+    private String goodsType;
+
+    private String goodsName;
+
+    private String customerName;
 
     private String address;
 
-    private Long estimatedPrice;
+    private String addressDetail;
+
+    private BigDecimal actualPrice;
+
+    private Byte isAccept;
 
     private Date orderTime;
-
-    private String isDone;
-
-    private String isAccept;
 
     private Date acceptTime;
 
@@ -46,20 +51,36 @@ public class Orders implements Serializable {
         this.customerId = customerId;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getGoodsType() {
+        return goodsType;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getAddress() {
@@ -70,12 +91,28 @@ public class Orders implements Serializable {
         this.address = address;
     }
 
-    public Long getEstimatedPrice() {
-        return estimatedPrice;
+    public String getAddressDetail() {
+        return addressDetail;
     }
 
-    public void setEstimatedPrice(Long estimatedPrice) {
-        this.estimatedPrice = estimatedPrice;
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail;
+    }
+
+    public BigDecimal getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public Byte getIsAccept() {
+        return isAccept;
+    }
+
+    public void setIsAccept(Byte isAccept) {
+        this.isAccept = isAccept;
     }
 
     public Date getOrderTime() {
@@ -84,22 +121,6 @@ public class Orders implements Serializable {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public String getIsDone() {
-        return isDone;
-    }
-
-    public void setIsDone(String isDone) {
-        this.isDone = isDone;
-    }
-
-    public String getIsAccept() {
-        return isAccept;
-    }
-
-    public void setIsAccept(String isAccept) {
-        this.isAccept = isAccept;
     }
 
     public Date getAcceptTime() {
