@@ -44,7 +44,7 @@ public class CodeUtil {
     }
 
     // 15位编号
-    public String createCode() {
+    public static String createCode() {
         number++;
         while (number >= maxNum) {
             number -= maxNum;

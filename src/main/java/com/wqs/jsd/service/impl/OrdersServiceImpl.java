@@ -44,7 +44,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public ResultBean<Void> insertOrdersRecord(Orders record) {
-        record.setOrderNumber(record.getCustomerId() + "_" + codeUtil.createCode());
+        record.setOrderNumber(record.getCustomerId() + "_" + codeUtil.createCode9());
         record.setIsAccept((byte) 0);
         record.setIsDone((byte) 0);
         record.setOrderTime(commonMethod.getTime());
