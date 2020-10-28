@@ -8,6 +8,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex"/>
     <result column="phone" jdbcType="VARCHAR" property="phone"/>
     <result column="identify" jdbcType="CHAR" property="identify"/>
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath"/>
     <result column="current_position" jdbcType="VARCHAR" property="currentPosition"/>
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="email" jdbcType="VARCHAR" property="email"/>
@@ -24,7 +25,7 @@
     <result column="final_edit_time" jdbcType="TIMESTAMP" property="finalEditTime"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, `number`, `name`, sex, phone, identify, current_position, address, email, birth, father_birth, mother_birth,
+    id, `number`, `name`, sex, phone, identify, pic_path, current_position, address, email, birth, father_birth, mother_birth,
     education, graduate_school, discipline, medical_num, bank_card_num, `status`, final_editor,
     final_edit_time
   </sql>
@@ -92,13 +93,13 @@
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.wqs.jsd.pojo.Staff">
     insert into staff (`number`, `name`, sex,
-      phone, identify, current_position,
+      phone, identify, pic_path, current_position,
       address, email, birth, father_birth, mother_birth,
       education, graduate_school, discipline,
       medical_num, bank_card_num, `status`,
       final_editor, final_edit_time)
     values (#{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
-      #{phone,jdbcType=VARCHAR}, #{identify,jdbcType=CHAR}, #{currentPosition,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{identify,jdbcType=CHAR}, #{picPath,jdbcType=VARCHAR}, #{currentPosition,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{fatherBirth,jdbcType=VARCHAR}, #{motherBirth,jdbcType=VARCHAR},
       #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{discipline,jdbcType=VARCHAR},
       #{medicalNum,jdbcType=VARCHAR}, #{bankCardNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
@@ -122,6 +123,9 @@
       </if>
       <if test="identify != null">
         identify,
+      </if>
+      <if test="picPath != null">
+        pic_path,
       </if>
       <if test="currentPosition != null">
         current_position,
@@ -181,6 +185,9 @@
       </if>
       <if test="identify != null">
         #{identify,jdbcType=CHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
       </if>
       <if test="currentPosition != null">
         #{currentPosition,jdbcType=VARCHAR},
@@ -244,6 +251,9 @@
       <if test="identify != null">
         identify = #{identify,jdbcType=CHAR},
       </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
       <if test="currentPosition != null">
         current_position = #{currentPosition,jdbcType=VARCHAR},
       </if>
@@ -296,6 +306,7 @@
       sex = #{sex,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       identify = #{identify,jdbcType=CHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR},
       current_position = #{currentPosition,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

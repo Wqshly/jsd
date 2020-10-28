@@ -23,6 +23,8 @@ public class Staff implements Serializable {
 
     private String identify;
 
+    private String picPath;
+
     private String currentPosition;
 
     private String address;
@@ -115,6 +117,14 @@ public class Staff implements Serializable {
 
     public void setIdentify(String identify) {
         this.identify = identify;
+    }
+
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
     }
 
     public String getCurrentPosition() {

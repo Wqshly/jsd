@@ -52,4 +52,9 @@ public class StaffController {
         return staffService.deleteStaffRecord(selectMultipleId);
     }
 
+    @GetMapping("getStaffInfo/{id}")
+    public ResultBean<Staff> getStaffInfo(@PathVariable("id") String id) {
+        return staffService.getStaffInfo(Integer.parseInt(id));
+    }
+
 }
