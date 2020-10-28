@@ -36,6 +36,17 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     private CommonMethod commonMethod;
 
     @Override
+    public ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId) {
+        try {
+            OrderDetails records = mapper.findOrderDetailByOrderId(ordersId);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
     public ResultBean<Void> insertOrderDetailsRecord(OrderDetails record) {
         return commonMethod.changeRecord(mapper.insert(record));
     }

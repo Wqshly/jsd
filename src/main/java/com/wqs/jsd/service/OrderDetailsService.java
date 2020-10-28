@@ -15,6 +15,8 @@ import java.util.List;
 @Service
 public interface OrderDetailsService {
 
+    ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId);
+
     ResultBean<Void> insertOrderDetailsRecord(OrderDetails record);
 
     ResultBean<Void> updateOrderDetailsRecord(OrderDetails record);

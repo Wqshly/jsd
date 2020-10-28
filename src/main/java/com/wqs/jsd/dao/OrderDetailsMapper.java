@@ -23,4 +23,6 @@ public interface OrderDetailsMapper {
     int updateByPrimaryKeySelective(OrderDetails record);
 
     int updateByPrimaryKey(OrderDetails record);
+
+    OrderDetails findOrderDetailByOrderId(int ordersId);
 }
