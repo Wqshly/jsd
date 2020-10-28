@@ -39,12 +39,9 @@ public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private SendSms sendSms;
 
-    @Autowired
-    private CodeUtil codeUtil;
-
     @Override
     public ResultBean<Void> insertOrdersRecord(Orders record) {
-        record.setOrderNumber(record.getCustomerId() + "_" + codeUtil.createCode9());
+        record.setOrderNumber(record.getCustomerId() + "_" + CodeUtil.createCode());
         record.setIsAccept((byte) 0);
         record.setIsDone((byte) 0);
         record.setOrderTime(commonMethod.getTime());
