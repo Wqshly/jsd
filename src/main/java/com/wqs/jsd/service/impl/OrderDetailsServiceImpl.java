@@ -71,6 +71,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Override
     public ResultBean<Void> deleteOrderDetailsRecord(List<Integer> id) {
-        return commonMethod.changeRecord(mapper.deleteByPrimaryKey(id));
+        return commonMethod.changeRecord(mapper.deleteByPrimaryKeys(id));
     }
 }

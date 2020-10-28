@@ -8,7 +8,7 @@ public interface OrderDetailsMapper {
 
     int countTotal();
 
-    int deleteByPrimaryKey(int id);
+    int deleteByPrimaryKey(Integer id);
 
     int deleteByPrimaryKeys(List<Integer> id);
 
