@@ -27,4 +27,12 @@ public interface OrdersService {
     ResultBean<Void> deleteOrdersRecord(List<Integer> id);
 
     ResultBean<Void> placeOrder(PlaceOrder placeOrder);
+
+    /**
+     * @date 2020.10.28
+     * @param customerId
+     * @return
+     * @Introduction 按客户id 查询订单信息
+     */
+    ResultBean<List<Orders>> findOrdersByCustomerId(int customerId);
 }

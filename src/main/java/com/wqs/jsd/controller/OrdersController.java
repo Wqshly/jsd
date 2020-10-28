@@ -37,6 +37,11 @@ public class OrdersController {
         return ordersService.findOrdersRecord();
     }
 
+    @GetMapping("findOrdersByCustomerId/{id}")
+    public ResultBean<List<Orders>> findOrdersByCustomerId(@PathVariable("id") String id) {
+        return ordersService.findOrdersByCustomerId(Integer.parseInt(id));
+    }
+
     @PostMapping("findAllOrders")
     public ResultBean<List<Orders>> findAllOrders(@RequestBody PageInfo pageInfo) {
         return ordersService.findAllOrdersRecord(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());

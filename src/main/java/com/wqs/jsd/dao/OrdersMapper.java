@@ -14,6 +14,8 @@ public interface OrdersMapper {
 
     List<Orders> selectAll();
 
+    List<Orders> findOrdersByCustomerId(int customerId);
+
     int insert(Orders record);
 
     int insertSelective(Orders record);

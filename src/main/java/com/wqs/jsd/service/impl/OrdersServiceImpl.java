@@ -56,6 +56,23 @@ public class OrdersServiceImpl implements OrdersService {
         return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
     }
 
+    /**
+     * @param customerId
+     * @return
+     * @date 2020.10.28
+     * @Introduction 按客户id 查询订单信息
+     */
+    @Override
+    public ResultBean<List<Orders>> findOrdersByCustomerId(int customerId) {
+        try {
+            List<Orders> records = mapper.findOrdersByCustomerId(customerId);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
     @Override
     public ResultBean<List<Orders>> findOrdersRecord() {
         try {
