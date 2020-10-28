@@ -2,32 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wqs.jsd.dao.OrdersMapper">
   <resultMap id="BaseResultMap" type="com.wqs.jsd.pojo.Orders">
-    <id column="id" jdbcType="INTEGER" property="id"/>
-    <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
-    <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
-    <result column="goods_type" jdbcType="VARCHAR" property="goodsType"/>
-    <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
-    <result column="address" jdbcType="VARCHAR" property="address"/>
-    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail"/>
-    <result column="is_accept" jdbcType="TINYINT" property="isAccept"/>
-    <result column="is_done" jdbcType="TINYINT" property="isDone"/>
-    <result column="expected_time" jdbcType="TIMESTAMP" property="expectedTime"/>
-    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime"/>
-    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice"/>
-    <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime"/>
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="goods_type" jdbcType="VARCHAR" property="goodsType" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="is_accept" jdbcType="TINYINT" property="isAccept" />
+    <result column="is_dispatch" jdbcType="TINYINT" property="isDispatch" />
+    <result column="is_done" jdbcType="TINYINT" property="isDone" />
+    <result column="expected_time" jdbcType="TIMESTAMP" property="expectedTime" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+    <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, customer_id, order_number, goods_type, goods_name, customer_name, address, address_detail, 
-    is_accept, is_done, expected_time, order_time, actual_price, accept_time
+    is_accept, is_dispatch, is_done, expected_time, order_time, actual_price, accept_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
     FROM orders
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
+    select 
+    <include refid="Base_Column_List" />
     from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -56,17 +57,16 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders (customer_id, order_number, goods_type, 
       goods_name, customer_name, address, 
-      address_detail, is_accept, is_done, 
-      expected_time, order_time, actual_price, 
-      accept_time)
+      address_detail, is_accept, is_dispatch, 
+      is_done, expected_time, order_time, 
+      actual_price, accept_time)
     values (#{customerId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{addressDetail,jdbcType=VARCHAR}, #{isAccept,jdbcType=TINYINT}, #{isDone,jdbcType=TINYINT}, 
-      #{expectedTime,jdbcType=TIMESTAMP}, #{orderTime,jdbcType=TIMESTAMP}, #{actualPrice,jdbcType=DECIMAL}, 
-      #{acceptTime,jdbcType=TIMESTAMP})
+      #{addressDetail,jdbcType=VARCHAR}, #{isAccept,jdbcType=TINYINT}, #{isDispatch,jdbcType=TINYINT}, 
+      #{isDone,jdbcType=TINYINT}, #{expectedTime,jdbcType=TIMESTAMP}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{actualPrice,jdbcType=DECIMAL}, #{acceptTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders"
-          useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="customerId != null">
@@ -92,6 +92,9 @@
       </if>
       <if test="isAccept != null">
         is_accept,
+      </if>
+      <if test="isDispatch != null">
+        is_dispatch,
       </if>
       <if test="isDone != null">
         is_done,
@@ -133,6 +136,9 @@
       </if>
       <if test="isAccept != null">
         #{isAccept,jdbcType=TINYINT},
+      </if>
+      <if test="isDispatch != null">
+        #{isDispatch,jdbcType=TINYINT},
       </if>
       <if test="isDone != null">
         #{isDone,jdbcType=TINYINT},
@@ -178,6 +184,9 @@
       <if test="isAccept != null">
         is_accept = #{isAccept,jdbcType=TINYINT},
       </if>
+      <if test="isDispatch != null">
+        is_dispatch = #{isDispatch,jdbcType=TINYINT},
+      </if>
       <if test="isDone != null">
         is_done = #{isDone,jdbcType=TINYINT},
       </if>
@@ -206,6 +215,7 @@
       address = #{address,jdbcType=VARCHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
       is_accept = #{isAccept,jdbcType=TINYINT},
+      is_dispatch = #{isDispatch,jdbcType=TINYINT},
       is_done = #{isDone,jdbcType=TINYINT},
       expected_time = #{expectedTime,jdbcType=TIMESTAMP},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
