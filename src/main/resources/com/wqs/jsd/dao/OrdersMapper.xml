@@ -48,9 +48,10 @@
     from orders
   </select>
   <select id="findOrdersByCustomerId" resultType="com.wqs.jsd.pojo.Orders">
-    select *
+    select
+    <include refid="Base_Column_List"/>
     from orders
-    where customer_id #{customerId,jdbcType=INTEGER}
+    where customer_id =  #{customerId,jdbcType=INTEGER}
   </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.Orders" useGeneratedKeys="true">
     insert into orders (customer_id, order_number, goods_type, 
