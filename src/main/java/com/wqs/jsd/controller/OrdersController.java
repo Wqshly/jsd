@@ -66,4 +66,9 @@ public class OrdersController {
     public ResultBean<OrderDetails> findOrderDetailByOrderId(@PathVariable("ordersId") String ordersId) {
         return  orderDetailsService.findOrderDetailByOrderId(Integer.parseInt(ordersId));
     }
+
+    @GetMapping("findOrderDetailsByOrderId/{ordersId}")
+    public ResultBean<OrderDetails> findOrderDetailsByOrderId(@PathVariable("ordersId") String ordersId) {
+        return  orderDetailsService.findOrderDetailsByOrderId(Integer.parseInt(ordersId));
+    }
 }

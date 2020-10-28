@@ -41,6 +41,17 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId) {
         try {
             OrderDetails records = mapper.findOrderDetailByOrderId(ordersId);
+            return new ResultBean<>(records, SUCCESS, "success");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
+        }
+    }
+
+    @Override
+    public ResultBean<OrderDetails> findOrderDetailsByOrderId(int ordersId) {
+        try {
+            OrderDetails records = mapper.findOrderDetailByOrderId(ordersId);
             if (records.getStaffId() != null) {
                 records.setStaff(staffMapper.selectByPrimaryKey(records.getId()));
             }

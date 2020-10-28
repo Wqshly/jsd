@@ -17,6 +17,8 @@ public interface OrderDetailsService {
 
     ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId);
 
+    ResultBean<OrderDetails> findOrderDetailsByOrderId(int ordersId);
+
     ResultBean<Void> insertOrderDetailsRecord(OrderDetails record);
 
     ResultBean<Void> updateOrderDetailsRecord(OrderDetails record);
