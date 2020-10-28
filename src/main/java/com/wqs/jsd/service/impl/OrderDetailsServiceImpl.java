@@ -41,7 +41,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId) {
         try {
             OrderDetails records = mapper.findOrderDetailByOrderId(ordersId);
-            records.setStaff(staffMapper.selectByPrimaryKey(records.getId()));
+            if (records.getStaffId() != null) {
+                records.setStaff(staffMapper.selectByPrimaryKey(records.getId()));
+            }
             return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());
