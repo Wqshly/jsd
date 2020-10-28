@@ -43,6 +43,7 @@ public class OrdersServiceImpl implements OrdersService {
     public ResultBean<Void> insertOrdersRecord(Orders record) {
         record.setOrderNumber(record.getCustomerId() + "_" + CodeUtil.createCode());
         record.setIsAccept((byte) 0);
+        record.setIsDispatch((byte) 0);
         record.setIsDone((byte) 0);
         record.setOrderTime(commonMethod.getTime());
         return commonMethod.changeRecord(mapper.insert(record));
