@@ -190,10 +190,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public ResultBean<Void> updateCustomerRecord(Customer record) {
         try {
-            byte[] decodedData = RSACode.decryptByPrivateKey(record.getPassword());
-            String password = new String(decodedData);
-            record.setPassword(commonMethod.MD5EncryptSalt(password, "wqs"));
-            return commonMethod.changeRecord(mapper.updateByPrimaryKey(record));
+            return commonMethod.changeRecord(mapper.updateByPrimaryKeySelective(record));
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
