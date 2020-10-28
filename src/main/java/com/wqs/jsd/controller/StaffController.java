@@ -39,7 +39,7 @@ public class StaffController {
 
     @PostMapping("findAllStaff")
     public ResultBean<List<Staff>> findAllStaff(@RequestBody PageInfo pageInfo) {
-        return staffService.selectStaffAll(pageInfo.getPage().getNum(),pageInfo.getPage().getSize());
+        return staffService.selectStaffAll(pageInfo.getPage().getNum(), pageInfo.getPage().getSize());
     }
 
     @PostMapping("addStaff")
@@ -51,10 +51,4 @@ public class StaffController {
     public ResultBean<Void> deleteStaffRecord(@RequestBody List<Integer> selectMultipleId) {
         return staffService.deleteStaffRecord(selectMultipleId);
     }
-
-    @GetMapping("getStaffInfo/{id}")
-    public ResultBean<Staff> getStaffInfo(@PathVariable("id") String id) {
-        return staffService.getStaffInfo(Integer.parseInt(id));
-    }
-
 }

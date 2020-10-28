@@ -83,15 +83,4 @@ public class StaffServiceImpl implements StaffService {
     public ResultBean<Void> deleteStaffRecord(List<Integer> id) {
         return commonMethod.changeRecord(staffMapper.deleteByPrimaryKey(id));
     }
-
-    @Override
-    public ResultBean<Staff> getStaffInfo(int id) {
-        try {
-            Staff staff = staffMapper.selectByPrimaryKey(id);
-            return new ResultBean<>(staff, SUCCESS, "success");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResultBean<>(UNKNOWN_EXCEPTION, "未知错误,请联系管理员!");
-        }
-    }
 }

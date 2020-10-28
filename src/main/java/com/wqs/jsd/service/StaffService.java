@@ -27,5 +27,4 @@ public interface StaffService {
 
     ResultBean<Void> deleteStaffRecord(List<Integer> id);
 
-    ResultBean<Staff> getStaffInfo(int id);
 }

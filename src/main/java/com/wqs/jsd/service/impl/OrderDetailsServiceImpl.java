@@ -3,6 +3,7 @@ package com.wqs.jsd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wqs.jsd.beans.ResultBean;
 import com.wqs.jsd.dao.OrderDetailsMapper;
+import com.wqs.jsd.dao.StaffMapper;
 import com.wqs.jsd.pojo.OrderDetails;
 import com.wqs.jsd.service.OrderDetailsService;
 import com.wqs.jsd.util.CodeUtil;
@@ -31,7 +32,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Resource
     private OrderDetailsMapper mapper;
-
+    @Resource
+    private StaffMapper staffMapper;
     @Autowired
     private CommonMethod commonMethod;
 
@@ -39,6 +41,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public ResultBean<OrderDetails> findOrderDetailByOrderId(int ordersId) {
         try {
             OrderDetails records = mapper.findOrderDetailByOrderId(ordersId);
+            records.setStaff(staffMapper.selectByPrimaryKey(records.getId()));
             return new ResultBean<>(records, SUCCESS, "success");
         } catch (Exception e) {
             logger.error(e.getMessage());

@@ -12,6 +12,8 @@ public class OrderDetails implements Serializable {
 
     private Integer staffId;
 
+    private Staff staff;
+
     private Integer ordersId;
 
     private Byte isArrival;
@@ -34,6 +36,14 @@ public class OrderDetails implements Serializable {
 
     public void setStaffId(Integer staffId) {
         this.staffId = staffId;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
     public Integer getOrdersId() {
