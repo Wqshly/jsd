@@ -5,10 +5,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
     <result column="orders_id" jdbcType="INTEGER" property="ordersId" />
-    <result column="accept_time" jdbcType="TIMESTAMP" property="acceptTime" />
+    <result column="is_arrival" jdbcType="TINYINT" property="isArrival" />
+    <result column="arrival_time" jdbcType="TIMESTAMP" property="arrivalTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, orders_id, accept_time
+    id, staff_id, orders_id, is_arrival, arrival_time
   </sql>
   <select id="countTotal" resultType="java.lang.Integer">
     SELECT count(1)
@@ -32,11 +33,15 @@
       #{item}
     </foreach>
   </delete>
+  <delete id="deleteByPrimaryKeys" parameterType="java.util.List">
+    delete from order_details
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.OrderDetails" useGeneratedKeys="true">
-    insert into order_details (staff_id, orders_id, accept_time
-      )
-    values (#{staffId,jdbcType=INTEGER}, #{ordersId,jdbcType=INTEGER}, #{acceptTime,jdbcType=TIMESTAMP}
-      )
+    insert into order_details (staff_id, orders_id, is_arrival, 
+      arrival_time)
+    values (#{staffId,jdbcType=INTEGER}, #{ordersId,jdbcType=INTEGER}, #{isArrival,jdbcType=TINYINT}, 
+      #{arrivalTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wqs.jsd.pojo.OrderDetails" useGeneratedKeys="true">
     insert into order_details
@@ -47,8 +52,11 @@
       <if test="ordersId != null">
         orders_id,
       </if>
-      <if test="acceptTime != null">
-        accept_time,
+      <if test="isArrival != null">
+        is_arrival,
+      </if>
+      <if test="arrivalTime != null">
+        arrival_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -58,8 +66,11 @@
       <if test="ordersId != null">
         #{ordersId,jdbcType=INTEGER},
       </if>
-      <if test="acceptTime != null">
-        #{acceptTime,jdbcType=TIMESTAMP},
+      <if test="isArrival != null">
+        #{isArrival,jdbcType=TINYINT},
+      </if>
+      <if test="arrivalTime != null">
+        #{arrivalTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -72,8 +83,11 @@
       <if test="ordersId != null">
         orders_id = #{ordersId,jdbcType=INTEGER},
       </if>
-      <if test="acceptTime != null">
-        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      <if test="isArrival != null">
+        is_arrival = #{isArrival,jdbcType=TINYINT},
+      </if>
+      <if test="arrivalTime != null">
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -82,7 +96,8 @@
     update order_details
     set staff_id = #{staffId,jdbcType=INTEGER},
       orders_id = #{ordersId,jdbcType=INTEGER},
-      accept_time = #{acceptTime,jdbcType=TIMESTAMP}
+      is_arrival = #{isArrival,jdbcType=TINYINT},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

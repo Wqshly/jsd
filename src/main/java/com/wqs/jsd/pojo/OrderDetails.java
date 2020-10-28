@@ -14,7 +14,9 @@ public class OrderDetails implements Serializable {
 
     private Integer ordersId;
 
-    private Date acceptTime;
+    private Byte isArrival;
+
+    private Date arrivalTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -42,11 +44,19 @@ public class OrderDetails implements Serializable {
         this.ordersId = ordersId;
     }
 
-    public Date getAcceptTime() {
-        return acceptTime;
+    public Byte getIsArrival() {
+        return isArrival;
     }
 
-    public void setAcceptTime(Date acceptTime) {
-        this.acceptTime = acceptTime;
+    public void setIsArrival(Byte isArrival) {
+        this.isArrival = isArrival;
+    }
+
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 }
